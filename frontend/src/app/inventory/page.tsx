@@ -1,6 +1,6 @@
 
-export default function InventoryPanel(){
+export default function InventoryPanel() {
     return (
-        <></>
+        <InventoryPanel />
     )
 }

@@ -15,5 +15,7 @@
     "save" : "Save",
     "cancel" : "Cancel",
     "addWorker" : "Add Worker",
-    "username" : "Username"
+    "username" : "Username",
+    "unit" : "Unit",
+    "familyCode" : "Family Code"
 }

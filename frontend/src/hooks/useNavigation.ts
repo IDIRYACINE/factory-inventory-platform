@@ -1,6 +1,6 @@
-import { createWorkersPath, editWorkersPath } from "@/domain/routerPaths"
+import { createFamilyCodePath, createWorkersPath, editWorkersPath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
-import {  selectPanelsState } from "@/stores/settings/selectors"
+import { selectPanelsState } from "@/stores/settings/selectors"
 import { SettingsState, setActivePanel } from "@/stores/settings/slice"
 import { Id } from "@convex/_generated/dataModel"
 import { useRouter } from "next/navigation"
@@ -35,7 +35,7 @@ export const useWorkerNavigation = () => {
         router.push(createWorkersPath)
     }
 
-    const navigateToEditWorker = (id:Id<"workers">) => {
+    const navigateToEditWorker = (id: Id<"workers">) => {
         router.push(editWorkersPath.replace(':id', id))
     }
 
@@ -49,4 +49,72 @@ export const useWorkerNavigation = () => {
         navigateHome
     }
 
+}
+
+export const useProductFamilyNavigation = () => {
+    const router = useRouter()
+
+    const navigateToNewProductFamily = () => {
+        router.push(createFamilyCodePath)
+    }
+
+    const navigateToEditProductFamily = (id: Id<"familyCode">) => {
+        router.push(editWorkersPath.replace(':id', id))
+    }
+
+    const navigateHome = () => {
+        router.push('/')
+    }
+
+    return {
+        navigateToNewProductFamily,
+        navigateToEditProductFamily,
+        navigateHome
+    }
+
+}
+
+export const useInventoryNavigation = () => {
+    const router = useRouter()
+
+    const navigateToNewInventory = () => {
+        router.push(createFamilyCodePath)
+    }
+
+    const navigateToEditInventory = (id: Id<"inventory">) => {
+        router.push(editWorkersPath.replace(':id', id))
+    }
+
+    const navigateHome = () => {
+        router.push('/')
+    }
+
+    return {
+        navigateToNewInventory,
+        navigateToEditInventory,
+        navigateHome
+    }
+}
+
+
+export const useStockNavigation = () => {
+    const router = useRouter()
+
+    const navigateToNewStock = () => {
+        router.push(createFamilyCodePath)
+    }
+
+    const navigateToEditStock = (id: Id<"stock">) => {
+        router.push(editWorkersPath.replace(':id', id))
+    }
+
+    const navigateHome = () => {
+        router.push('/')
+    }
+
+    return {
+        navigateToNewStock,
+        navigateToEditStock,
+        navigateHome
+    }
 }
