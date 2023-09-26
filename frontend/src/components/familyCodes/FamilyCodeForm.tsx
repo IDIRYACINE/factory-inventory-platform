@@ -1,27 +1,50 @@
 'use client';
 
+import { useCreateFamilyCode, useReadFamilyCode, useUpdateFamilyCode } from "@/hooks/useFamilyCodes";
+import { useProductFamilyNavigation } from "@/hooks/useNavigation";
+import { Doc } from "@convex/_generated/dataModel";
 import Button from "antd/es/button";
 import Form from "antd/es/form";
 import Input from "antd/es/input";
 import useTranslation from "next-translate/useTranslation";
 
 
-type FieldType = {
-  code?: string;
-  name?: string;
-};
+type FieldType = Partial<Doc<"familyCode">>
 
 export default function FamilyCodeForm() {
 
   const { t } = useTranslation('common');
 
+  const { navigateHome } = useProductFamilyNavigation()
+
+  const familyCode = useReadFamilyCode({})
+
+  const update = useUpdateFamilyCode()
+
+  const create = useCreateFamilyCode()
+
   const onFinish = (values: FieldType) => {
-    console.log('Success:', values);
+
+    if (familyCode) {
+      update({
+        id: familyCode._id,
+        ...values
+      })
+
+      return;
+    }
+
+    create({
+      code: values.code!,
+      name: values.name!
+    })
+
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
 
   return (
     <Form
@@ -29,12 +52,12 @@ export default function FamilyCodeForm() {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
-      // initialValues={{ remember: true }}
+      initialValues={familyCode}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-     
+
 
       <Form.Item<FieldType>
         label={t('name')}
@@ -54,7 +77,7 @@ export default function FamilyCodeForm() {
 
       <div className="flex flex-row justify-end items-center gap-8">
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="text" htmlType="reset">
+          <Button type="text" onClick={navigateHome}>
             {t('cancel')}
           </Button>
         </Form.Item>

@@ -1,5 +1,6 @@
-import { createFamilyCodePath, createWorkersPath, editWorkersPath } from "@/domain/routerPaths"
+import { createFamilyCodePath, createWorkersPath, editFamilyCodePath, editWorkersPath, familyCodePath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
+import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
 import { SettingsState, setActivePanel } from "@/stores/settings/slice"
 import { Id } from "@convex/_generated/dataModel"
@@ -53,17 +54,19 @@ export const useWorkerNavigation = () => {
 
 export const useProductFamilyNavigation = () => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
 
     const navigateToNewProductFamily = () => {
         router.push(createFamilyCodePath)
     }
 
     const navigateToEditProductFamily = (id: Id<"familyCode">) => {
-        router.push(editWorkersPath.replace(':id', id))
+        router.push(editFamilyCodePath.replace(':id', id))
     }
 
     const navigateHome = () => {
-        router.push('/')
+        dispatch(unselectFamilyCode())
+        router.push(familyCodePath)
     }
 
     return {

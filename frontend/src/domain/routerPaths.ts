@@ -1,7 +1,7 @@
 
 
 export const workersPath = '/workers'
-export const familyCodePath = '/familyCode'
+export const familyCodePath = '/productFamily'
 export const scannedArticlesPath = '/scannedArticles'
 export const userPath = '/user'
 export const stockPath = '/stock'
@@ -16,7 +16,7 @@ export const sessionRecordPath = '/sessionRecord'
 
 
 export const editWorkersPath = '/workers/:id/edit'
-export const editFamilyCodePath = '/familyCode/:id/edit'
+export const editFamilyCodePath = '/productFamily/:id/edit'
 export const editScannedArticlesPath = '/scannedArticles/:id/edit'
 export const editUserPath = '/user/:id/edit'
 export const editStockPath = '/stock/:id/edit'
@@ -32,7 +32,7 @@ export const editSessionRecordPath = '/sessionRecord/:id/edit'
 
 
 export const createWorkersPath = '/workers/new'
-export const createFamilyCodePath = '/familyCode/new'
+export const createFamilyCodePath = '/productFamily/new'
 export const createScannedArticlesPath = '/scannedArticles/new'
 export const createUserPath = '/user/new'
 export const createStockPath = '/stock/new'

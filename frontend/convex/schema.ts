@@ -3,31 +3,31 @@ import { v } from "convex/values";
 
 
 
-const Workers = {
+export const Workers = {
     name: v.string(),
     phone: v.string(),
     username: v.string(),
 }
 
 
-const FamilyCode = {
+export const FamilyCode = {
     code: v.string(),
     name: v.string(),
 }
 
-const ScannedArticles = {
+export const ScannedArticles = {
     articleCode: v.string(),
     articleName: v.string(),
     affectationId: v.id('affectations'),
 }
 
-const User = {
+export const User = {
     name: v.string(),
     tokenIdentifier: v.string(),
     role: v.string(),
 }
 
-const Stock = {
+export const Stock = {
     articleName: v.string(),
     articleCode: v.string(),
     quantity: v.number(),
@@ -35,23 +35,23 @@ const Stock = {
     familyCode : v.id('familyCode'),
 }
 
-const Affectations = {
+export const Affectations = {
     affectionCode: v.string(),
     affectionName: v.string(),
 }
 
-const AffectationPermisions = {
+export const AffectationPermisions = {
     userId : v.id('users'),
     affectationIds : v.array(v.id('affectations')),
 }
 
-const GroupsPermissions = {
+export const GroupsPermissions = {
     groupId : v.id('groups'),
     permissionIds : v.array(v.id('permissions')),
 }
 
 
-const Sessions = {
+export const Sessions = {
     active : v.boolean(),
     statrtDate : v.int64(),
     endDate : v.int64(),
@@ -59,14 +59,14 @@ const Sessions = {
     quantityShift : v.number(),
 }
 
-const SessionGroups = {
+export const SessionGroups = {
     sessionId : v.id('sessions'),
     groupName : v.string(),
     supervisorId : v.id('users'),
 }
 
 
-const SessionWorkers = {
+export const SessionWorkers = {
     groupId : v.id('sessionGroups'),
     workerId : v.id('workers'),
     username : v.string(),
@@ -74,14 +74,14 @@ const SessionWorkers = {
 
 }
 
-const Inventory = {
+export const Inventory = {
     articleCode : v.string(),
     articleName : v.string(),
     unit : v.string(),
     familyCode : v.id('familyCode'),
 }
 
-const SessionRecord = {
+export const SessionRecord = {
     sessionId : v.id('sessions'),
     workerId : v.id('workers'),
     groupId : v.id('sessionGroups'),
@@ -97,7 +97,9 @@ const SessionRecord = {
 }
 
 const workers = defineTable(Workers)
-const familyCode = defineTable(FamilyCode)
+
+const familyCode = defineTable(FamilyCode).index('by_code', ['code'])
+
 const scannedArticles = defineTable(ScannedArticles)
 const user = defineTable(User)
 const stock = defineTable(Stock)

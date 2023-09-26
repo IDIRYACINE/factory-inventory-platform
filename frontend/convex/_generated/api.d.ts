@@ -14,6 +14,10 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as helpers_isAuthenticated from "../helpers/isAuthenticated";
+import type * as helpers_statusCodes from "../helpers/statusCodes";
+import type * as productFamily from "../productFamily";
+import type * as workers from "../workers";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -23,7 +27,12 @@ import type {
  * const myFunctionReference = api.myModule.myFunction;
  * ```
  */
-declare const fullApi: ApiFromModules<{}>;
+declare const fullApi: ApiFromModules<{
+  "helpers/isAuthenticated": typeof helpers_isAuthenticated;
+  "helpers/statusCodes": typeof helpers_statusCodes;
+  productFamily: typeof productFamily;
+  workers: typeof workers;
+}>;
 export declare const api: FilterApi<
   typeof fullApi,
   FunctionReference<any, "public">
