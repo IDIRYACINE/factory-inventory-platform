@@ -5,5 +5,15 @@
     "productFamily" : "Product Family",
     "settings" : "Settings",
     "history" : "History",
-    "workers" : "Workers"
+    "workers" : "Workers",
+    "name" : "Name",
+    "phone" : "Phone",
+    "email" : "Email",
+    "add" : "Add",
+    "edit" : "Edit",
+    "delete" : "Delete",
+    "save" : "Save",
+    "cancel" : "Cancel",
+    "addWorker" : "Add Worker",
+    "username" : "Username"
 }

@@ -6,7 +6,7 @@ import { v } from "convex/values";
 const Workers = {
     name: v.string(),
     phone: v.string(),
-    email: v.string(),
+    username: v.string(),
 }
 
 

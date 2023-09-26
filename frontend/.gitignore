@@ -44,3 +44,5 @@ appV2
 pagesV2
 
 *.sql
+
+*.yaml
