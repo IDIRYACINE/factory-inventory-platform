@@ -1,6 +1,7 @@
+import { FamilyCodePanel } from "@/components/familyCodes/FamilyCodePanel";
 
-export default function ProductFamilyPanel(){
+export default function ProductFamilyPage(){
     return (
-        <ProductFamilyPanel/>
+        <FamilyCodePanel/>
     )
 }

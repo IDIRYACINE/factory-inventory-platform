@@ -1,6 +1,7 @@
+import { SessionPanel } from "@/components/session/SessionPanel";
 
-export default function SessionPanel(){
+export default function SessionPage(){
     return (
-        <></>
+        <SessionPanel/>
     )
 }

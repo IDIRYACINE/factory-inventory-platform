@@ -1,20 +1,20 @@
 'use client';
 
-import { useWorkerNavigation } from "@/hooks/useNavigation"
+import { useHistoryNavigation } from "@/hooks/useNavigation"
 import Button from "antd/es/button"
 import clsx from "clsx"
 import useTranslation from "next-translate/useTranslation"
 
 
- const FamilyCodesTableActions = (props:React.ComponentPropsWithoutRef<"div">) => {
+ const HistoryTableActions = (props:React.ComponentPropsWithoutRef<"div">) => {
     const { t } = useTranslation('common')
     const className= clsx(props.className, "flex flex-row justify-end items-center")
-    const { navigateToNewWorker } = useWorkerNavigation()
+    const { navigateToNewHistory } = useHistoryNavigation()
   
   
     return (
       <div className={className}>
-        <Button onClick={navigateToNewWorker} type="primary">
+        <Button onClick={navigateToNewHistory} type="primary">
           {t('add')}
         </Button>
   
@@ -22,4 +22,4 @@ import useTranslation from "next-translate/useTranslation"
     )
   }
 
-  export default FamilyCodesTableActions
+  export default HistoryTableActions

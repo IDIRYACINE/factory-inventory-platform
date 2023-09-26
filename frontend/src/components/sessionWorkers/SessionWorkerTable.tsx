@@ -5,21 +5,19 @@ import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
 
 
-type DataType = Doc<'familyCode'> & { key: string };
+type DataType = Doc<'sessionGroups'> & { key: string };
 
-export default function FamilyCodeTable(props:React.ComponentPropsWithoutRef<"div">) {
+export default function SessionGroupTable(props:React.ComponentPropsWithoutRef<"div">) {
   const { t } = useTranslation()
 
   const className= clsx(props.className)
-  
-  const rawColumns = ["code","name"]
+  const rawColumns = [""]
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({
     title: t(rawCol),
     dataIndex: rawCol,
-    key: `record-header-${rawCol}`,
+    key: `sessionG-header-${rawCol}`,
   }))
-
 
 
   const data: DataType[] = [

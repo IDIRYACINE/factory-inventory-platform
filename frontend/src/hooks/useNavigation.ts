@@ -118,3 +118,25 @@ export const useStockNavigation = () => {
         navigateHome
     }
 }
+
+export const useHistoryNavigation = () => {
+    const router = useRouter()
+
+    const navigateToNewHistory = () => {
+        router.push(createFamilyCodePath)
+    }
+
+    const navigateToEditHistory = (id: Id<"sessionRecord">) => {
+        router.push(editWorkersPath.replace(':id', id))
+    }
+
+    const navigateHome = () => {
+        router.push('/')
+    }
+
+    return {
+        navigateToNewHistory,
+        navigateToEditHistory,
+        navigateHome
+    }
+}
