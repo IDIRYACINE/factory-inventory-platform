@@ -1,0 +1,9 @@
+{
+    "session" : "Session",
+    "stock" : "Stock",
+    "inventory" : "Inventory",
+    "productFamily" : "Product Family",
+    "settings" : "Settings",
+    "history" : "History",
+    "workers" : "Workers"
+}

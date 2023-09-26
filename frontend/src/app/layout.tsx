@@ -1,6 +1,9 @@
+import { AntdThemeProvider } from '@/lib/AntdThemeConfig';
 import './globals.css'
 
-import { NextUIProvider } from "@nextui-org/react";
+import StyledComponentsRegistry from '@/lib/AntdRegistry';
+import MainLayout from '@/lib/MainLayout';
+
 
 export default function RootLayout({
   children,
@@ -9,10 +12,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body >
-        <NextUIProvider>
-          {children}
-        </NextUIProvider>
+      <body className="h-screen" >
+        <StyledComponentsRegistry>
+          <AntdThemeProvider>
+            <MainLayout>
+              {children}
+            </MainLayout>
+          </AntdThemeProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   )
