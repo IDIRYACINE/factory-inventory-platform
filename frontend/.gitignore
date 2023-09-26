@@ -42,3 +42,5 @@ next-env.d.ts
 appV2
 /stats
 pagesV2
+
+*.sql

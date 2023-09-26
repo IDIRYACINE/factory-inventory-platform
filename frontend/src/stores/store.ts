@@ -1,10 +1,25 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import settingsSliceReducer from './settings/slice'
+import workersSliceReducer from './workers/slice'
+import sessionGroupsSliceReducer from './groups/slice'
+import inventorySliceReducer from './inventory/slice'
+import stocksSliceReducer from './stock/slice'
+import recordsSliceReducer from './records/slice'
+import affectionsSliceReducer from './affectations/slice'
+import familyCodeSliceReducer from './productFamily/slice'
 
 export const store = configureStore({
     reducer: {
         settings: settingsSliceReducer,
+        workers : workersSliceReducer,
+        sessionGroups : sessionGroupsSliceReducer,
+        inventory : inventorySliceReducer,
+        stock: stocksSliceReducer,
+        records:recordsSliceReducer,
+        affectations : affectionsSliceReducer,
+        familyCodes : familyCodeSliceReducer,
+
     },
 })
 
