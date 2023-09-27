@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { selectFamilyCode, selectFamilyCodes } from "@/stores/productFamily/selectors"
-import { loadFamilyCodes } from "@/stores/productFamily/slice"
+import { loadFamilyCodes, setFamilyCodes } from "@/stores/productFamily/slice"
 import { api } from "@convex/_generated/api"
 import { Id } from "@convex/_generated/dataModel";
 import { useMutation, usePaginatedQuery } from "convex/react";
@@ -28,7 +28,7 @@ export const useLoadFamilyCodes = () => {
 
     useEffect(() => {
         if (results.length > 0) {
-            dispatch(loadFamilyCodes(results))
+            dispatch(setFamilyCodes(results))
         }
     }, [dispatch, results])
 

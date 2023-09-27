@@ -1,24 +1,33 @@
 'use client';
 
+import { useCreateWorker, useUpdateWorker } from "@/hooks/useWorkers";
+import { useAppSelector } from "@/stores/hooks";
+import { selectWorker } from "@/stores/workers/selectors";
+import { Doc } from "@convex/_generated/dataModel";
 import Button from "antd/es/button";
 import Form from "antd/es/form";
 import Input from "antd/es/input";
 import useTranslation from "next-translate/useTranslation";
 
 
-type FieldType = {
-  username?: string;
-  password?: string;
-  name?: string;
-  phone?: string;
-};
+type FieldType = Doc<"workers">
 
 export default function WorkerForm() {
 
   const { t } = useTranslation('common');
 
+  const create = useCreateWorker()
+  const update = useUpdateWorker()
+
+  const worker = useAppSelector(selectWorker)
+
   const onFinish = (values: FieldType) => {
-    console.log('Success:', values);
+    if (worker) {
+      update({ id: worker._id, ...values })
+      return
+    }
+    create(values)
+
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -31,27 +40,11 @@ export default function WorkerForm() {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
-      // initialValues={{ remember: true }}
+      initialValues={worker}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <Form.Item<FieldType>
-        label={t('username')}
-        name="username"
-        rules={[{ required: true, message: 'ErrorMessageHere' }]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item<FieldType>
-        label={t('password')}
-        name="password"
-        rules={[{ required: true, message: 'ErrorMessageHere' }]}
-      >
-        <Input.Password />
-      </Form.Item>
-
       <Form.Item<FieldType>
         label={t('name')}
         name="name"

@@ -16,7 +16,10 @@ import type {
 } from "convex/server";
 import type * as helpers_isAuthenticated from "../helpers/isAuthenticated";
 import type * as helpers_statusCodes from "../helpers/statusCodes";
+import type * as helpers_updateHelpers from "../helpers/updateHelpers";
+import type * as inventory from "../inventory";
 import type * as productFamily from "../productFamily";
+import type * as stock from "../stock";
 import type * as workers from "../workers";
 
 /**
@@ -30,7 +33,10 @@ import type * as workers from "../workers";
 declare const fullApi: ApiFromModules<{
   "helpers/isAuthenticated": typeof helpers_isAuthenticated;
   "helpers/statusCodes": typeof helpers_statusCodes;
+  "helpers/updateHelpers": typeof helpers_updateHelpers;
+  inventory: typeof inventory;
   productFamily: typeof productFamily;
+  stock: typeof stock;
   workers: typeof workers;
 }>;
 export declare const api: FilterApi<

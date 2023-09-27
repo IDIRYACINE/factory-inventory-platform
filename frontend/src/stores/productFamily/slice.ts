@@ -18,7 +18,7 @@ const initialState: ProductFamilyState = {
 }
 
 export const familySlice = createSlice({
-    name: 'products',
+    name: 'productFamily',
     initialState,
     reducers: {
         setFamilyCodes: (state, action: PayloadAction<ProductFamilyState['familyCodes']>) => {
@@ -30,11 +30,14 @@ export const familySlice = createSlice({
         },
         unselectFamilyCode:(state,)=>{
             state.familyCode = undefined
+        },
+        selectFamilyCode:(state,action:PayloadAction<ProductFamilyState['familyCode']>)=>{
+            state.familyCode = action.payload
         }
 
     },
 })
 
-export const { setFamilyCodes,loadFamilyCodes,unselectFamilyCode } = familySlice.actions
+export const { setFamilyCodes,loadFamilyCodes,unselectFamilyCode,selectFamilyCode } = familySlice.actions
 
 export default familySlice.reducer

@@ -17,5 +17,6 @@
     "addWorker" : "Add Worker",
     "username" : "Username",
     "unit" : "Unit",
-    "familyCode" : "Family Code"
+    "familyCode" : "Family Code",
+    "stockCode" : "Stock Code"
 }

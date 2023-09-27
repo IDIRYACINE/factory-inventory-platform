@@ -6,16 +6,29 @@ import Form from "antd/es/form";
 import Input from "antd/es/input";
 import useTranslation from "next-translate/useTranslation";
 import FamilyCodeSelector from "@/components/familyCodes/FamilyCodeSelector";
+import { useAppSelector } from "@/stores/hooks";
+import { useCreateStock, useUpdateStock } from "@/hooks/useStock";
+import { selectStock } from "@/stores/stock/selectors";
 
 
-type FieldType = Partial<Doc<"stock">>
+type FieldType = Doc<"stock">
 
 export default function StockForm() {
 
   const { t } = useTranslation('common');
 
+  const create = useCreateStock()
+  const update = useUpdateStock()
+
+  const stock = useAppSelector(selectStock)
+
   const onFinish = (values: FieldType) => {
-    console.log('Success:', values);
+    if (stock) {
+      update({ id: stock._id, ...values })
+      return
+    }
+    create(values)
+
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -28,7 +41,7 @@ export default function StockForm() {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
-      // initialValues={{ remember: true }}
+      initialValues={stock}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"

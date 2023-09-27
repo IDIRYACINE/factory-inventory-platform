@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface WorkersState {
     workers : Doc<'workers'>[],
+    worker? : Doc<'workers'>,
 }
 
 const initialState: WorkersState = {
@@ -16,10 +17,16 @@ export const workersSlice = createSlice({
     reducers: {
         setWorkers: (state, action: PayloadAction<WorkersState['workers']>) => {
             state.workers = action.payload
+        },
+        selectWorker: (state, action: PayloadAction<WorkersState['worker']>) => {
+            state.worker = action.payload
+        },
+        unselectWorker: (state) => {
+            state.worker = undefined
         }
     },
 })
 
-export const { setWorkers } = workersSlice.actions
+export const { setWorkers,selectWorker,unselectWorker } = workersSlice.actions
 
 export default workersSlice.reducer

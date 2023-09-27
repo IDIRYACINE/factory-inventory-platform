@@ -46,6 +46,8 @@ export const create = mutation({
 
         const authenticated = await isAuthenticated(ctx.auth)
 
+        console.log(authenticated)
+
         if (!authenticated) {
             return { code: codeNotAuthenticated }
         }

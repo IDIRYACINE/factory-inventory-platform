@@ -1,10 +1,8 @@
-import { AntdThemeProvider } from '@/lib/AntdThemeConfig';
+import ServerProviders from '@/lib/ServerProviders';
 import './globals.css'
 
-import StyledComponentsRegistry from '@/lib/AntdRegistry';
 import MainLayout from '@/lib/MainLayout';
-import ConvexClientProvider from '@/lib/ConvexProvider';
-import { ClerkProvider } from '@clerk/nextjs';
+import ReduxProvider from '@/lib/ReduxProvider';
 
 
 
@@ -16,17 +14,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="h-screen" >
-        <StyledComponentsRegistry>
-          <AntdThemeProvider>
-            <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
-              <ConvexClientProvider convexDomain={process.env.NEXT_PUBLIC_CONVEX_URL!}>
-                <MainLayout>
-                  {children}
-                </MainLayout>
-              </ConvexClientProvider>
-            </ClerkProvider>
-          </AntdThemeProvider>
-        </StyledComponentsRegistry>
+        <ServerProviders>
+          <MainLayout>
+            <ReduxProvider>
+              {children}
+            </ReduxProvider>
+          </MainLayout>
+        </ServerProviders>
+
       </body>
     </html>
   )

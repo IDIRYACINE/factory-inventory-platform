@@ -1,14 +1,14 @@
+"use client";
+
 import type { ColumnsType } from 'antd/es/table';
 import Table from 'antd/es/table';
 import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
+import { selectWorkers } from '@/stores/workers/selectors';
+import { useAppSelector } from '@/stores/hooks';
+import { Doc } from '@convex/_generated/dataModel';
 
-interface DataType {
-  key: string;
-  name: string;
-  username: string;
-  phone: string;
-}
+type DataType  = Doc<"workers"> & {key: string;}
 
 export default function WorkersTable(props:React.ComponentPropsWithoutRef<"div">) {
   const { t } = useTranslation()
@@ -33,9 +33,11 @@ export default function WorkersTable(props:React.ComponentPropsWithoutRef<"div">
     }
   ]
 
-  const data: DataType[] = [
-
-  ]
+  const storeData = useAppSelector(selectWorkers)
+  const data: DataType[] = storeData.map((el) => ({
+    ...el,
+    key: el._id,
+  }))
 
   return (
     <Table className={className} columns={columns} dataSource={data} />

@@ -6,7 +6,6 @@ import { v } from "convex/values";
 export const Workers = {
     name: v.string(),
     phone: v.string(),
-    username: v.string(),
 }
 
 
@@ -79,6 +78,7 @@ export const Inventory = {
     articleName : v.string(),
     unit : v.string(),
     familyCode : v.id('familyCode'),
+    stockCode : v.string(),
 }
 
 export const SessionRecord = {
@@ -102,14 +102,17 @@ const familyCode = defineTable(FamilyCode).index('by_code', ['code'])
 
 const scannedArticles = defineTable(ScannedArticles)
 const user = defineTable(User)
-const stock = defineTable(Stock)
+
+
+const stock = defineTable(Stock).index('by_articleCode',['articleCode'])
+
 const affectations = defineTable(Affectations)
 const affectationPermisions = defineTable(AffectationPermisions)
 const groupsPermissions = defineTable(GroupsPermissions)
 const sessions = defineTable(Sessions)
 const sessionGroups = defineTable(SessionGroups)
 const sessionWorkers = defineTable(SessionWorkers)
-const inventory = defineTable(Inventory)
+const inventory = defineTable(Inventory).index('by_articleCode',['articleCode'])
 const sessionRecord = defineTable(SessionRecord)
 
 

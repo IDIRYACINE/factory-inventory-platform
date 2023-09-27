@@ -1,16 +1,16 @@
 import { v } from "convex/values";
-import { action, internalQuery, mutation, query } from "./_generated/server";
+import {  mutation, query } from "./_generated/server";
 import { isAuthenticated } from "./helpers/isAuthenticated";
 import { codeNotAuthenticated } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
-import { Workers,  } from "./schema";
-import { WorkersOptional } from "./helpers/updateHelpers";
+import { Stock,  } from "./schema";
+import { StockOptional } from "./helpers/updateHelpers";
 
 
 
 
-export const load = query({
-    args: {  },
+export const get = query({
+    args: { code: v.string() },
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -19,16 +19,30 @@ export const load = query({
             return { code: codeNotAuthenticated }
         }
 
+        const data = await ctx.db.query(
+            'stock'
+        ).withIndex(
+            "by_articleCode",
+            (q) => q.eq('articleCode', args.code)).first()
 
-       const workers=  await ctx.db.query('workers').order("desc").collect();
+        return data
+    }
+})
 
-       return {workers}
+export const load = query({
+    args: { paginationOpts: paginationOptsValidator },
+    handler: async (ctx, args) => {
+
+
+
+        return await ctx.db.query('stock').order("desc").paginate(args.paginationOpts);
+
     }
 })
 
 
 export const create = mutation({
-    args: {worker:v.object(Workers)},
+    args: {stock:v.object(Stock)},
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -37,7 +51,7 @@ export const create = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.insert('workers',args.worker)
+        const data = await ctx.db.insert('stock',args.stock)
 
         return data
     }
@@ -46,7 +60,7 @@ export const create = mutation({
 
 
 export const update = mutation({
-    args: {id :v.id("workers") ,worker:v.object(WorkersOptional)},
+    args: {id :v.id("stock") ,stock:v.object(StockOptional)},
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -55,7 +69,7 @@ export const update = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.patch(args.id,args.worker)
+        const data = await ctx.db.patch(args.id,args.stock)
 
         return data
     }

@@ -2,24 +2,41 @@ import { Doc } from '@convex/_generated/dataModel'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface StockState {
-    stock : Doc<'stock'>[],
+    stocks : Doc<'stock'>[],
+    itemsPerPage : number,
+    pages : number,
+    displayedPage: number,
+    stock?: Doc<'stock'>
 }
 
 const initialState: StockState = {
-    stock: [],
+    stocks: [],
+    itemsPerPage : 50,
+    pages : 0,
+    displayedPage: 0,
 
 }
 
-export const inventorySlice = createSlice({
-    name: 'products',
+export const stockSlice = createSlice({
+    name: 'stocks',
     initialState,
     reducers: {
         setStock: (state, action: PayloadAction<StockState['stock']>) => {
+            state.stock = action.payload
+        },
+
+        loadStocks: (state, action: PayloadAction<StockState['stocks']>) => {
+            state.stocks = [...state.stocks , ...action.payload] 
+        },
+        unselectStock:(state,)=>{
+            state.stock = undefined
+        },
+        selectStock:(state,action:PayloadAction<StockState['stock']>)=>{
             state.stock = action.payload
         }
     },
 })
 
-export const { setStock } = inventorySlice.actions
+export const { setStock,selectStock,unselectStock,loadStocks } = stockSlice.actions
 
-export default inventorySlice.reducer
+export default stockSlice.reducer

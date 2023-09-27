@@ -6,16 +6,29 @@ import Form from "antd/es/form";
 import Input from "antd/es/input";
 import useTranslation from "next-translate/useTranslation";
 import FamilyCodeSelector from "@/components/familyCodes/FamilyCodeSelector";
+import { useCreateInventory, useUpdateInventory } from "@/hooks/useInventory";
+import { useAppSelector } from "@/stores/hooks";
+import { selectInventory } from "@/stores/inventory/selectors";
 
 
-type FieldType = Partial<Doc<"inventory">>
+type FieldType = Doc<"inventory">
 
 export default function InventoryForm() {
 
   const { t } = useTranslation('common');
 
+  const create = useCreateInventory()
+  const update = useUpdateInventory()
+
+  const inventory = useAppSelector(selectInventory)
+
   const onFinish = (values: FieldType) => {
-    console.log('Success:', values);
+    if (inventory) {
+      update({ id: inventory._id, ...values })
+      return
+    }
+    create(values)
+
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -28,7 +41,7 @@ export default function InventoryForm() {
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
-      // initialValues={{ remember: true }}
+      initialValues={inventory}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
@@ -46,6 +59,14 @@ export default function InventoryForm() {
       <Form.Item<FieldType>
         label={t('code')}
         name="articleCode"
+        rules={[{ required: true, message: 'ErrorMessageHere' }]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item<FieldType>
+        label={t('stockCode')}
+        name="stockCode"
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
       >
         <Input />
