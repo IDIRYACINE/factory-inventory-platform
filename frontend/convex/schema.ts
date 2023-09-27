@@ -62,6 +62,7 @@ export const SessionGroups = {
     sessionId : v.id('sessions'),
     groupName : v.string(),
     supervisorId : v.id('users'),
+    supervisorTokenIdentifier : v.string(),
 }
 
 
@@ -101,7 +102,8 @@ const workers = defineTable(Workers)
 const familyCode = defineTable(FamilyCode).index('by_code', ['code'])
 
 const scannedArticles = defineTable(ScannedArticles)
-const user = defineTable(User)
+
+const user = defineTable(User).index('by_tokenIdentifier',['tokenIdentifier'])
 
 
 const stock = defineTable(Stock).index('by_articleCode',['articleCode'])
@@ -112,7 +114,8 @@ const groupsPermissions = defineTable(GroupsPermissions)
 
 const sessions = defineTable(Sessions).index('by_active',['active'])
 
-const sessionGroups = defineTable(SessionGroups)
+const sessionGroups = defineTable(SessionGroups).index('by_supervisorTokenIdentifier',['supervisorTokenIdentifier'])
+
 const sessionWorkers = defineTable(SessionWorkers)
 
 const inventory = defineTable(Inventory).index('by_articleCode',['articleCode'])

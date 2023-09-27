@@ -33,3 +33,9 @@ export const SessionsOptional = {
     priceShift : v.optional(v.number()),
     quantityShift : v.optional(v.number()),
 }
+
+
+export const SessionGroupsOptional = {
+    sessionId : v.optional(v.id('sessions')),
+    groupName : v.optional(v.string()),
+}

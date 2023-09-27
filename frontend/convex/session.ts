@@ -3,7 +3,6 @@ import {  mutation, query } from "./_generated/server";
 import { isAuthenticated } from "./helpers/isAuthenticated";
 import { codeNotAuthenticated, codeSessionNotFound } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
-import { Sessions,  } from "./schema";
 
 
 export const getActiveSession = query({

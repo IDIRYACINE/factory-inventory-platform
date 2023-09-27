@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface GroupsState {
     groups : Doc<'sessionGroups'>[],
+    activeGroup?: Doc<'sessionGroups'>
 }
 
 const initialState: GroupsState = {
@@ -16,10 +17,16 @@ export const sessionGroupsSlice = createSlice({
     reducers: {
         setSessionGroups: (state, action: PayloadAction<GroupsState['groups']>) => {
             state.groups = action.payload
+        },
+        selectActiveGroup: (state, action: PayloadAction<Doc<'sessionGroups'>>) => {
+            state.activeGroup = action.payload
+        },
+        resetActiveGroup: (state) => {
+            state.activeGroup = undefined
         }
     },
 })
 
-export const { setSessionGroups } = sessionGroupsSlice.actions
+export const { setSessionGroups,selectActiveGroup,resetActiveGroup } = sessionGroupsSlice.actions
 
 export default sessionGroupsSlice.reducer

@@ -1,4 +1,4 @@
-import { createFamilyCodePath, createWorkersPath, editFamilyCodePath, editWorkersPath, familyCodePath } from "@/domain/routerPaths"
+import { createFamilyCodePath, createSessionGroupsPath, createWorkersPath, editFamilyCodePath, editSessionGroupsPath, editWorkersPath, familyCodePath, sessionsPath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
@@ -140,6 +140,28 @@ export const useHistoryNavigation = () => {
     return {
         navigateToNewHistory,
         navigateToEditHistory,
+        navigateHome
+    }
+}
+
+export const useSessionGroupNavigation = () => {
+    const router = useRouter()
+
+    const navigateToNewSessionGroup = () => {
+        router.push(createSessionGroupsPath)
+    }
+
+    const navigateToEditSessionGroup = (id: Id<"sessionGroups">) => {
+        router.push(editSessionGroupsPath.replace(':id', id))
+    }
+
+    const navigateHome = () => {
+        router.push(sessionsPath)
+    }
+
+    return {
+        navigateToNewSessionGroup,
+        navigateToEditSessionGroup,
         navigateHome
     }
 }

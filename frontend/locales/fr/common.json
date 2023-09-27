@@ -22,5 +22,6 @@
     "noSession" : "No Session",
     "worker" : "Worker",
     "openSession" : "Open Session",
-    "closeSession" : "Close Session"
+    "closeSession" : "Close Session",
+    "groupName" : "Group Name"
 }
