@@ -1,30 +1,36 @@
+"use client";
+
 import type { ColumnsType } from 'antd/es/table';
 import Table from 'antd/es/table';
 import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
-import { useReadSessionWorkers } from '@/hooks/useSesionWorker';
+import { useAppSelector } from '@/stores/hooks';
+import { selectAffectations } from '@/stores/affectations/selectors';
 
 
-type DataType = Doc<'sessionWorkers'> & { key: string };
+type DataType = Doc<'affectations'> & { key: string };
 
-export default function SessionGroupTable(props:React.ComponentPropsWithoutRef<"div">) {
+export default function AffectationTable(props:React.ComponentPropsWithoutRef<"div">) {
   const { t } = useTranslation()
 
   const className= clsx(props.className)
-  const rawColumns = ["username","password"]
+
+  
+  const rawColumns = ["code","name"]
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({
     title: t(rawCol),
     dataIndex: rawCol,
-    key: `sessionW-header-${rawCol}`,
+    key: `affectation-header-${rawCol}`,
   }))
 
 
-  const storeData = useReadSessionWorkers()
-  const data: DataType[] = storeData.map((el) => ({
-    ...el,
-    key: el._id,
+  const codes = useAppSelector(selectAffectations)
+
+  const data: DataType[] = codes.map((code) => ({
+    ...code,
+    key: code._id,
   }))
 
   return (

@@ -19,7 +19,7 @@ export default function SessionGroupSelector() {
         <Select
             showSearch
             style={{ width: 200 }}
-            placeholder={t('familyCode')}
+            placeholder={t('group')}
             optionFilterProp="children"
             options={options}
         />

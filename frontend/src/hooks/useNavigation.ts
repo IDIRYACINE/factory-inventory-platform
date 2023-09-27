@@ -1,4 +1,4 @@
-import { createFamilyCodePath, createSessionGroupsPath, createWorkersPath, editFamilyCodePath, editSessionGroupsPath, editWorkersPath, familyCodePath, sessionsPath } from "@/domain/routerPaths"
+import { affectationsPath, createAffectationsPath, createFamilyCodePath, createSessionGroupsPath, createSessionWorkersPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editSessionGroupsPath, editSessionWorkersPath, editWorkersPath, familyCodePath, sessionWorkersPath, sessionsPath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
@@ -162,6 +162,53 @@ export const useSessionGroupNavigation = () => {
     return {
         navigateToNewSessionGroup,
         navigateToEditSessionGroup,
+        navigateHome
+    }
+}
+
+
+export const useAffectationNavigation = () => {
+    const router = useRouter()
+
+    const navigateToNewAffectation = () => {
+        router.push(createAffectationsPath)
+    }
+
+    const navigateToEditAffectation = (id: Id<"affectations">) => {
+        router.push(editAffectationsPath.replace(':id', id))
+    }
+
+    const navigateHome = () => {
+        router.push(affectationsPath)
+    }
+
+    return {
+        navigateToNewAffectation,
+        navigateToEditAffectation,
+        navigateHome
+    }
+
+
+}
+
+export const useSessionWorkerNavigation = () => {
+    const router = useRouter()
+
+    const navigateToNewSessionWorker = () => {
+        router.push(createSessionWorkersPath)
+    }
+
+    const navigateToEditSessionWorker = (id: Id<"sessionWorkers">) => {
+        router.push(editSessionWorkersPath.replace(':id', id))
+    }
+
+    const navigateHome = () => {
+        router.push(sessionWorkersPath)
+    }
+
+    return {
+        navigateToNewSessionWorker,
+        navigateToEditSessionWorker,
         navigateHome
     }
 }

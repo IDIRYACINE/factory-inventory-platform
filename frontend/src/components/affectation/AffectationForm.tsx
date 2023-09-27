@@ -1,30 +1,43 @@
 'use client';
 
-import { useCreateSessionWorker, useReadSessionWorker, useUpdateSessionWorker } from "@/hooks/useSesionWorker";
+import { useCreateAffectation, useReadAffectation, useUpdateAffectation } from "@/hooks/useAffectation";
+import { useAffectationNavigation } from "@/hooks/useNavigation";
 import { Doc } from "@convex/_generated/dataModel";
 import Button from "antd/es/button";
 import Form from "antd/es/form";
 import Input from "antd/es/input";
 import useTranslation from "next-translate/useTranslation";
-import SessionGroupSelector from "@/components/sessionGroups/SessionGroupSelector";
 
 
-type FieldType = Doc<"sessionWorkers">
+type FieldType = Partial<Doc<"affectations">>
 
-export default function SessionWorkerForm() {
+export default function AffectationForm() {
 
   const { t } = useTranslation('common');
 
-  const sessionWorker = useReadSessionWorker()
-  const create = useCreateSessionWorker()
-  const update = useUpdateSessionWorker()
+  const { navigateHome } = useAffectationNavigation()
+
+  const affectation = useReadAffectation({})
+
+  const update = useUpdateAffectation()
+
+  const create = useCreateAffectation()
 
   const onFinish = (values: FieldType) => {
-    if (sessionWorker) {
-      update({ id: sessionWorker._id, ...values })
-      return
+
+    if (affectation) {
+      update({
+        id: affectation._id,
+        ...values
+      })
+
+      return;
     }
-    create(values)
+
+    create({
+      affectationCode:values.affectationCode!,
+      affectationName:values.affectationName!
+    })
 
   };
 
@@ -32,44 +45,39 @@ export default function SessionWorkerForm() {
     console.log('Failed:', errorInfo);
   };
 
+
   return (
     <Form
       name="basic"
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
       style={{ maxWidth: 600 }}
-      initialValues={sessionWorker}
+      initialValues={affectation}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-     <Form.Item<FieldType>
+
+
+      <Form.Item<FieldType>
         label={t('name')}
-        name="username"
+        name="affectationName"
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
       >
         <Input />
       </Form.Item>
 
       <Form.Item<FieldType>
-        label={t('group')}
-        name="groupId"
-        rules={[{ required: true, message: 'ErrorMessageHere' }]}
-      >
-        <SessionGroupSelector/>
-      </Form.Item>
-
-      <Form.Item<FieldType>
-        label={t('password')}
-        name="password"
+        label={t('code')}
+        name="affectationCode"
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
       >
         <Input />
-      </Form.Item> 
+      </Form.Item>
 
       <div className="flex flex-row justify-end items-center gap-8">
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="text" htmlType="reset">
+          <Button type="text" onClick={navigateHome}>
             {t('cancel')}
           </Button>
         </Form.Item>

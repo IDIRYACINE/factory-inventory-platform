@@ -14,6 +14,8 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as affectation from "../affectation";
+import type * as helpers_createHelpers from "../helpers/createHelpers";
 import type * as helpers_isAuthenticated from "../helpers/isAuthenticated";
 import type * as helpers_statusCodes from "../helpers/statusCodes";
 import type * as helpers_updateHelpers from "../helpers/updateHelpers";
@@ -21,6 +23,7 @@ import type * as inventory from "../inventory";
 import type * as productFamily from "../productFamily";
 import type * as session from "../session";
 import type * as sessionGroup from "../sessionGroup";
+import type * as sessionWorker from "../sessionWorker";
 import type * as stock from "../stock";
 import type * as workers from "../workers";
 
@@ -33,6 +36,8 @@ import type * as workers from "../workers";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  affectation: typeof affectation;
+  "helpers/createHelpers": typeof helpers_createHelpers;
   "helpers/isAuthenticated": typeof helpers_isAuthenticated;
   "helpers/statusCodes": typeof helpers_statusCodes;
   "helpers/updateHelpers": typeof helpers_updateHelpers;
@@ -40,6 +45,7 @@ declare const fullApi: ApiFromModules<{
   productFamily: typeof productFamily;
   session: typeof session;
   sessionGroup: typeof sessionGroup;
+  sessionWorker: typeof sessionWorker;
   stock: typeof stock;
   workers: typeof workers;
 }>;

@@ -1,20 +1,20 @@
 'use client';
 
-import { useSessionWorkerNavigation } from "@/hooks/useNavigation"
+import { useAffectationNavigation } from "@/hooks/useNavigation"
 import Button from "antd/es/button"
 import clsx from "clsx"
 import useTranslation from "next-translate/useTranslation"
 
 
- const SessionGroupTableActions = (props:React.ComponentPropsWithoutRef<"div">) => {
+ const AffectationTableActions = (props:React.ComponentPropsWithoutRef<"div">) => {
     const { t } = useTranslation('common')
     const className= clsx(props.className, "flex flex-row justify-end items-center")
-    const { navigateToNewSessionWorker } = useSessionWorkerNavigation()
+    const { navigateToNewAffectation } = useAffectationNavigation()
   
   
     return (
       <div className={className}>
-        <Button onClick={navigateToNewSessionWorker} type="primary">
+        <Button onClick={navigateToNewAffectation} type="primary">
           {t('add')}
         </Button>
   
@@ -22,4 +22,4 @@ import useTranslation from "next-translate/useTranslation"
     )
   }
 
-  export default SessionGroupTableActions
+  export default AffectationTableActions

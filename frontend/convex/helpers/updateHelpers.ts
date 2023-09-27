@@ -39,3 +39,17 @@ export const SessionGroupsOptional = {
     sessionId : v.optional(v.id('sessions')),
     groupName : v.optional(v.string()),
 }
+
+
+export const SessionWorkerOptional = {
+    groupId : v.optional(v.id('sessionGroups')),
+    username : v.optional(v.string()),
+    password : v.optional(v.string()),
+
+}
+
+
+export const AffectationsOptional = {
+    affectationCode: v.optional(v.string()),
+    affectationName: v.optional(v.string()),
+}
