@@ -28,7 +28,7 @@ export const useLoadFamilyCodes = () => {
 
     useEffect(() => {
         if (results.length > 0) {
-            dispatch(setFamilyCodes(results))
+            dispatch(loadFamilyCodes(results))
         }
     }, [dispatch, results])
 

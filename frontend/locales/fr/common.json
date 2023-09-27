@@ -18,5 +18,9 @@
     "username" : "Username",
     "unit" : "Unit",
     "familyCode" : "Family Code",
-    "stockCode" : "Stock Code"
+    "stockCode" : "Stock Code",
+    "noSession" : "No Session",
+    "worker" : "Worker",
+    "openSession" : "Open Session",
+    "closeSession" : "Close Session"
 }

@@ -16,7 +16,6 @@ export default function FamilyCodeTable(props:React.ComponentPropsWithoutRef<"di
 
   const className= clsx(props.className)
 
-  const codes = useAppSelector(selectFamilyCodes)
   
   const rawColumns = ["code","name"]
 
@@ -27,6 +26,7 @@ export default function FamilyCodeTable(props:React.ComponentPropsWithoutRef<"di
   }))
 
 
+  const codes = useAppSelector(selectFamilyCodes)
 
   const data: DataType[] = codes.map((code) => ({
     ...code,

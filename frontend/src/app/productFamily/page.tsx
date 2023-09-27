@@ -1,4 +1,4 @@
-
+"use client";
 
 import { FamilyCodePanel } from "@/components/familyCodes/FamilyCodePanel";
 import FamilyCodesInjector from "@/lib/StateLoaders/FamilyCodesInjector";

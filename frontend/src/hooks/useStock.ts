@@ -21,7 +21,7 @@ export const useReadstock = (args:{id?:Id<"stock">}) => {
     return stock
 }
 
-export const useLoadstock = () => {
+export const useLoadStock = () => {
     const { results, status, loadMore } = usePaginatedQuery(api.stock.load, {}, { initialNumItems: 50 })
 
     const dispatch = useAppDispatch()

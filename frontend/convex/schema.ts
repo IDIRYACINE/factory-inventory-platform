@@ -52,10 +52,10 @@ export const GroupsPermissions = {
 
 export const Sessions = {
     active : v.boolean(),
-    statrtDate : v.int64(),
-    endDate : v.int64(),
-    priceShift : v.number(),
-    quantityShift : v.number(),
+    startDate : v.number(),
+    endDate : v.optional(v.number()),
+    priceShift : v.optional(v.number()),
+    quantityShift :v.optional( v.number()),
 }
 
 export const SessionGroups = {
@@ -109,11 +109,15 @@ const stock = defineTable(Stock).index('by_articleCode',['articleCode'])
 const affectations = defineTable(Affectations)
 const affectationPermisions = defineTable(AffectationPermisions)
 const groupsPermissions = defineTable(GroupsPermissions)
-const sessions = defineTable(Sessions)
+
+const sessions = defineTable(Sessions).index('by_active',['active'])
+
 const sessionGroups = defineTable(SessionGroups)
 const sessionWorkers = defineTable(SessionWorkers)
+
 const inventory = defineTable(Inventory).index('by_articleCode',['articleCode'])
-const sessionRecord = defineTable(SessionRecord)
+
+const sessionRecord = defineTable(SessionRecord).index("by_sessionId",['sessionId'])
 
 
 export default defineSchema({

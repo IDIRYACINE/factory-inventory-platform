@@ -19,6 +19,7 @@ import type * as helpers_statusCodes from "../helpers/statusCodes";
 import type * as helpers_updateHelpers from "../helpers/updateHelpers";
 import type * as inventory from "../inventory";
 import type * as productFamily from "../productFamily";
+import type * as session from "../session";
 import type * as stock from "../stock";
 import type * as workers from "../workers";
 
@@ -36,6 +37,7 @@ declare const fullApi: ApiFromModules<{
   "helpers/updateHelpers": typeof helpers_updateHelpers;
   inventory: typeof inventory;
   productFamily: typeof productFamily;
+  session: typeof session;
   stock: typeof stock;
   workers: typeof workers;
 }>;

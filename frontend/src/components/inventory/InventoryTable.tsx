@@ -16,7 +16,7 @@ export default function InventoryTable(props:React.ComponentPropsWithoutRef<"div
 
   const className= clsx(props.className)
 
-  const rawColumns = [""]
+  const rawColumns = ["code","name","familyCode","unit"]
 
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({

@@ -23,3 +23,13 @@ export const WorkersOptional = {
     phone: v.optional(v.string()),
     username: v.optional(v.string()),
 }
+
+
+
+export const SessionsOptional = {
+    active : v.optional(v.boolean()),
+    statrtDate : v.optional(v.int64()),
+    endDate : v.optional(v.int64()),
+    priceShift : v.optional(v.number()),
+    quantityShift : v.optional(v.number()),
+}
