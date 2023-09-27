@@ -1,9 +1,4 @@
-import ServerProviders from '@/lib/ServerProviders';
 import './globals.css'
-
-import MainLayout from '@/lib/MainLayout';
-import ReduxProvider from '@/lib/ReduxProvider';
-
 
 
 export default function RootLayout({
@@ -14,14 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="h-screen" >
-        <ServerProviders>
-          <MainLayout>
-            <ReduxProvider>
-              {children}
-            </ReduxProvider>
-          </MainLayout>
-        </ServerProviders>
-
+        {children}
       </body>
     </html>
   )

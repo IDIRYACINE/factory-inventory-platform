@@ -2,7 +2,7 @@ import UserTable from "./UserTable"
 import UserTableActions from "./UserTableActions"
 
 
-export const UserPanel = () => {
+export const UsersPanel = () => {
 
 
     return (

@@ -22,7 +22,7 @@ export const useReadUser = (args:{id?:Id<"user">}) => {
     return user
 }
 
-export const useLoadUser = () => {
+export const useLoadUsers = () => {
     const res = useQuery(api.user.load)
 
     const dispatch = useAppDispatch()

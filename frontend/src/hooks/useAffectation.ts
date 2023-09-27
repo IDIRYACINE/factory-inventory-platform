@@ -21,7 +21,7 @@ export const useReadAffectation = (args:{id?:Id<"affectations">}) => {
     return family
 }
 
-export const useLoadAffectation = () => {
+export const useLoadAffectations = () => {
     const { results, status, loadMore } = usePaginatedQuery(api.affectation.load, {}, { initialNumItems: 50 })
 
     const dispatch = useAppDispatch()

@@ -2,7 +2,7 @@ import AffectationTable from "./AffectationTable"
 import AffectationTableActions from "./AffectationTableActions"
 
 
-export const AffectationPanel = () => {
+export const AffectationsPanel = () => {
 
 
     return (
