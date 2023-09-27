@@ -3,19 +3,19 @@ import { v } from "convex/values";
 
 
 export const InventoryOptional = {
-    articleCode: v.optional(v.string()),
+    articleCode: v.optional(v.number()),
     articleName: v.optional(v.string()),
     unit: v.optional(v.string()),
-    familyCode: v.optional(v.id('familyCode')),
+    familyCode: v.optional(v.number()),
 }
 
 
 export const StockOptional = {
     articleName: v.optional(v.string()),
-    articleCode: v.optional(v.string()),
+    articleCode: v.optional(v.number()),
     quantity: v.optional(v.number()),
     unit: v.optional(v.string()),
-    familyCode : v.optional(v.id('familyCode')),
+    familyCode : v.optional(v.number()),
 }
 
 export const WorkersOptional = {
@@ -28,8 +28,8 @@ export const WorkersOptional = {
 
 export const SessionsOptional = {
     active : v.optional(v.boolean()),
-    statrtDate : v.optional(v.int64()),
-    endDate : v.optional(v.int64()),
+    statrtDate : v.optional(v.number()),
+    endDate : v.optional(v.number()),
     priceShift : v.optional(v.number()),
     quantityShift : v.optional(v.number()),
 }
@@ -50,7 +50,7 @@ export const SessionWorkerOptional = {
 
 
 export const AffectationsOptional = {
-    affectationCode: v.optional(v.string()),
+    affectationCode: v.optional(v.number()),
     affectationName: v.optional(v.string()),
 }
 

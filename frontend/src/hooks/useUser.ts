@@ -7,7 +7,7 @@ import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation,  useQuery } from "convex/react";
 import { useEffect } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {  useSearchParams } from "next/navigation";
 
 
 export const useReadUsers = () => {
@@ -69,8 +69,8 @@ type PermissionArgs = Omit<Doc<"affectationPermisions">,"_id" | "_creationTime" 
 export const useGrantPermission = () => {
     const grant = useMutation(api.permissions.grant)
 
-    const handleGrant = ({ affectationId, userId }: PermissionArgs) => {
-        grant({ affectationPermision:{ affectationId, userId} })
+    const handleGrant = ({ affectationCode, userId }: PermissionArgs) => {
+        grant({ affectationPermision:{ affectationCode, userId} })
     }
 
     return handleGrant

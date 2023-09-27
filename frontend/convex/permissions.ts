@@ -22,7 +22,7 @@ export const load = query({
 
 
         const permissions = await ctx.db.query('affectationPermisions')
-        .withIndex("by_userId",(q) => q.eq('userId', args.userId))
+        .withIndex("by_userId_affectationCode",(q) => q.eq('userId', args.userId))
         .collect();
 
         return {permissions}

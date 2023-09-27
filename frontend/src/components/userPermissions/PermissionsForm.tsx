@@ -47,7 +47,7 @@ export default function PermissionsForm() {
 
       <Form.Item<FieldType>
         label={t('code')}
-        name="affectationId"
+        name="affectationCode"
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
       >
         <Input />

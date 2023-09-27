@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { action, internalQuery, mutation, query } from "./_generated/server";
+import {  mutation, query } from "./_generated/server";
 import { isAuthenticated } from "./helpers/isAuthenticated";
 import { codeNotAuthenticated } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
@@ -9,7 +9,7 @@ import { FamilyCode } from "./schema";
 
 
 export const get = query({
-    args: { code: v.string() },
+    args: { code: v.number() },
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -61,7 +61,7 @@ export const create = mutation({
 
 
 export const update = mutation({
-    args: {id :v.id("familyCode") ,code:v.optional(v.string()),name:v.optional(v.string())},
+    args: {id :v.id("familyCode") ,code:v.optional(v.number()),name:v.optional(v.string())},
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -70,7 +70,7 @@ export const update = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const patched:{code?:string,name?:string} = {}
+        const patched:{code?:number,name?:string} = {}
 
         if(args.code){
             patched.code = args.code

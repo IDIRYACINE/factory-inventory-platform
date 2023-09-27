@@ -23,5 +23,6 @@
     "worker" : "Worker",
     "openSession" : "Open Session",
     "closeSession" : "Close Session",
-    "groupName" : "Group Name"
+    "groupName" : "Group Name",
+    "groups" : "Groups"
 }

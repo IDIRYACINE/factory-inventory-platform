@@ -1,4 +1,4 @@
-import { affectationPermisionsPath, affectationsPath, createAffectationsPath, createFamilyCodePath, createSessionGroupsPath, createSessionWorkersPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editSessionGroupsPath, editSessionWorkersPath, editUserPath, editWorkersPath, familyCodePath, sessionWorkersPath, sessionsPath, userPath } from "@/domain/routerPaths"
+import { affectationPermisionsPath, affectationsPath, createAffectationsPath, createFamilyCodePath, createInventoryPath, createSessionGroupsPath, createSessionWorkersPath, createStockPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editInventoryPath, editSessionGroupsPath, editSessionWorkersPath, editStockPath, editUserPath, editWorkersPath, familyCodePath, inventoryPath, sessionWorkersPath, sessionsPath, stockPath, userPath, workersPath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
@@ -15,8 +15,21 @@ export const usePanelNavigation = () => {
 
     const dispatch = useAppDispatch()
 
+    const panelNavigationMap = {
+        workers: workersPath,
+        familyCode: familyCodePath,
+        inventory: inventoryPath,
+        stock: stockPath,
+        sessions: sessionsPath,
+        sessionWorkers: sessionWorkersPath,
+        sessionGroups: sessionsPath,
+        affectations: affectationsPath,
+        users: userPath,
+        permissions: affectationPermisionsPath
+    }
+
     const navigateToPanel = (panel: SettingsState['activePanel']) => {
-        router.push(`/${panel}`)
+        router.push(`/dashboard/${panel}`)
         dispatch(setActivePanel(panel))
     }
 
@@ -41,7 +54,7 @@ export const useWorkerNavigation = () => {
     }
 
     const navigateHome = () => {
-        router.push('/')
+        router.push(workersPath)
     }
 
     return {
@@ -81,15 +94,15 @@ export const useInventoryNavigation = () => {
     const router = useRouter()
 
     const navigateToNewInventory = () => {
-        router.push(createFamilyCodePath)
+        router.push(createInventoryPath)
     }
 
     const navigateToEditInventory = (id: Id<"inventory">) => {
-        router.push(editWorkersPath.replace(':id', id))
+        router.push(editInventoryPath.replace(':id', id))
     }
 
     const navigateHome = () => {
-        router.push('/')
+        router.push(inventoryPath)
     }
 
     return {
@@ -104,15 +117,15 @@ export const useStockNavigation = () => {
     const router = useRouter()
 
     const navigateToNewStock = () => {
-        router.push(createFamilyCodePath)
+        router.push(createStockPath)
     }
 
     const navigateToEditStock = (id: Id<"stock">) => {
-        router.push(editWorkersPath.replace(':id', id))
+        router.push(editStockPath.replace(':id', id))
     }
 
     const navigateHome = () => {
-        router.push('/')
+        router.push(stockPath)
     }
 
     return {
@@ -233,6 +246,7 @@ export const useUserNavigation = () => {
         router.push(affectationPermisionsPath)
     }
 
+
     return {
         navigateToNewUser,
         navigateToEditUser,
@@ -253,4 +267,27 @@ export const usePermissionsNavigation = () => {
     return {
         navigateHome
     }
+}
+
+export const useSessionNavigation = () => {
+    
+        const router = useRouter()
+    
+        const navigateHome = () => {
+            router.push(sessionsPath)
+        }
+
+        const navigateSessionWorkers = () => {
+            router.push(sessionWorkersPath)
+        }
+
+        const navigateSessionGroups = () => {
+            router.push(sessionWorkersPath)
+        }
+    
+        return {
+            navigateHome,
+            navigateSessionWorkers,
+            navigateSessionGroups
+        }
 }

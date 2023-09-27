@@ -10,7 +10,7 @@ import { StockOptional } from "./helpers/updateHelpers";
 
 
 export const get = query({
-    args: { code: v.string() },
+    args: { code: v.number() },
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)

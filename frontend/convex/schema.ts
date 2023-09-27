@@ -10,14 +10,14 @@ export const Workers = {
 
 
 export const FamilyCode = {
-    code: v.string(),
+    code: v.number(),
     name: v.string(),
 }
 
 export const ScannedArticles = {
-    articleCode: v.string(),
+    articleCode: v.number(),
     articleName: v.string(),
-    affectationId: v.id('affectations'),
+    affectationCode: v.number(),
 }
 
 export const User = {
@@ -28,20 +28,20 @@ export const User = {
 
 export const Stock = {
     articleName: v.string(),
-    articleCode: v.string(),
+    articleCode: v.number(),
     quantity: v.number(),
     unit: v.string(),
-    familyCode : v.id('familyCode'),
+    familyCode : v.number(),
 }
 
 export const Affectations = {
-    affectationCode: v.string(),
+    affectationCode: v.number(),
     affectationName: v.string(),
 }
 
 export const AffectationPermisions = {
     userId : v.id('user'),
-    affectationId : v.id('affectations'),
+    affectationCode : v.number(),
 }
 
 export const GroupsPermissions = {
@@ -75,11 +75,11 @@ export const SessionWorker = {
 }
 
 export const Inventory = {
-    articleCode : v.string(),
+    articleCode : v.number(),
     articleName : v.string(),
     unit : v.string(),
-    familyCode : v.id('familyCode'),
-    stockCode : v.string(),
+    familyCode : v.number(),
+    stockCode : v.number(),
 }
 
 export const SessionRecord = {
@@ -87,13 +87,12 @@ export const SessionRecord = {
     workerId : v.id('workers'),
     groupId : v.id('sessionGroups'),
     workerName : v.string(),
-    articlaName : v.string(),
-    articleCode : v.string(),
+    articleName : v.string(),
+    articleCode : v.number(),
     priceShift : v.number(),
     quantityShift : v.number(),
     stockUnit : v.number(),
-    timestamp : v.int64(),
-    inventoryId : v.id('inventory'),
+    timestamp : v.number(),
     recordQuantity : v.number(),
 }
 
@@ -106,11 +105,11 @@ const scannedArticles = defineTable(ScannedArticles)
 const user = defineTable(User).index('by_tokenIdentifier',['tokenIdentifier'])
 
 
-const stock = defineTable(Stock).index('by_articleCode',['articleCode'])
+const stock = defineTable(Stock).index('by_articleCode',['articleCode']).index('by_familyCode',['familyCode'])
 
 const affectations = defineTable(Affectations).index('by_affectationCode',['affectationCode'])
 
-const affectationPermisions = defineTable(AffectationPermisions).index("by_userId",["userId"])
+const affectationPermisions = defineTable(AffectationPermisions).index("by_userId_affectationCode",["userId","affectationCode"])
 
 const groupsPermissions = defineTable(GroupsPermissions)
 
@@ -121,6 +120,7 @@ const sessionGroups = defineTable(SessionGroups).index('by_supervisorTokenIdenti
 const sessionWorkers = defineTable(SessionWorker)
 
 const inventory = defineTable(Inventory).index('by_articleCode',['articleCode'])
+.index('by_familyCode',['familyCode']).index('by_stockCode',['stockCode'])
 
 const sessionRecord = defineTable(SessionRecord).index("by_sessionId",['sessionId'])
 

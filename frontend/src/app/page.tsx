@@ -1,12 +1,8 @@
+import { sessionsPath } from "@/domain/routerPaths"
+import { RedirectType, redirect } from "next/navigation"
 
 
 export default async function Home() {
-
-  return (
-
-    <main className="flex flex-col items-center justify-center">
-     
-    </main>
-  )
+  redirect(sessionsPath,RedirectType.replace)
 }
 
