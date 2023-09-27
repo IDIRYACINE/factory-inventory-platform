@@ -53,3 +53,9 @@ export const AffectationsOptional = {
     affectationCode: v.optional(v.string()),
     affectationName: v.optional(v.string()),
 }
+
+
+export const UserOptional = {
+    name: v.optional(v.string()),
+    role: v.optional(v.string()),
+}

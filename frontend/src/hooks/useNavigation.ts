@@ -1,4 +1,4 @@
-import { affectationsPath, createAffectationsPath, createFamilyCodePath, createSessionGroupsPath, createSessionWorkersPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editSessionGroupsPath, editSessionWorkersPath, editWorkersPath, familyCodePath, sessionWorkersPath, sessionsPath } from "@/domain/routerPaths"
+import { affectationPermisionsPath, affectationsPath, createAffectationsPath, createFamilyCodePath, createSessionGroupsPath, createSessionWorkersPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editSessionGroupsPath, editSessionWorkersPath, editUserPath, editWorkersPath, familyCodePath, sessionWorkersPath, sessionsPath, userPath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
@@ -209,6 +209,48 @@ export const useSessionWorkerNavigation = () => {
     return {
         navigateToNewSessionWorker,
         navigateToEditSessionWorker,
+        navigateHome
+    }
+}
+
+
+export const useUserNavigation = () => {
+    const router = useRouter()
+
+    const navigateToNewUser = () => {
+        router.push(createUserPath)
+    }
+
+    const navigateToEditUser = (id: Id<"user">) => {
+        router.push(editUserPath.replace(':id', id))
+    }
+
+    const navigateHome = () => {
+        router.push(userPath)
+    }
+
+    const navigatePermissions = () => {
+        router.push(affectationPermisionsPath)
+    }
+
+    return {
+        navigateToNewUser,
+        navigateToEditUser,
+        navigateHome,
+        navigatePermissions
+    }
+}
+
+
+export const usePermissionsNavigation = () => {
+
+    const router = useRouter()
+
+    const navigateHome = () => {
+        router.push(userPath)
+    }
+
+    return {
         navigateHome
     }
 }

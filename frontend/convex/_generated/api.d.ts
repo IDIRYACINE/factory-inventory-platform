@@ -20,11 +20,13 @@ import type * as helpers_isAuthenticated from "../helpers/isAuthenticated";
 import type * as helpers_statusCodes from "../helpers/statusCodes";
 import type * as helpers_updateHelpers from "../helpers/updateHelpers";
 import type * as inventory from "../inventory";
+import type * as permissions from "../permissions";
 import type * as productFamily from "../productFamily";
 import type * as session from "../session";
 import type * as sessionGroup from "../sessionGroup";
 import type * as sessionWorker from "../sessionWorker";
 import type * as stock from "../stock";
+import type * as user from "../user";
 import type * as workers from "../workers";
 
 /**
@@ -42,11 +44,13 @@ declare const fullApi: ApiFromModules<{
   "helpers/statusCodes": typeof helpers_statusCodes;
   "helpers/updateHelpers": typeof helpers_updateHelpers;
   inventory: typeof inventory;
+  permissions: typeof permissions;
   productFamily: typeof productFamily;
   session: typeof session;
   sessionGroup: typeof sessionGroup;
   sessionWorker: typeof sessionWorker;
   stock: typeof stock;
+  user: typeof user;
   workers: typeof workers;
 }>;
 export declare const api: FilterApi<

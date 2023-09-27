@@ -40,8 +40,8 @@ export const Affectations = {
 }
 
 export const AffectationPermisions = {
-    userId : v.id('users'),
-    affectationIds : v.array(v.id('affectations')),
+    userId : v.id('user'),
+    affectationId : v.id('affectations'),
 }
 
 export const GroupsPermissions = {
@@ -61,7 +61,7 @@ export const Sessions = {
 export const SessionGroups = {
     sessionId : v.id('sessions'),
     groupName : v.string(),
-    supervisorId : v.id('users'),
+    supervisorId : v.id('user'),
     supervisorTokenIdentifier : v.string(),
 }
 
@@ -110,7 +110,8 @@ const stock = defineTable(Stock).index('by_articleCode',['articleCode'])
 
 const affectations = defineTable(Affectations).index('by_affectationCode',['affectationCode'])
 
-const affectationPermisions = defineTable(AffectationPermisions)
+const affectationPermisions = defineTable(AffectationPermisions).index("by_userId",["userId"])
+
 const groupsPermissions = defineTable(GroupsPermissions)
 
 const sessions = defineTable(Sessions).index('by_active',['active'])

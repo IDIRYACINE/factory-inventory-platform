@@ -9,6 +9,8 @@ import recordsSliceReducer from './records/slice'
 import affectionsSliceReducer from './affectations/slice'
 import familyCodeSliceReducer from './productFamily/slice'
 import sessionSliceReducer from './session/slice'
+import usersSliceReducer from './users/slice'
+
 
 export const store = configureStore({
     reducer: {
@@ -20,7 +22,8 @@ export const store = configureStore({
         records:recordsSliceReducer,
         affectations : affectionsSliceReducer,
         familyCodes : familyCodeSliceReducer,
-        session : sessionSliceReducer
+        session : sessionSliceReducer,
+        users : usersSliceReducer,
     },
 })
 
