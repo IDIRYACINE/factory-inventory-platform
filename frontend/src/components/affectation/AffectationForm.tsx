@@ -28,7 +28,7 @@ export default function AffectationForm() {
     if (affectation) {
       update({
         id: affectation._id,
-        ...values
+        affectationName : values.affectationName!,
       })
 
       return;

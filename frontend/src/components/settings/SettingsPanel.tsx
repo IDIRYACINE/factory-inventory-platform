@@ -3,6 +3,8 @@
 import { Col, Row } from "antd/es/grid";
 import useTranslation from "next-translate/useTranslation";
 import OpenSessionButton from "./OpenSessionButton";
+import UsersButton from "./UsersButton";
+import ImportsButton from "./ImportsButton";
 
 
 
@@ -16,6 +18,12 @@ export default function SettingsPanel() {
             <Row className="w-full h-full" gutter={16}>
                 <Col span={8}>
                     <OpenSessionButton openSessionTitle={t("openSession")} closeSessionTitle={t("closeSession")} />
+                </Col>
+                <Col span={8}>
+                    <UsersButton usersTitle={t('users')} />
+                </Col>
+                <Col span={8}>
+                    <ImportsButton importsTitle={t('imports')} />
                 </Col>
             </Row>
         </div>

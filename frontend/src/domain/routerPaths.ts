@@ -13,6 +13,7 @@ export const sessionGroupsPath = '/dashboard/sessionGroups'
 export const sessionWorkersPath = '/dashboard/sessionWorkers'
 export const inventoryPath = '/dashboard/inventory'
 export const sessionRecordPath = '/dashboard/sessionRecord'
+export const importsPath = '/dashboard/settings/imports'
 
 
 export const editWorkersPath = '/dashboard/workers/:id/edit'

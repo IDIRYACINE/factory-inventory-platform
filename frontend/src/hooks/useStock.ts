@@ -42,8 +42,8 @@ export const useCreateStock = () => {
 
     const create = useMutation(api.stock.create)
 
-    const handleCreate = ({ familyCode, articleName,articleCode,unit,quantity }: CreatestockArgs) => {
-        create({ stock: { familyCode, articleName,articleCode,unit,quantity } })
+    const handleCreate = ({ familyCode, articleName,articleCode }: CreatestockArgs) => {
+        create({ stock: { familyCode, articleName,articleCode } })
     }
 
     return handleCreate
@@ -56,8 +56,8 @@ export const useUpdateStock = () => {
 
     const update = useMutation(api.stock.update)
 
-    const handleUpdate = ({ id, familyCode, articleName,articleCode,unit,quantity }:UpdatestockArgs) => {
-        update({ id, stock:{familyCode, articleName,articleCode,unit,quantity} })
+    const handleUpdate = ({ id, familyCode, articleName,articleCode }:UpdatestockArgs) => {
+        update({ id, stock:{familyCode, articleName,articleCode} })
     }
 
     return handleUpdate

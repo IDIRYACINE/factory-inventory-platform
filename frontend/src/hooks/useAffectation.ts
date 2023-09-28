@@ -50,14 +50,14 @@ export const useCreateAffectation = () => {
 
 }
 
-type UpdateAffectationArgs = Partial<CreateAffectationArgs> & {id:Id<"affectations">}
+type UpdateAffectationArgs = Omit<CreateAffectationArgs,'affectationCode'> & {id:Id<"affectations">}
 export const useUpdateAffectation = () => {
 
 
     const update = useMutation(api.affectation.update)
 
-    const handleUpdate = ({ id, affectationCode, affectationName }:UpdateAffectationArgs) => {
-        update({ id, affectation: { affectationCode, affectationName  }  })
+    const handleUpdate = ({ id,  affectationName }:UpdateAffectationArgs) => {
+        update({ id, affectation: {  affectationName  }  })
     }
 
     return handleUpdate

@@ -44,7 +44,7 @@ export default function StockForm() {
 
   const options = codes.map(code => ({
     id: code._id,
-    value: code.code,
+    value: code.code.toString(),
     label: code.name,
   }))
 
@@ -95,13 +95,6 @@ export default function StockForm() {
           />
         </Form.Item>
 
-        <Form.Item<FieldType>
-          label={t('unit')}
-          name="unit"
-          rules={[{ required: true, message: 'ErrorMessageHere' }]}
-        >
-          <Input />
-        </Form.Item>
 
         <div className="flex flex-row justify-end items-center gap-8">
           <Form.Item wrapperCol={wrapperCol}>

@@ -10,7 +10,7 @@ import { AffectationsOptional } from "./helpers/updateHelpers";
 
 
 export const get = query({
-    args: { code: v.number() },
+    args: { code: v.string() },
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)

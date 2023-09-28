@@ -50,7 +50,6 @@ export const SessionWorkerOptional = {
 
 
 export const AffectationsOptional = {
-    affectationCode: v.optional(v.number()),
     affectationName: v.optional(v.string()),
 }
 

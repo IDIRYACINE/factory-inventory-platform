@@ -11,7 +11,7 @@ export default function FamilyCodeSelector() {
 
     const options = codes.map(code => ({
         id: code._id,
-        value: code.code,
+        value: code.code.toString(),
         label: code.name,
     }))
 

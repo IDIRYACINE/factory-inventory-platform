@@ -1,4 +1,4 @@
-import { affectationPermisionsPath, affectationsPath, createAffectationsPath, createFamilyCodePath, createInventoryPath, createSessionGroupsPath, createSessionWorkersPath, createStockPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editInventoryPath, editSessionGroupsPath, editSessionWorkersPath, editStockPath, editUserPath, editWorkersPath, familyCodePath, inventoryPath, sessionWorkersPath, sessionsPath, stockPath, userPath, workersPath } from "@/domain/routerPaths"
+import { affectationPermisionsPath, affectationsPath, createAffectationsPath, createFamilyCodePath, createInventoryPath, createSessionGroupsPath, createSessionWorkersPath, createStockPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editInventoryPath, editSessionGroupsPath, editSessionWorkersPath, editStockPath, editUserPath, editWorkersPath, familyCodePath, importsPath, inventoryPath, sessionWorkersPath, sessionsPath, stockPath, userPath, workersPath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
@@ -270,24 +270,48 @@ export const usePermissionsNavigation = () => {
 }
 
 export const useSessionNavigation = () => {
-    
-        const router = useRouter()
-    
-        const navigateHome = () => {
-            router.push(sessionsPath)
-        }
 
-        const navigateSessionWorkers = () => {
-            router.push(sessionWorkersPath)
-        }
+    const router = useRouter()
 
-        const navigateSessionGroups = () => {
-            router.push(sessionWorkersPath)
-        }
-    
-        return {
-            navigateHome,
-            navigateSessionWorkers,
-            navigateSessionGroups
-        }
+    const navigateHome = () => {
+        router.push(sessionsPath)
+    }
+
+    const navigateSessionWorkers = () => {
+        router.push(sessionWorkersPath)
+    }
+
+    const navigateSessionGroups = () => {
+        router.push(sessionWorkersPath)
+    }
+
+    return {
+        navigateHome,
+        navigateSessionWorkers,
+        navigateSessionGroups
+    }
+}
+
+
+export const useSettingsNavigation = () => {
+
+    const router = useRouter()
+
+    const navigateHome = () => {
+        router.push(sessionsPath)
+    }
+
+    const navigateUsers = () => {
+        router.push(userPath)
+    }
+
+    const navigateImports = () => {
+        router.push(importsPath)
+    }
+
+    return {
+        navigateHome,
+        navigateUsers,
+        navigateImports
+    }
 }

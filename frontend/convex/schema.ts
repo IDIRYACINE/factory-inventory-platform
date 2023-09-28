@@ -17,7 +17,7 @@ export const FamilyCode = {
 export const ScannedArticles = {
     articleCode: v.number(),
     articleName: v.string(),
-    affectationCode: v.number(),
+    affectationCode: v.string(),
 }
 
 export const User = {
@@ -29,13 +29,11 @@ export const User = {
 export const Stock = {
     articleName: v.string(),
     articleCode: v.number(),
-    quantity: v.number(),
-    unit: v.string(),
     familyCode : v.number(),
 }
 
 export const Affectations = {
-    affectationCode: v.number(),
+    affectationCode: v.string(),
     affectationName: v.string(),
 }
 

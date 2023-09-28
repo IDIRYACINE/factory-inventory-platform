@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { selectFamilyCode, selectFamilyCodes } from "@/stores/productFamily/selectors"
 import { loadFamilyCodes, setFamilyCodes } from "@/stores/productFamily/slice"
 import { api } from "@convex/_generated/api"
-import { Id } from "@convex/_generated/dataModel";
+import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation, usePaginatedQuery } from "convex/react";
 import { useEffect } from "react"
 
@@ -35,10 +35,7 @@ export const useLoadFamilyCodes = () => {
     return { status, loadMore }
 }
 
-type CreateFamilyCodeArgs = {
-    code: string,
-    name: string,
-}
+type CreateFamilyCodeArgs = Omit<Doc<'familyCode'>,'_id'|'_creationTime'>
 
 export const useCreateFamilyCode = () => {
 
