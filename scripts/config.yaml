@@ -1,0 +1,5 @@
+
+inventory : ['data/x.xls']
+stock : ['data/x.xls']
+family : ['data/x.xls']
+affectation : ['data/x.xls']
