@@ -19,6 +19,7 @@ import type * as helpers_createHelpers from "../helpers/createHelpers";
 import type * as helpers_isAuthenticated from "../helpers/isAuthenticated";
 import type * as helpers_statusCodes from "../helpers/statusCodes";
 import type * as helpers_updateHelpers from "../helpers/updateHelpers";
+import type * as http from "../http";
 import type * as importData from "../importData";
 import type * as inventory from "../inventory";
 import type * as permissions from "../permissions";
@@ -44,6 +45,7 @@ declare const fullApi: ApiFromModules<{
   "helpers/isAuthenticated": typeof helpers_isAuthenticated;
   "helpers/statusCodes": typeof helpers_statusCodes;
   "helpers/updateHelpers": typeof helpers_updateHelpers;
+  http: typeof http;
   importData: typeof importData;
   inventory: typeof inventory;
   permissions: typeof permissions;

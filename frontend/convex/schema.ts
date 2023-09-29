@@ -16,8 +16,10 @@ export const FamilyCode = {
 
 export const ScannedArticles = {
     articleCode: v.number(),
-    articleName: v.string(),
-    affectationCode: v.string(),
+}
+
+export const MissingArticles = {
+    articleCode: v.number(),
 }
 
 export const User = {
@@ -87,18 +89,24 @@ export const SessionRecord = {
     workerName : v.string(),
     articleName : v.string(),
     articleCode : v.number(),
-    priceShift : v.number(),
-    quantityShift : v.number(),
-    stockUnit : v.number(),
-    timestamp : v.number(),
-    recordQuantity : v.number(),
+    price: v.number(),
+    affectationCode : v.string(),
+}
+
+export const MissingSessionRecord = {
+    articleName : v.string(),
+    articleCode : v.number(),
+    price: v.number(),
+    affectationCode : v.string(),
 }
 
 const workers = defineTable(Workers)
 
 const familyCode = defineTable(FamilyCode).index('by_code', ['code'])
 
-const scannedArticles = defineTable(ScannedArticles)
+const scannedArticles = defineTable(ScannedArticles).index('by_code',['articleCode'])
+
+const missingArticles = defineTable(MissingArticles).index('by_code',['articleCode'])
 
 const user = defineTable(User).index('by_tokenIdentifier',['tokenIdentifier'])
 
@@ -115,18 +123,20 @@ const sessions = defineTable(Sessions).index('by_active',['active'])
 
 const sessionGroups = defineTable(SessionGroups).index('by_supervisorTokenIdentifier',['supervisorTokenIdentifier'])
 
-const sessionWorkers = defineTable(SessionWorker)
+const sessionWorkers = defineTable(SessionWorker).index('by_username_password',['username','password']).index('by_workerId',['workerId'])
 
 const inventory = defineTable(Inventory).index('by_articleCode',['articleCode'])
 .index('by_familyCode',['familyCode']).index('by_stockCode',['stockCode'])
 
-const sessionRecord = defineTable(SessionRecord).index("by_sessionId",['sessionId'])
+const sessionRecord = defineTable(SessionRecord).index("by_sessionId_code",['sessionId','articleCode']).index("by_sessionId",['sessionId']).index("by_workerId",['workerId'])
 
+const missingSessionRecord = defineTable(MissingSessionRecord)
 
 export default defineSchema({
     workers,
     familyCode,
     scannedArticles,
+    missingArticles,
     user,
     stock,
     affectations,
@@ -135,6 +145,7 @@ export default defineSchema({
     sessions,
     sessionGroups,
     sessionWorkers,
+    missingSessionRecord,
     inventory,
     sessionRecord,
 });
