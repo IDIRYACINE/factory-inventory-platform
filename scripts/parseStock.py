@@ -42,8 +42,8 @@ def parseStock(data) :
     familyCode = code[0:4]
 
     return {
-        'code': int(code),
-        'name': name,
+        'articleCode': int(code),
+        'articleName': name,
         'familyCode': int(familyCode)
     }
 

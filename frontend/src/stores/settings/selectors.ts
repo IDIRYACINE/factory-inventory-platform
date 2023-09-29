@@ -9,5 +9,23 @@ export const selectActivePanel = (state: RootState) => state.settings.activePane
 
 
 export const selectPanelsState = createSelector(
-    [selectPanels, selectActivePanel],(panels, activePanel) => ({ panels, activePanel })
+    [selectPanels, selectActivePanel], (panels, activePanel) => ({ panels, activePanel })
 )
+
+
+const selectSettingsSlice = (state: RootState) => state.settings
+
+export const selectImpportingStatus = createSelector([selectSettingsSlice], (settings) => {
+
+    const importingInventory = settings.importingInventory
+    const importingStock = settings.importingStock
+    const importingAffectations = settings.importingAffectations
+    const importingFamilyCode = settings.importingFamilyCode
+
+    return {
+        importingInventory,
+        importingStock,
+        importingAffectations,
+        importingFamilyCode
+    }
+})

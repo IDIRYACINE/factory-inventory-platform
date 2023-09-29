@@ -5,6 +5,7 @@ import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel"
 import { useMutation, useQuery } from "convex/react"
 import { useEffect } from "react"
+import { useReadActiveSession } from "./useSession"
 
 
 export const useReadSessionGroups = () => {
@@ -34,15 +35,16 @@ export const useLoadSessionGroups = () => {
     return res?.group ?? []
 }
 
-type CreateSessionGroupsArgs = Omit<Doc<"sessionGroups">,"_id" |"_creationTime"|"supervisorTokenIdentifier">
+type CreateSessionGroupsArgs = Omit<Doc<"sessionGroups">,"_id" |"_creationTime"|"supervisorTokenIdentifier"|"supervisorId">
 
 export const useCreateSessionGroup = () => {
 
 
     const create = useMutation(api.sessionGroup.create)
+    const session = useReadActiveSession()
 
-    const handleCreate = ({ sessionId,groupName,supervisorId }: CreateSessionGroupsArgs) => {
-        create({ sessionGroups: { sessionId,groupName,supervisorId } })
+    const handleCreate = ({ groupName }: CreateSessionGroupsArgs) => {
+        create({ sessionGroups: { sessionId:session!._id,groupName } })
     }
 
     return handleCreate

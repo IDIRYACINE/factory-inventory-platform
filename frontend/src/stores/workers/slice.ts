@@ -6,12 +6,15 @@ export interface WorkersState {
     worker? : Doc<'workers'>,
     sessionWorkers : Doc<'sessionWorkers'>[],
     sessionWorker? : Doc<'sessionWorkers'>,
+    loadedWorkers : boolean,
+    loadedSessionWorkers : boolean,
 }
 
 const initialState: WorkersState = {
     workers: [],
     sessionWorkers : [],
-
+    loadedWorkers : false,
+    loadedSessionWorkers : false,
 }
 
 export const workersSlice = createSlice({
@@ -20,6 +23,7 @@ export const workersSlice = createSlice({
     reducers: {
         setWorkers: (state, action: PayloadAction<WorkersState['workers']>) => {
             state.workers = action.payload
+            state.loadedWorkers = true
         },
         selectWorker: (state, action: PayloadAction<WorkersState['worker']>) => {
             state.worker = action.payload
@@ -36,10 +40,17 @@ export const workersSlice = createSlice({
         unselectSessionWorker: (state) => {
             state.sessionWorker = undefined
         },
+        setLoadedWorkers: (state, action: PayloadAction<boolean>) => {
+            state.loadedWorkers = action.payload
+        },
+        setLoadedSessionWorkers: (state, action: PayloadAction<boolean>) => {
+            state.loadedSessionWorkers = action.payload
+        },
     },
 })
 
 export const { setWorkers,selectWorker,unselectWorker } = workersSlice.actions
 export const { setSessionWorkers,selectSessionWorker,unselectSessionWorker } = workersSlice.actions
+export const { setLoadedWorkers,setLoadedSessionWorkers } = workersSlice.actions
 
 export default workersSlice.reducer

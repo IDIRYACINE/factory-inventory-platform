@@ -7,6 +7,9 @@ import Form from "antd/es/form";
 import Input from "antd/es/input";
 import useTranslation from "next-translate/useTranslation";
 import SessionGroupSelector from "@/components/sessionGroups/SessionGroupSelector";
+import { useLoadSessionGroups, useReadSessionGroups } from "@/hooks/useSessionGroup";
+import Select from "antd/es/select";
+import { useSessionWorkerNavigation } from "@/hooks/useNavigation";
 
 
 type FieldType = Doc<"sessionWorkers">
@@ -18,6 +21,16 @@ export default function SessionWorkerForm() {
   const sessionWorker = useReadSessionWorker()
   const create = useCreateSessionWorker()
   const update = useUpdateSessionWorker()
+
+  const groups = useLoadSessionGroups()
+
+  const {navigateHome} = useSessionWorkerNavigation()
+
+  const options = groups.map(group => ({
+    id: group._id,
+    value: group._id,
+    label: group.groupName,
+  }))
 
   const onFinish = (values: FieldType) => {
     if (sessionWorker) {
@@ -43,7 +56,7 @@ export default function SessionWorkerForm() {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-     <Form.Item<FieldType>
+      <Form.Item<FieldType>
         label={t('name')}
         name="username"
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
@@ -56,7 +69,13 @@ export default function SessionWorkerForm() {
         name="groupId"
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
       >
-        <SessionGroupSelector/>
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          placeholder={t('group')}
+          optionFilterProp="children"
+          options={options}
+        />
       </Form.Item>
 
       <Form.Item<FieldType>
@@ -65,11 +84,11 @@ export default function SessionWorkerForm() {
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
       >
         <Input />
-      </Form.Item> 
+      </Form.Item>
 
       <div className="flex flex-row justify-end items-center gap-8">
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="text" htmlType="reset">
+          <Button type="text" onClick={navigateHome}>
             {t('cancel')}
           </Button>
         </Form.Item>

@@ -5,8 +5,9 @@ import Table from 'antd/es/table';
 import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import { selectWorkers } from '@/stores/workers/selectors';
-import { useAppSelector } from '@/stores/hooks';
+import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import { Doc } from '@convex/_generated/dataModel';
+import { selectWorker } from '@/stores/workers/slice';
 
 type DataType  = Doc<"workers"> & {key: string;}
 
@@ -15,16 +16,25 @@ export default function WorkersTable(props:React.ComponentPropsWithoutRef<"div">
 
   const className= clsx(props.className)
 
+  const dispatch =useAppDispatch()
+
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+      if(selectedRows.length === 0) return
+
+      dispatch(selectWorker(selectedRows[0]))
+    },
+    getCheckboxProps: (record: DataType) => ({
+      disabled: record.name === 'Disabled User',
+      name: record.name,
+    }),
+  };
+
   const columns: ColumnsType<DataType> = [
     {
       title: t('name'),
       dataIndex: 'name',
       key: 'worker-header-name',
-    },
-    {
-      title: t('username'),
-      dataIndex: 'username',
-      key: 'worker-header-username',
     },
     {
       title: t('phone'),
@@ -40,7 +50,11 @@ export default function WorkersTable(props:React.ComponentPropsWithoutRef<"div">
   }))
 
   return (
-    <Table className={className} columns={columns} dataSource={data} />
+    <Table  rowSelection={{
+      type: 'radio',
+      ...rowSelection,
+    }}
+    className={className} columns={columns} dataSource={data} />
   )
 
 }

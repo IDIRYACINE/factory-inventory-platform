@@ -10,12 +10,12 @@ interface ImportCardProps {
     text: string,
     onUpload: (data:any) => void,
     isUploadingLabel:string,
-    startUploadLabel:string
+    startUploadLabel:string,
+    uploading:boolean
 }
-export default function ImportCard({ text, onUpload,startUploadLabel,isUploadingLabel }: ImportCardProps) {
+export default function ImportCard({ text,uploading, onUpload,startUploadLabel,isUploadingLabel }: ImportCardProps) {
 
     const [fileList, setFileList] = useState<UploadFile[]>([]);
-    const [uploading, setUploading] = useState(false);
 
     const handleUpload = () => {
         let data:RcFile[] = []
@@ -24,8 +24,7 @@ export default function ImportCard({ text, onUpload,startUploadLabel,isUploading
             data.push(file as  RcFile );
         });
 
-        setUploading(true);
-        
+        onUpload(data)
 
     };
 

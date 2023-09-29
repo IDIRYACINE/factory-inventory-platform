@@ -5,7 +5,8 @@ import { v } from "convex/values";
 export const InventoryOptional = {
     articleCode: v.optional(v.number()),
     articleName: v.optional(v.string()),
-    unit: v.optional(v.string()),
+    unit: v.optional(v.number()),
+    affectationCode: v.optional(v.string()),
     familyCode: v.optional(v.number()),
 }
 

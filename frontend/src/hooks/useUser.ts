@@ -69,8 +69,8 @@ type PermissionArgs = Omit<Doc<"affectationPermisions">,"_id" | "_creationTime" 
 export const useGrantPermission = () => {
     const grant = useMutation(api.permissions.grant)
 
-    const handleGrant = ({ affectationCode, userId }: PermissionArgs) => {
-        grant({ affectationPermision:{ affectationCode, userId} })
+    const handleGrant = ({ affectationCode, tokenIdentifier }: PermissionArgs) => {
+        grant({ affectationPermision:{ affectationCode, tokenIdentifier} })
     }
 
     return handleGrant
@@ -88,10 +88,8 @@ export const useRevokePermission = () => {
 }
 
 export const useLoadUserPermissions = () => {
-    const params  = useSearchParams().get("id")
-    const userId = params as Id<"user">
 
-    const res = useQuery(api.permissions.load,{userId})
+    const res = useQuery(api.permissions.load)
 
     const dispatch = useAppDispatch()
 

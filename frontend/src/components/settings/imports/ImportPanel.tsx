@@ -2,6 +2,8 @@ import { Col, Row } from "antd/es/grid";
 import ImportCard from "./ImportCard";
 import useTranslation from "next-translate/useTranslation";
 import { useDataImports } from "@/hooks/useImport";
+import { useReadImportingStatus } from "@/hooks/useSettings";
+import { useAppDispatch } from "@/stores/hooks";
 
 
 
@@ -13,18 +15,23 @@ export default function ImportPanel() {
 
     const { importInventory, importAffectation, importFamilyCode, importStock } = useDataImports()
 
+    const {importingAffectations,importingFamilyCode,importingInventory,importingStock} = useReadImportingStatus()
+
+
     const inventoryProps = {
         text: t("inventory"),
         isUploadingLabel,
         startUploadLabel,
-        onUpload: importInventory
+        onUpload: importInventory,
+        uploading : importingInventory
     }
 
     const stockProps = {
         text: t("stock"),
         isUploadingLabel,
         startUploadLabel,
-        onUpload: importStock
+        onUpload: importStock,
+        uploading : importingStock
 
     }
 
@@ -32,7 +39,8 @@ export default function ImportPanel() {
         text: t("family"),
         isUploadingLabel,
         startUploadLabel,
-        onUpload: importFamilyCode
+        onUpload: importFamilyCode,
+        uploading : importingFamilyCode
 
     }
 
@@ -40,7 +48,8 @@ export default function ImportPanel() {
         text: t("affectation"),
         isUploadingLabel,
         startUploadLabel,
-        onUpload: importAffectation
+        onUpload: importAffectation,
+        uploading : importingAffectations
     }
 
 

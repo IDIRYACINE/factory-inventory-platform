@@ -1,3 +1,5 @@
+'use client'
+
 import type { ColumnsType } from 'antd/es/table';
 import Table from 'antd/es/table';
 import useTranslation from 'next-translate/useTranslation';

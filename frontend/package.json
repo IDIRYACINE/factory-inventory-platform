@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "live" : "next build && next start",
+    "live": "next build && next start",
     "start": "next start",
     "lint": "next lint"
   },
@@ -16,7 +16,7 @@
     "antd": "^5.9.3",
     "clsx": "^2.0.0",
     "convex": "^1.3.1",
-    "next": "latest",
+    "next": "13.5.4-canary.7",
     "next-redux-wrapper": "^8.1.0",
     "next-translate": "^2.5.3",
     "react": "latest",

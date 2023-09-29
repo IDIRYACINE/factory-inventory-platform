@@ -24,5 +24,7 @@
     "openSession" : "Open Session",
     "closeSession" : "Close Session",
     "groupName" : "Group Name",
-    "groups" : "Groups"
+    "groups" : "Groups",
+    "back" : "Back",
+    "addToSession" : "Add to Session"
 }

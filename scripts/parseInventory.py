@@ -63,10 +63,10 @@ def parseInventory(data,stockCode) :
     familyCode = code[0:4]
 
     return {
-        'code': int(code),
-        'name': name,
-        'affectation': affectation.replace(' ',''),
-        'price': float(price),
+        'articleCode': int(code),
+        'articleName': name,
+        'affectationCode': affectation.replace(' ',''),
+        'unit': float(price),
         'stockCode': int(stockCode),
         'familyCode': int(familyCode)
     }

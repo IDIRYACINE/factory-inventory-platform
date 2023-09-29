@@ -1,6 +1,7 @@
 'use client';
 
-import { useCreateWorker, useUpdateWorker } from "@/hooks/useWorkers";
+import { useWorkerNavigation } from "@/hooks/useNavigation";
+import { useCreateWorker, useReadActiveWorker, useUpdateWorker } from "@/hooks/useWorkers";
 import { useAppSelector } from "@/stores/hooks";
 import { selectWorker } from "@/stores/workers/selectors";
 import { Doc } from "@convex/_generated/dataModel";
@@ -19,7 +20,9 @@ export default function WorkerForm() {
   const create = useCreateWorker()
   const update = useUpdateWorker()
 
-  const worker = useAppSelector(selectWorker)
+  const {navigateHome} = useWorkerNavigation()
+
+  const worker = useReadActiveWorker()
 
   const onFinish = (values: FieldType) => {
     if (worker) {
@@ -63,7 +66,7 @@ export default function WorkerForm() {
 
       <div className="flex flex-row justify-end items-center gap-8">
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="text" htmlType="reset">
+          <Button type="text" onClick={navigateHome}>
             {t('cancel')}
           </Button>
         </Form.Item>

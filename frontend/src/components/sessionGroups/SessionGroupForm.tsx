@@ -1,5 +1,6 @@
 'use client';
 
+import { useSessionGroupNavigation } from "@/hooks/useNavigation";
 import { useCreateSessionGroup, useReadSessionGroup, useUpdateSessionGroup } from "@/hooks/useSessionGroup";
 import { Doc } from "@convex/_generated/dataModel";
 import Button from "antd/es/button";
@@ -17,6 +18,8 @@ export default function SessionGroupForm() {
   const sessionGroup = useReadSessionGroup()
   const create = useCreateSessionGroup()
   const update = useUpdateSessionGroup()
+
+  const {navigateHome} = useSessionGroupNavigation()
 
   const onFinish = (values: FieldType) => {
     if (sessionGroup) {
@@ -55,7 +58,7 @@ export default function SessionGroupForm() {
 
       <div className="flex flex-row justify-end items-center gap-8">
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="text" htmlType="reset">
+          <Button type="text" onClick={navigateHome}>
             {t('cancel')}
           </Button>
         </Form.Item>

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
-import { selectWorkers } from "@/stores/workers/selectors"
+import { selectLoadedWorkers, selectWorker, selectWorkers } from "@/stores/workers/selectors"
 import { setWorkers } from "@/stores/workers/slice";
 import { api } from "@convex/_generated/api";
 import { Doc, Id } from "@convex/_generated/dataModel";
@@ -26,7 +26,7 @@ export const useLoadWorkers = () => {
         }
     }, [dispatch, data])
     
-    return data
+    return data?.workers ?? []
 }
 
 type CreateWorkerArgs = Omit<Doc<"workers">,"_id" |"_creationTime">
@@ -57,3 +57,9 @@ export const useUpdateWorker = () => {
     return handleUpdate
 }
 
+
+export const useReadActiveWorker = () => {
+    const worker = useAppSelector(selectWorker)
+
+    return worker
+}

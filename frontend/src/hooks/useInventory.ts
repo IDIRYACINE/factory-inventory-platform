@@ -42,8 +42,8 @@ export const useCreateInventory = () => {
 
     const create = useMutation(api.inventory.create)
 
-    const handleCreate = ({ familyCode, articleName,articleCode,unit,stockCode }: CreateInventoryArgs) => {
-        create({ inventory: { familyCode, articleName,articleCode,unit,stockCode } })
+    const handleCreate = ({ familyCode, articleName,articleCode,unit,stockCode,affectationCode }: CreateInventoryArgs) => {
+        create({ inventory: { familyCode, articleName,articleCode,unit,stockCode,affectationCode } })
     }
 
     return handleCreate
@@ -56,8 +56,8 @@ export const useUpdateInventory = () => {
 
     const update = useMutation(api.inventory.update)
 
-    const handleUpdate = ({ id, familyCode, articleName,articleCode,unit }:UpdateInventoryArgs) => {
-        update({ id, inventory:{familyCode, articleName,articleCode,unit} })
+    const handleUpdate = ({ id, familyCode, articleName,articleCode,unit,affectationCode }:UpdateInventoryArgs) => {
+        update({ id, inventory:{familyCode, articleName,articleCode,unit,affectationCode} })
     }
 
     return handleUpdate

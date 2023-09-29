@@ -11,7 +11,7 @@ import { AffectationPermisions,  } from "./schema";
 
 
 export const load = query({
-    args: {userId:v.id("user")},
+    args: {},
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -20,9 +20,11 @@ export const load = query({
             return { code: codeNotAuthenticated }
         }
 
+        const supervisorId = (await ctx.auth.getUserIdentity())!.tokenIdentifier
+
 
         const permissions = await ctx.db.query('affectationPermisions')
-        .withIndex("by_userId_affectationCode",(q) => q.eq('userId', args.userId))
+        .withIndex("by_tokenIdentifer_affectationCode",(q) => q.eq('tokenIdentifier',supervisorId))
         .collect();
 
         return {permissions}

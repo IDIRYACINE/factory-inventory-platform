@@ -37,9 +37,9 @@ export const create = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.insert('sessionWorkers', args.sessionWorker)
+        const workerId = await ctx.db.insert('sessionWorkers', args.sessionWorker)
 
-        return data
+        return {workerId}
     }
 
 })

@@ -1,4 +1,4 @@
-import { affectationPermisionsPath, affectationsPath, createAffectationsPath, createFamilyCodePath, createInventoryPath, createSessionGroupsPath, createSessionWorkersPath, createStockPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editInventoryPath, editSessionGroupsPath, editSessionWorkersPath, editStockPath, editUserPath, editWorkersPath, familyCodePath, importsPath, inventoryPath, sessionWorkersPath, sessionsPath, stockPath, userPath, workersPath } from "@/domain/routerPaths"
+import { affectationPermisionsPath, affectationsPath, createAffectationsPath, createFamilyCodePath, createInventoryPath, createSessionGroupsPath, createSessionWorkersPath, createStockPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editInventoryPath, editSessionGroupsPath, editSessionWorkersPath, editStockPath, editUserPath, editWorkersPath, familyCodePath, importsPath, inventoryPath, sessionGroupsPath, sessionWorkersPath, sessionsPath, stockPath, userPath, workersPath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
@@ -219,10 +219,15 @@ export const useSessionWorkerNavigation = () => {
         router.push(sessionWorkersPath)
     }
 
+    const navigateSession = () => {
+        router.push(sessionsPath)
+    }
+
     return {
         navigateToNewSessionWorker,
         navigateToEditSessionWorker,
-        navigateHome
+        navigateHome,
+        navigateSession
     }
 }
 
@@ -282,7 +287,7 @@ export const useSessionNavigation = () => {
     }
 
     const navigateSessionGroups = () => {
-        router.push(sessionWorkersPath)
+        router.push(sessionGroupsPath)
     }
 
     return {
