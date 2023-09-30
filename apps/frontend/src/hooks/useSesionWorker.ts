@@ -8,6 +8,8 @@ import { Doc, Id } from "@convex/_generated/dataModel"
 import { useMutation, useQuery } from "convex/react"
 import { useEffect } from "react"
 import { useReadActiveWorker } from "./useWorkers";
+import { displayMessage } from "@/stores/settings/slice";
+import useTranslation from "next-translate/useTranslation";
 
 
 export const useReadSessionWorkers = () => {
@@ -47,13 +49,14 @@ export const useCreateSessionWorker = () => {
 
     const dispatch = useAppDispatch()
 
+    const { t } = useTranslation()
 
     const handleCreate = ({ groupId, username, password }: CreateSessionWorkerArgs) => {
         if (!worker) return
         create({ sessionWorker: { groupId, username, password, workerId: worker._id } }).then((res) => {
-            if (res.workerId ){
-                dispatch(unselectWorker())
-            }
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
+            dispatch(displayMessage({ message: t(message), type: type }))
         })
     }
 
@@ -66,9 +69,17 @@ export const useUpdateSessionWorker = () => {
 
 
     const update = useMutation(api.sessionWorker.update)
+    const dispatch = useAppDispatch()
+    const { t } = useTranslation()
 
     const handleUpdate = ({ id, groupId, username, password }: UpdateSessionWorkerArgs) => {
-        update({ id, sessionWorker: { groupId, username, password } })
+        update({ id, sessionWorker: { groupId, username, password } }).then((res) => {
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
+
+            dispatch(displayMessage({ message: t(message), type: type }))
+
+        })
     }
 
     return handleUpdate

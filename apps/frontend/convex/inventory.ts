@@ -76,7 +76,7 @@ export const create = mutation({
 
         const data = await ctx.db.insert('inventory',args.inventory)
 
-        return data
+        return {inventoryId:data}
     }
 
 })
@@ -94,7 +94,7 @@ export const update = mutation({
 
         const data = await ctx.db.patch(args.id,args.inventory)
 
-        return data
+        return {inventoryId:args.id}
     }
 
 })

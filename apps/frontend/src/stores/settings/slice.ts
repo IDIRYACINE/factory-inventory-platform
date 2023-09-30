@@ -10,6 +10,8 @@ export interface SettingsState {
     importingStock : boolean,
     importingFamilyCode : boolean,
     importingAffectations : boolean,
+    message?: string,
+    messageType?: 'success' | 'error' | 'warning' | 'info'
 }
 
 const initialState: SettingsState = {
@@ -40,11 +42,19 @@ export const settingsSlice = createSlice({
         setImportingAffectations: (state,action : PayloadAction<SettingsState['importingAffectations']>) => {
             state.importingAffectations = action.payload
         },
+        displayMessage: (state, action: PayloadAction<{ message: string, type: SettingsState['messageType'] }>) => {
+            state.message = action.payload.message
+            state.messageType = action.payload.type
+        },
+        clearMessage: (state) => {
+            state.message = undefined
+            state.messageType = undefined
+        },
        
     },
 })
 
-export const { setActivePanel } = settingsSlice.actions
+export const { setActivePanel,displayMessage,clearMessage } = settingsSlice.actions
 export const { setImportingInventory,setImportingAffectations,setImportingFamilyCode,setImportingStock } = settingsSlice.actions
 
 export default settingsSlice.reducer

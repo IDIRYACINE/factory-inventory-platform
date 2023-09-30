@@ -58,7 +58,7 @@ export const update = mutation({
 
         const data = await ctx.db.patch(args.id, args.sessionWorker)
 
-        return data
+        return {sessionWorkerId:args.id}
     }
 
 })

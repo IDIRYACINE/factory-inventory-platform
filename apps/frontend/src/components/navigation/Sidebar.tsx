@@ -1,10 +1,8 @@
 import { usePanelNavigation } from "@/hooks/useNavigation";
 import { SettingsState } from "@/stores/settings/slice";
 import Button from "antd/es/button";
-import theme from "antd/es/theme";
 import useTranslation from 'next-translate/useTranslation'
 
-const { useToken } = theme;
 
 interface SidebarButtonProps {
     textKey: SettingsState['activePanel'];

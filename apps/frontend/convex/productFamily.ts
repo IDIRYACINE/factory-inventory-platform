@@ -54,7 +54,7 @@ export const create = mutation({
 
         const data = await ctx.db.insert('familyCode',args.familyCode)
 
-        return data
+        return {familyId:data}
     }
 
 })
@@ -82,7 +82,7 @@ export const update = mutation({
 
         const data = await ctx.db.patch(args.id,patched)
 
-        return data
+        return {familyId:args.id}
     }
 
 })

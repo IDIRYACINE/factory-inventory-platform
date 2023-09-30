@@ -75,7 +75,7 @@ export const openSession = mutation({
 
         const data = await ctx.db.insert('sessions', session)
 
-        return data
+        return {sessionId:data}
     }
 
 })
@@ -100,7 +100,7 @@ export const closeSession = mutation({
 
         const data = await ctx.db.patch(activeSession._id, { active: false })
 
-        return data
+        return {sessionId:activeSession._id}
     }
 
 })

@@ -6,6 +6,8 @@ import { Doc, Id } from "@convex/_generated/dataModel"
 import { useMutation, useQuery } from "convex/react"
 import { useEffect } from "react"
 import { useReadActiveSession } from "./useSession"
+import useTranslation from "next-translate/useTranslation"
+import { displayMessage } from "@/stores/settings/slice"
 
 
 export const useReadSessionGroups = () => {
@@ -42,9 +44,15 @@ export const useCreateSessionGroup = () => {
 
     const create = useMutation(api.sessionGroup.create)
     const session = useReadActiveSession()
+    const dispatch = useAppDispatch()
+    const {t} = useTranslation('messages')
 
     const handleCreate = ({ groupName }: CreateSessionGroupsArgs) => {
-        create({ sessionGroups: { sessionId:session!._id,groupName } })
+        create({ sessionGroups: { sessionId:session!._id,groupName } }).then((res) => {
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
+            dispatch(displayMessage({ message: t(message), type: type }))
+        })
     }
 
     return handleCreate
@@ -56,9 +64,15 @@ export const useUpdateSessionGroup = () => {
 
 
     const update = useMutation(api.sessionGroup.update)
+    const dispatch = useAppDispatch()
+    const {t} = useTranslation('messages')
 
     const handleUpdate = ({ id, sessionId,groupName }:UpdateSessionGroupsArgs) => {
-        update({ id, sessionGroups:{sessionId,groupName} })
+        update({ id, sessionGroups:{sessionId,groupName} }).then((res) => {
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
+            dispatch(displayMessage({ message: t(message), type: type }))
+        })
     }
 
     return handleUpdate

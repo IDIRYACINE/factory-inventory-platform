@@ -53,7 +53,7 @@ export const create = mutation({
 
         const data = await ctx.db.insert('affectations',args.affectation)
 
-        return data
+        return {affectationId:data}
     }
 
 })

@@ -1,8 +1,10 @@
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { selectActiveSession, selectActiveSessionRecords } from "@/stores/session/selectors";
 import { loadRecords, setActiveSession } from "@/stores/session/slice";
+import { displayMessage } from "@/stores/settings/slice";
 import { api } from "@convex/_generated/api";
 import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
+import useTranslation from "next-translate/useTranslation";
 import { useEffect } from "react";
 
 
@@ -50,12 +52,32 @@ export const useLoadActiveSession = () => {
 
 export const useCloseSession = () => {
     const closeSesion = useMutation(api.session.closeSession)
+    const dispatch = useAppDispatch()
+    const {t} = useTranslation('messages')
+    
+    const handleCloseSession =  () => {
+        closeSesion().then((res) => {
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
+            dispatch(displayMessage({ message: t(message), type: type }))
+        })
+    }
 
-    return closeSesion
+    return handleCloseSession
 }
 
 export const useOpenSession = () => {
     const openSession = useMutation(api.session.openSession)
+    const dispatch = useAppDispatch()
+    const {t} = useTranslation('messages')
 
-    return openSession
+    const handleOpenSession =  () => {
+        openSession().then((res) => {
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
+            dispatch(displayMessage({ message: t(message), type: type }))
+        })
+    }
+
+    return handleOpenSession
 }

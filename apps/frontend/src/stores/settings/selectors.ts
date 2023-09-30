@@ -29,3 +29,14 @@ export const selectImpportingStatus = createSelector([selectSettingsSlice], (set
         importingFamilyCode
     }
 })
+
+
+export const selectMessage = createSelector([selectSettingsSlice], (settings) => {
+    const message = settings.message
+    const messageType = settings.messageType
+
+    return {
+        message,
+        messageType
+    }
+})

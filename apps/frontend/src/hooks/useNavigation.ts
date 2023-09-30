@@ -1,8 +1,14 @@
 import { affectationPermisionsPath, affectationsPath, createAffectationPermisionsPath, createAffectationsPath, createFamilyCodePath, createInventoryPath, createSessionGroupsPath, createSessionWorkersPath, createStockPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editInventoryPath, editSessionGroupsPath, editSessionWorkersPath, editStockPath, editUserPath, editWorkersPath, familyCodePath, importsPath, inventoryPath, sessionGroupsPath, sessionWorkersPath, sessionsPath, stockPath, userPath, workersPath } from "@/domain/routerPaths"
+import { unselectAffecation } from "@/stores/affectations/slice"
+import { resetActiveGroup } from "@/stores/groups/slice"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
+import { unselectInventor } from "@/stores/inventory/slice"
 import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
 import { SettingsState, setActivePanel } from "@/stores/settings/slice"
+import { unselectStock } from "@/stores/stock/slice"
+import { unselectUser } from "@/stores/users/slice"
+import { unselectWorker } from "@/stores/workers/slice"
 import { Id } from "@convex/_generated/dataModel"
 import { useRouter } from "next/navigation"
 
@@ -44,6 +50,7 @@ export const usePanelNavigation = () => {
 
 export const useWorkerNavigation = () => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
 
     const navigateToNewWorker = () => {
         router.push(createWorkersPath)
@@ -54,6 +61,7 @@ export const useWorkerNavigation = () => {
     }
 
     const navigateHome = () => {
+        dispatch(unselectWorker())
         router.push(workersPath)
     }
 
@@ -92,6 +100,7 @@ export const useProductFamilyNavigation = () => {
 
 export const useInventoryNavigation = () => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
 
     const navigateToNewInventory = () => {
         router.push(createInventoryPath)
@@ -102,6 +111,7 @@ export const useInventoryNavigation = () => {
     }
 
     const navigateHome = () => {
+        dispatch(unselectInventor())
         router.push(inventoryPath)
     }
 
@@ -115,6 +125,7 @@ export const useInventoryNavigation = () => {
 
 export const useStockNavigation = () => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
 
     const navigateToNewStock = () => {
         router.push(createStockPath)
@@ -125,6 +136,7 @@ export const useStockNavigation = () => {
     }
 
     const navigateHome = () => {
+        dispatch(unselectStock())
         router.push(stockPath)
     }
 
@@ -159,6 +171,7 @@ export const useHistoryNavigation = () => {
 
 export const useSessionGroupNavigation = () => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
 
     const navigateToNewSessionGroup = () => {
         router.push(createSessionGroupsPath)
@@ -169,7 +182,9 @@ export const useSessionGroupNavigation = () => {
     }
 
     const navigateHome = () => {
+        dispatch(resetActiveGroup())
         router.push(sessionsPath)
+
     }
 
     return {
@@ -183,6 +198,8 @@ export const useSessionGroupNavigation = () => {
 export const useAffectationNavigation = () => {
     const router = useRouter()
 
+    const dispatch = useAppDispatch()
+
     const navigateToNewAffectation = () => {
         router.push(createAffectationsPath)
     }
@@ -192,6 +209,7 @@ export const useAffectationNavigation = () => {
     }
 
     const navigateHome = () => {
+        dispatch(unselectAffecation)
         router.push(affectationsPath)
     }
 
@@ -234,6 +252,7 @@ export const useSessionWorkerNavigation = () => {
 
 export const useUserNavigation = () => {
     const router = useRouter()
+    const dispatch = useAppDispatch()
 
     const navigateToNewUser = () => {
         router.push(createUserPath)
@@ -244,6 +263,7 @@ export const useUserNavigation = () => {
     }
 
     const navigateHome = () => {
+        dispatch(unselectUser())
         router.push(userPath)
     }
 

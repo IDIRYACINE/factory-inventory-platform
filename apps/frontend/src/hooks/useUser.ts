@@ -7,6 +7,8 @@ import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation,  useQuery } from "convex/react";
 import { useEffect } from "react"
+import { displayMessage } from "@/stores/settings/slice";
+import useTranslation from "next-translate/useTranslation";
 
 
 export const useReadUsers = () => {
@@ -41,9 +43,15 @@ export const useCreateUser = () => {
 
 
     const create = useMutation(api.user.create)
-
+    const dispatch = useAppDispatch()
+    const {t} = useTranslation('messages')
+    
     const handleCreate = ({ name,role,tokenIdentifier }: CreateUserArgs) => {
-        create({ user: { name,role,tokenIdentifier  } })
+        create({ user: { name,role,tokenIdentifier  } }).then((res) => {
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
+            dispatch(displayMessage({ message: t(message), type: type }))
+        })
     }
 
     return handleCreate
@@ -55,9 +63,15 @@ export const useUpdateUser = () => {
 
 
     const update = useMutation(api.user.update)
-
+    const dispatch = useAppDispatch()
+    const {t} = useTranslation('messages')
+    
     const handleUpdate = ({ id, name,role, }:UpdateUserArgs) => {
-        update({ id, user: { name,role,  }  })
+        update({ id, user: { name,role,  }  }).then((res) => {
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
+            dispatch(displayMessage({ message: t(message), type: type }))
+        })
     }
 
     return handleUpdate

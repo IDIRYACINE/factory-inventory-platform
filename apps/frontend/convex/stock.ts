@@ -51,9 +51,9 @@ export const create = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.insert('stock',args.stock)
+        const stockId = await ctx.db.insert('stock',args.stock)
 
-        return data
+        return {stockId}
     }
 
 })
@@ -71,7 +71,7 @@ export const update = mutation({
 
         const data = await ctx.db.patch(args.id,args.stock)
 
-        return data
+        return {stockId:args.id}
     }
 
 })

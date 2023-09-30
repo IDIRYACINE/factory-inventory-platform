@@ -1,11 +1,19 @@
-import { selectImpportingStatus } from "@/stores/settings/selectors"
-import { useSelector } from "react-redux"
+import { useAppSelector } from "@/stores/hooks"
+import { selectImpportingStatus, selectMessage } from "@/stores/settings/selectors"
 
 
 
 export const useReadImportingStatus = () => {
-    const { importingAffectations, importingFamilyCode, importingInventory, importingStock } = useSelector(selectImpportingStatus)
+    const { importingAffectations, importingFamilyCode, importingInventory, importingStock } = useAppSelector(selectImpportingStatus)
 
 
     return { importingAffectations, importingFamilyCode, importingInventory, importingStock }
+}
+
+
+export const useReadMessage = () => {
+    const message = useAppSelector(selectMessage)
+
+    return message
+
 }

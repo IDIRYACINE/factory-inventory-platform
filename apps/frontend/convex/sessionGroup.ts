@@ -54,7 +54,7 @@ export const create = mutation({
 
         const data = await ctx.db.insert('sessionGroups',group)
 
-        return data
+        return {groupId:data}
     }
 
 })
@@ -72,7 +72,7 @@ export const update = mutation({
 
         const data = await ctx.db.patch(args.id,args.sessionGroups)
 
-        return data
+        return {groupId:args.id}
     }
 
 })
