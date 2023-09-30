@@ -1,6 +1,6 @@
 'use client';
 
-import { useCreateUser, useReadUser, useUpdateUser } from "@/hooks/useUser";
+import { useCreateUser, useReadUser, useSelectUser, useUpdateUser } from "@/hooks/useUser";
 import { useUserNavigation } from "@/hooks/useNavigation";
 import { Doc } from "@convex/_generated/dataModel";
 import Button from "antd/es/button";
@@ -23,6 +23,8 @@ export default function UserForm() {
 
   const create = useCreateUser()
 
+  const {unSelectUser} = useSelectUser()
+
   const onFinish = (values: FieldType) => {
 
     if (user) {
@@ -37,6 +39,8 @@ export default function UserForm() {
     create({
       ...values
     })
+
+    unSelectUser()
 
   };
 

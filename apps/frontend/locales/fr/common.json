@@ -27,5 +27,9 @@
     "groups" : "Groups",
     "back" : "Back",
     "addToSession" : "Add to Session",
-    "managePermissions" : "Manage Permissions"
+    "managePermissions" : "Manage Permissions",
+    "affectations" : "Affectations",
+    "affectationCode" : "Affectation Code",
+    "affectationName" : "Affectation Name",
+    "revoke" : "Revoke"
 }

@@ -1,12 +1,7 @@
-import StateLoader from "@/lib/StateLoaders/StateLoader";
-import AffectationsInjector from "@/lib/StateLoaders/AffectationInjector";
-import { AffectationsPanel } from "@/components/affectation/AffectationPanel";
+import { PermissionPanel } from "@/components/userPermissions/PermissionsPanel";
 
 export default function AffectationsPage() {
     return (
-        <>
-            <StateLoader injector={<AffectationsInjector />} />
-            <AffectationsPanel />
-        </>
+            <PermissionPanel />
     )
 }

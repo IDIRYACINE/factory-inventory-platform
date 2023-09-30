@@ -1,4 +1,4 @@
-import { affectationPermisionsPath, affectationsPath, createAffectationsPath, createFamilyCodePath, createInventoryPath, createSessionGroupsPath, createSessionWorkersPath, createStockPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editInventoryPath, editSessionGroupsPath, editSessionWorkersPath, editStockPath, editUserPath, editWorkersPath, familyCodePath, importsPath, inventoryPath, sessionGroupsPath, sessionWorkersPath, sessionsPath, stockPath, userPath, workersPath } from "@/domain/routerPaths"
+import { affectationPermisionsPath, affectationsPath, createAffectationPermisionsPath, createAffectationsPath, createFamilyCodePath, createInventoryPath, createSessionGroupsPath, createSessionWorkersPath, createStockPath, createUserPath, createWorkersPath, editAffectationsPath, editFamilyCodePath, editInventoryPath, editSessionGroupsPath, editSessionWorkersPath, editStockPath, editUserPath, editWorkersPath, familyCodePath, importsPath, inventoryPath, sessionGroupsPath, sessionWorkersPath, sessionsPath, stockPath, userPath, workersPath } from "@/domain/routerPaths"
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { unselectFamilyCode } from "@/stores/productFamily/slice"
 import { selectPanelsState } from "@/stores/settings/selectors"
@@ -266,11 +266,21 @@ export const usePermissionsNavigation = () => {
     const router = useRouter()
 
     const navigateHome = () => {
+        router.push(affectationPermisionsPath)
+    }
+
+    const navigateGrantPermission = () => {
+        router.push(createAffectationPermisionsPath)
+    }
+
+    const navigateUsers = () => {
         router.push(userPath)
     }
 
     return {
-        navigateHome
+        navigateUsers,
+        navigateHome,
+        navigateGrantPermission
     }
 }
 

@@ -41,7 +41,7 @@ export const Affectations = {
 
 export const AffectationPermisions = {
     tokenIdentifier : v.string(),
-    affectationCode : v.number(),
+    affectationCode : v.string(),
 }
 
 export const GroupsPermissions = {
@@ -127,6 +127,7 @@ const sessionWorkers = defineTable(SessionWorker).index('by_username_password',[
 
 const inventory = defineTable(Inventory).index('by_articleCode',['articleCode'])
 .index('by_familyCode',['familyCode']).index('by_stockCode',['stockCode'])
+.index('by_affecationCode',['affectationCode'])
 
 const sessionRecord = defineTable(SessionRecord).index("by_sessionId_code",['sessionId','articleCode']).index("by_sessionId",['sessionId']).index("by_workerId",['workerId'])
 

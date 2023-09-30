@@ -5,6 +5,7 @@ import { mutation, query } from "./_generated/server";
 import { isAuthenticated } from "./helpers/isAuthenticated";
 import { codeNotAuthenticated } from "./helpers/statusCodes";
 import { AffectationPermisions,  } from "./schema";
+import { AffectationPermisionsCreate } from "./helpers/createHelpers";
 
 
 
@@ -34,7 +35,7 @@ export const load = query({
 
 
 export const grant = mutation({
-    args: {affectationPermision:v.object(AffectationPermisions)},
+    args: {affectationPermision:v.object(AffectationPermisionsCreate)},
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -43,8 +44,9 @@ export const grant = mutation({
             return { code: codeNotAuthenticated }
         }
 
+        const tokenIdentifier = (await ctx.auth.getUserIdentity())!.tokenIdentifier
 
-        const data = await ctx.db.insert('affectationPermisions',args.affectationPermision)
+        const data = await ctx.db.insert('affectationPermisions',{affectationCode:args.affectationPermision.affectationCode,tokenIdentifier})
 
         return data
     }

@@ -5,7 +5,7 @@ import { selectInventories, selectInventory } from "@/stores/inventory/selectors
 import { loadInventories } from "@/stores/inventory/slice";
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
-import { useMutation, usePaginatedQuery } from "convex/react";
+import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import { useEffect } from "react"
 
 
@@ -22,17 +22,17 @@ export const useReadInventory = (args:{id?:Id<"inventory">}) => {
 }
 
 export const useLoadInventory = () => {
-    const { results, status, loadMore } = usePaginatedQuery(api.inventory.load, {}, { initialNumItems: 50 })
+    const results = useQuery(api.inventory.load, )
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (results.length > 0) {
-            dispatch(loadInventories(results))
+        if (results?.inventory && results!.inventory.length > 0) {
+            dispatch(loadInventories(results.inventory))
         }
     }, [dispatch, results])
 
-    return { status, loadMore }
+    return results
 }
 
 type CreateInventoryArgs = Omit<Doc<"inventory">,"_id" |"_creationTime">

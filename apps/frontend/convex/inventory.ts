@@ -30,12 +30,35 @@ export const get = query({
 })
 
 export const load = query({
-    args: { paginationOpts: paginationOptsValidator },
+    args: { },
     handler: async (ctx, args) => {
 
+        const authenticated = await isAuthenticated(ctx.auth)
+        if (!authenticated) {
+            return { code: codeNotAuthenticated }
+        }
+
+        const tokenIdentifier = (await ctx.auth.getUserIdentity())!.tokenIdentifier
+
+        const user = await ctx.db.query('user').withIndex('by_tokenIdentifier',q=>q.eq('tokenIdentifier',tokenIdentifier)).first()
+
+        if(user!.role === 'admin'){
+            const data = await ctx.db.query('inventory').collect()
+            return {inventory:data}
+        }
+
+        const permissions = await ctx.db.query('affectationPermisions').
+        withIndex('by_tokenIdentifer_affectationCode',q=>q.eq('tokenIdentifier',tokenIdentifier)).collect()
 
 
-        return await ctx.db.query('inventory').order("desc").paginate(args.paginationOpts);
+        const inventory = []
+
+        for (const permission of permissions) {
+            const data = await ctx.db.query('inventory').withIndex('by_affecationCode',q=>q.eq('affectationCode',permission.affectationCode)).collect()
+            inventory.push(...data)
+        }
+
+        return {inventory}
 
     }
 })

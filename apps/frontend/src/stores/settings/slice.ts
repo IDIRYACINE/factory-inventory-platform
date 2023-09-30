@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type TPanels = ['session', 'stock', 'inventory','productFamily','workers','settings','affectations']
+type TPanels = ['session', 'stock', 'inventory','productFamily','workers','affectations','settings']
 type APanel ='session'| 'stock'| 'inventory'|'productFamily'|'affectations'|'workers'|'settings'
 
 export interface SettingsState {
@@ -13,7 +13,7 @@ export interface SettingsState {
 }
 
 const initialState: SettingsState = {
-    panels: ['session', 'stock', 'inventory', 'productFamily',  'workers', 'settings','affectations'],
+    panels: ['session', 'stock', 'inventory', 'productFamily',  'workers', 'affectations','settings'],
     activePanel: 'session',
     importingInventory: false,
     importingStock: false,
