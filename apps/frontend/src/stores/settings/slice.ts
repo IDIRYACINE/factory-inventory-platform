@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+type TPanels = ['session', 'stock', 'inventory','productFamily','workers','settings','affectations']
+type APanel ='session'| 'stock'| 'inventory'|'productFamily'|'affectations'|'workers'|'settings'
+
 export interface SettingsState {
-    panels : ['session', 'stock', 'inventory','productFamily','history','workers','settings']
-    activePanel : 'session'| 'stock'| 'inventory'|'productFamily'|'history'|'workers'|'settings',
+    panels :TPanels
+    activePanel : APanel,
     importingInventory : boolean,
     importingStock : boolean,
     importingFamilyCode : boolean,
@@ -10,7 +13,7 @@ export interface SettingsState {
 }
 
 const initialState: SettingsState = {
-    panels: ['session', 'stock', 'inventory', 'productFamily', 'history', 'workers', 'settings'],
+    panels: ['session', 'stock', 'inventory', 'productFamily',  'workers', 'settings','affectations'],
     activePanel: 'session',
     importingInventory: false,
     importingStock: false,

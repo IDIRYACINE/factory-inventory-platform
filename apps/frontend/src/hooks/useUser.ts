@@ -1,13 +1,12 @@
 'use client'
 
 import { selectActiveUser, selectUserPermissions, selectUsers } from "@/stores/users/selectors";
-import { loadUsers, setUserPermissions } from "@/stores/users/slice";
+import { loadUsers, selectUser, setUserPermissions, unselectUser } from "@/stores/users/slice";
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation,  useQuery } from "convex/react";
 import { useEffect } from "react"
-import {  useSearchParams } from "next/navigation";
 
 
 export const useReadUsers = () => {
@@ -107,4 +106,13 @@ export const useReadUserPermissions = (args?:{userId:Id<"user">}) => {
     const permissions = useAppSelector(selectUserPermissions)
 
     return permissions
+}
+
+export const useSelectUser = () => {
+    const dispatch = useAppDispatch()
+
+    return {
+        selectUser :(user:Doc<"user">) => dispatch(selectUser(user)),
+        unSelectUser :() => dispatch(unselectUser())
+    }
 }

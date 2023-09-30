@@ -17,7 +17,7 @@ export default function AffectationTable(props:React.ComponentPropsWithoutRef<"d
   const className= clsx(props.className)
 
   
-  const rawColumns = ["code","name"]
+  const rawColumns = ["affectationCode","affectationName"]
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({
     title: t(rawCol),

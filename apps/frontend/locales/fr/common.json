@@ -26,5 +26,6 @@
     "groupName" : "Group Name",
     "groups" : "Groups",
     "back" : "Back",
-    "addToSession" : "Add to Session"
+    "addToSession" : "Add to Session",
+    "managePermissions" : "Manage Permissions"
 }
