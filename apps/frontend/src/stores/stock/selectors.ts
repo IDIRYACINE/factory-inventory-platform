@@ -18,3 +18,4 @@ export const selectStocks = createSelector(
     }
 )
 
+export const selectLoadedStocks = (state: RootState) => state.stock.loaded

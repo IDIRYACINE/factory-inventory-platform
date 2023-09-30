@@ -8,5 +8,5 @@ export default function AffectationInjector() {
 
     useLoadAffectations()
     
-    return null
+    return <></>
 }

@@ -7,6 +7,7 @@ import Button from "antd/es/button";
 import Form from "antd/es/form";
 import Input from "antd/es/input";
 import useTranslation from "next-translate/useTranslation";
+import { Select } from "antd";
 
 
 type FieldType = Doc<"user">
@@ -23,7 +24,7 @@ export default function UserForm() {
 
   const create = useCreateUser()
 
-  const {unSelectUser} = useSelectUser()
+  const { unSelectUser } = useSelectUser()
 
   const onFinish = (values: FieldType) => {
 
@@ -47,6 +48,20 @@ export default function UserForm() {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
+
+  const options = [
+    {
+      id: "role-option-admin",
+      value: "admin",
+      label: "admin",
+    },
+    {
+      id: "role-option-user",
+      value: "user",
+      label: "user",
+    }
+  ]
 
 
   return (
@@ -83,7 +98,9 @@ export default function UserForm() {
         name="role"
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
       >
-        <Input />
+        <Select placeholder={t('group')}
+          optionFilterProp="children"
+          options={options} />
       </Form.Item>
 
       <div className="flex flex-row justify-end items-center gap-8">

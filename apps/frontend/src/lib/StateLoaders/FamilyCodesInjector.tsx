@@ -7,5 +7,5 @@ export default function FamilyCodesInjector() {
 
     useLoadFamilyCodes()
     
-    return null
+    return <></>
 }

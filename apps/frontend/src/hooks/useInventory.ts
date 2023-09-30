@@ -6,7 +6,7 @@ import { loadInventories } from "@/stores/inventory/slice";
 import { displayMessage } from "@/stores/settings/slice";
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
-import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
+import { useMutation,  useQuery } from "convex/react";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect } from "react"
 

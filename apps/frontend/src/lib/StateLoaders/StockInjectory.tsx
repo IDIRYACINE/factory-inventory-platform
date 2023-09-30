@@ -7,5 +7,5 @@ export default function StockInjector() {
 
     useLoadStock()
     
-    return null
+    return <></>
 }

@@ -16,5 +16,7 @@ export const selectAffectations = createSelector(
     }
 )
 
+export const selectLoadedAffectations = (state: RootState) => state.affectations.loaded
+
 
 export const selectActiveAffectation = (state: RootState) => state.affectations.activeAffectation

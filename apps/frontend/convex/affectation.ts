@@ -30,12 +30,14 @@ export const get = query({
 })
 
 export const load = query({
-    args: { paginationOpts: paginationOptsValidator },
+    args: {  },
     handler: async (ctx, args) => {
 
 
 
-        return await ctx.db.query('affectations').order("desc").paginate(args.paginationOpts);
+        const affectations = await ctx.db.query('affectations').withIndex('by_affectationCode').collect();
+
+        return {affectations}
 
     }
 })

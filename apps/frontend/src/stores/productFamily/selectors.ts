@@ -19,3 +19,5 @@ export const selectFamilyCodes = createSelector(
 
 
 export const selectFamilyCode = (state: RootState) => state.familyCodes.familyCode
+
+export const selectLoadedFamilyCodes = (state: RootState) => state.familyCodes.loaded

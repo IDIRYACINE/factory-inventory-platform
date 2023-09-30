@@ -6,7 +6,7 @@ import { selectStocks, selectStock } from "@/stores/stock/selectors";
 import { loadStocks } from "@/stores/stock/slice";
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
-import { useMutation, usePaginatedQuery } from "convex/react";
+import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect } from "react"
 
@@ -24,17 +24,17 @@ export const useReadstock = (args:{id?:Id<"stock">}) => {
 }
 
 export const useLoadStock = () => {
-    const { results, status, loadMore } = usePaginatedQuery(api.stock.load, {}, { initialNumItems: 50 })
+    const results = useQuery(api.stock.load)
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (results.length > 0) {
+        if (results && results.length > 0) {
             dispatch(loadStocks(results))
         }
     }, [dispatch, results])
 
-    return { status, loadMore }
+    return results
 }
 
 type CreatestockArgs = Omit<Doc<"stock">,"_id" |"_creationTime">

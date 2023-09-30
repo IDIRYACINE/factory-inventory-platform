@@ -6,7 +6,8 @@ export interface AffectationState {
     itemsPerPage : number,
     pages : number,
     displayedPage: number,
-    activeAffectation? : Doc<'affectations'> 
+    activeAffectation? : Doc<'affectations'> ,
+    loaded: boolean
 }
 
 const initialState: AffectationState = {
@@ -14,6 +15,8 @@ const initialState: AffectationState = {
     itemsPerPage: 50,
     pages: 0,
     displayedPage: 0,
+    loaded: false
+
 
 }
 
@@ -32,10 +35,13 @@ export const affecatationSlice = createSlice({
         },
         unselectAffecation: (state) => {
             state.activeAffectation = undefined
+        },
+        setLoadedAffectations: (state, action: PayloadAction<boolean>) => {
+            state.loaded = action.payload
         }
     },
 })
 
 export const { setAffectations,selectAffecation,unselectAffecation,loadAffectations } = affecatationSlice.actions
-
+export const {setLoadedAffectations} = affecatationSlice.actions
 export default affecatationSlice.reducer

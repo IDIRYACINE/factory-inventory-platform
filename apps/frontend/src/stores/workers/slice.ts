@@ -46,6 +46,8 @@ export const workersSlice = createSlice({
         setLoadedSessionWorkers: (state, action: PayloadAction<boolean>) => {
             state.loadedSessionWorkers = action.payload
         },
+
+
     },
 })
 

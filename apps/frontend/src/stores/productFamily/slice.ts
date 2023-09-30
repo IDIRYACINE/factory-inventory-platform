@@ -6,7 +6,8 @@ export interface ProductFamilyState {
     itemsPerPage : number,
     pages : number,
     displayedPage: number,
-    familyCode?: Doc<'familyCode'>
+    familyCode?: Doc<'familyCode'>,
+    loaded: boolean
 }
 
 const initialState: ProductFamilyState = {
@@ -14,7 +15,8 @@ const initialState: ProductFamilyState = {
     itemsPerPage : 50,
     pages : 0,
     displayedPage: 0,
-    familyCode: undefined
+    familyCode: undefined,
+    loaded: false
 }
 
 export const familySlice = createSlice({
@@ -33,11 +35,14 @@ export const familySlice = createSlice({
         },
         selectFamilyCode:(state,action:PayloadAction<ProductFamilyState['familyCode']>)=>{
             state.familyCode = action.payload
+        },
+        setLoadedFamilyCodes: (state, action: PayloadAction<boolean>) => {
+            state.loaded = action.payload
         }
 
     },
 })
 
-export const { setFamilyCodes,loadFamilyCodes,unselectFamilyCode,selectFamilyCode } = familySlice.actions
+export const { setFamilyCodes,loadFamilyCodes,unselectFamilyCode,selectFamilyCode,setLoadedFamilyCodes } = familySlice.actions
 
 export default familySlice.reducer

@@ -1,12 +1,12 @@
 'use client'
 
 import { selectActiveAffectation, selectAffectations } from "@/stores/affectations/selectors";
-import { loadAffectations } from "@/stores/affectations/slice";
+import { loadAffectations, setAffectations } from "@/stores/affectations/slice";
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { displayMessage } from "@/stores/settings/slice";
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
-import { useMutation, usePaginatedQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect } from "react"
 
@@ -24,17 +24,17 @@ export const useReadAffectation = (args:{id?:Id<"affectations">}) => {
 }
 
 export const useLoadAffectations = () => {
-    const { results, status, loadMore } = usePaginatedQuery(api.affectation.load, {}, { initialNumItems: 50 })
+    const results = useQuery(api.affectation.load)
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (results.length > 0) {
-            dispatch(loadAffectations(results))
+        if (results &&  results.affectations.length > 0) {
+            dispatch(setAffectations(results.affectations))
         }
     }, [dispatch, results])
 
-    return { status, loadMore }
+    return results
 }
 
 type CreateAffectationArgs = Omit<Doc<"affectations">,'_id' | '_creationTime'>

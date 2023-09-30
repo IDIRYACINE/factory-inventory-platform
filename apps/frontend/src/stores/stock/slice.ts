@@ -6,7 +6,8 @@ export interface StockState {
     itemsPerPage : number,
     pages : number,
     displayedPage: number,
-    stock?: Doc<'stock'>
+    stock?: Doc<'stock'>,
+    loaded: boolean
 }
 
 const initialState: StockState = {
@@ -14,6 +15,7 @@ const initialState: StockState = {
     itemsPerPage : 50,
     pages : 0,
     displayedPage: 0,
+    loaded: false
 
 }
 
@@ -33,10 +35,13 @@ export const stockSlice = createSlice({
         },
         selectStock:(state,action:PayloadAction<StockState['stock']>)=>{
             state.stock = action.payload
+        },
+        setLoadedStocks: (state, action: PayloadAction<boolean>) => {
+            state.loaded = action.payload
         }
     },
 })
 
-export const { setStock,selectStock,unselectStock,loadStocks } = stockSlice.actions
+export const { setStock,selectStock,unselectStock,loadStocks,setLoadedStocks } = stockSlice.actions
 
 export default stockSlice.reducer

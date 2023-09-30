@@ -7,5 +7,5 @@ export default function InventoryInjector() {
 
     useLoadInventory()
     
-    return null
+    return <></>
 }

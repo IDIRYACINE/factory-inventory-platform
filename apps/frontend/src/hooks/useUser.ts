@@ -1,7 +1,7 @@
 'use client'
 
 import { selectActivePermission, selectActiveUser, selectUserPermissions, selectUsers } from "@/stores/users/selectors";
-import { loadUsers, selectPermission, selectUser, setUserPermissions, setUsers, unselectPermission, unselectUser } from "@/stores/users/slice";
+import {  selectPermission, selectUser, setUserPermissions, setUsers, unselectPermission, unselectUser } from "@/stores/users/slice";
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";

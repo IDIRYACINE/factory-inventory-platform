@@ -18,3 +18,5 @@ export const selectActiveSessionRecords = createSelector(
 
 
 export const selectActiveSession = (state: RootState) => state.session.activeSession
+
+export const selectLoadedSession = (state: RootState) => state.session.loadedSession

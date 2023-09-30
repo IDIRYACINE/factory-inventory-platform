@@ -6,11 +6,13 @@ export interface UsersState {
     user?: Doc<'user'>,
     userPermissions : Doc<'affectationPermisions'>[],
     activePermission?: Doc<'affectationPermisions'>,
+    loaded: boolean
 }
 
 const initialState: UsersState = {
     users: [],
     userPermissions : [],
+    loaded: false
 }
 
 export const UsersSlice = createSlice({
@@ -38,11 +40,14 @@ export const UsersSlice = createSlice({
         },
         unselectPermission:(state,)=>{
             state.activePermission = undefined
+        },
+        setLoadedUsers: (state, action: PayloadAction<boolean>) => {
+            state.loaded = action.payload
         }
     },
 })
 
-export const { setUsers,selectUser,unselectUser,loadUsers,setUserPermissions } = UsersSlice.actions
-export const { selectPermission,unselectPermission } = UsersSlice.actions
+export const { setUsers,selectUser,unselectUser,setUserPermissions } = UsersSlice.actions
+export const { selectPermission,unselectPermission,setLoadedUsers } = UsersSlice.actions
 
 export default UsersSlice.reducer

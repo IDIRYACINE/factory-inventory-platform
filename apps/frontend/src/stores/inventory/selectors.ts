@@ -18,3 +18,4 @@ export const selectInventories = createSelector(
     }
 )
 
+export const selectLoadedInventories = (state: RootState) => state.inventory.loaded

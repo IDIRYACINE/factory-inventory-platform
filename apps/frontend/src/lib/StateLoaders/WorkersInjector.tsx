@@ -7,5 +7,5 @@ export default function WorkerInjector() {
 
     useLoadWorkers()
 
-    return null
+    return <></>
 }

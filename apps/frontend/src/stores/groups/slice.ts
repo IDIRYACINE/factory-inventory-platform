@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface GroupsState {
     groups : Doc<'sessionGroups'>[],
-    activeGroup?: Doc<'sessionGroups'>
+    activeGroup?: Doc<'sessionGroups'>,
+    loaded: boolean
 }
 
 const initialState: GroupsState = {
     groups: [],
+    loaded: false
 
 }
 
@@ -23,10 +25,13 @@ export const sessionGroupsSlice = createSlice({
         },
         resetActiveGroup: (state) => {
             state.activeGroup = undefined
+        },
+        setLoadedGroups: (state, action: PayloadAction<boolean>) => {
+            state.loaded = action.payload
         }
     },
 })
 
-export const { setSessionGroups,selectActiveGroup,resetActiveGroup } = sessionGroupsSlice.actions
+export const { setSessionGroups,selectActiveGroup,resetActiveGroup,setLoadedGroups } = sessionGroupsSlice.actions
 
 export default sessionGroupsSlice.reducer

@@ -30,12 +30,12 @@ export const get = query({
 })
 
 export const load = query({
-    args: { paginationOpts: paginationOptsValidator },
+    args: { },
     handler: async (ctx, args) => {
 
 
 
-        return await ctx.db.query('stock').order("desc").paginate(args.paginationOpts);
+        return await ctx.db.query('stock').withIndex('by_articleCode').collect();
 
     }
 })

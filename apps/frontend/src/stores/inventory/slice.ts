@@ -6,7 +6,8 @@ export interface InventoryState {
     itemsPerPage : number,
     pages : number,
     displayedPage: number,
-    inventory?: Doc<'inventory'>
+    inventory?: Doc<'inventory'>,
+    loaded: boolean
 }
 
 const initialState: InventoryState = {
@@ -14,7 +15,8 @@ const initialState: InventoryState = {
     ,itemsPerPage : 50,
     pages : 0,
     displayedPage: 0,
-    inventory: undefined
+    inventory: undefined,
+    loaded: false
 
 }
 
@@ -33,11 +35,14 @@ export const inventorySlice = createSlice({
         },
         selectInventory:(state,action:PayloadAction<InventoryState['inventory']>)=>{
             state.inventory = action.payload
+        },
+        setLoadedInventories: (state, action: PayloadAction<boolean>) => {
+            state.loaded = action.payload
         }
 
     },
 })
 
-export const { setInventory,selectInventory,unselectInventor,loadInventories } = inventorySlice.actions
+export const { setInventory,selectInventory,unselectInventor,loadInventories,setLoadedInventories } = inventorySlice.actions
 
 export default inventorySlice.reducer

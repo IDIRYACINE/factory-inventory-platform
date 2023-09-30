@@ -7,6 +7,8 @@ export interface SessionState {
     itemsPerPage : number,
     pages : number,
     displayedPage: number,
+    loadedSession: boolean,
+
 }
 
 const initialState: SessionState = {
@@ -14,7 +16,8 @@ const initialState: SessionState = {
     activeSession: undefined,
     itemsPerPage: 50,
     pages: 0,
-    displayedPage: 0
+    displayedPage: 0,
+    loadedSession: false
 }
 
 export const sessionSlice = createSlice({
@@ -30,10 +33,13 @@ export const sessionSlice = createSlice({
         ,
         setActiveSession: (state, action: PayloadAction<SessionState['activeSession']>) => {
             state.activeSession = action.payload
+        },
+        setLoadedSession: (state, action: PayloadAction<boolean>) => {
+            state.loadedSession = action.payload
         }
     },
 })
 
-export const { setRecords,setActiveSession,loadRecords } = sessionSlice.actions
+export const { setRecords,setActiveSession,loadRecords,setLoadedSession } = sessionSlice.actions
 
 export default sessionSlice.reducer

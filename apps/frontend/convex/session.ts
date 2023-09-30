@@ -1,7 +1,7 @@
 import { v } from "convex/values";
 import { httpAction, internalMutation, mutation, query } from "./_generated/server";
 import { isAuthenticated } from "./helpers/isAuthenticated";
-import {  codeAlreadyScanned, codeInventoryNotFound, codeNoActiveSession, codeNotAuthenticated, codeSessionNotFound, codeSucess, codeWorkerDoesntExist } from "./helpers/statusCodes";
+import { codeAlreadyScanned, codeInventoryNotFound, codeNoActiveSession, codeNotAuthenticated, codeSessionNotFound, codeSucess, codeWorkerDoesntExist } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
 import { internal } from "./_generated/api";
 
@@ -41,18 +41,16 @@ export const loadRecords = query({
     args: { paginationOpts: paginationOptsValidator, active: v.optional(v.boolean()) },
     handler: async (ctx, args) => {
 
-        if (args.active) {
-
-            const activeSession = await ctx.db.query('sessions').withIndex("by_active", (q) => q.eq('active', true)).first()
 
 
-            return await ctx.db.query('sessionRecord')
-                .withIndex("by_sessionId", (q) => q.eq('sessionId', activeSession!._id))
-                .paginate(args.paginationOpts);
+        const activeSession = await ctx.db.query('sessions').withIndex("by_active", (q) => q.eq('active', true)).first()
 
-        }
 
-        return await ctx.db.query('sessionRecord').order("desc").paginate(args.paginationOpts);
+        return await ctx.db.query('sessionRecord')
+            .withIndex("by_sessionId", (q) => q.eq('sessionId', activeSession!._id))
+            .paginate(args.paginationOpts);
+
+
 
     }
 })
@@ -75,7 +73,7 @@ export const openSession = mutation({
 
         const data = await ctx.db.insert('sessions', session)
 
-        return {sessionId:data}
+        return { sessionId: data }
     }
 
 })
@@ -100,7 +98,7 @@ export const closeSession = mutation({
 
         const data = await ctx.db.patch(activeSession._id, { active: false })
 
-        return {sessionId:activeSession._id}
+        return { sessionId: activeSession._id }
     }
 
 })
@@ -179,14 +177,14 @@ export const handleMissingRecords = internalMutation({
         for (const item of inventory) {
 
             const scanned = await ctx.db.query('scannedArticles').withIndex("by_code", (q) => q.eq('articleCode', item.articleCode)).first()
-            if(!scanned){
-                await ctx.db.insert('missingArticles', {articleCode: item.articleCode})
+            if (!scanned) {
+                await ctx.db.insert('missingArticles', { articleCode: item.articleCode })
 
                 const record = {
                     articleCode: item.articleCode,
                     articleName: item.articleName,
                     affectationCode: item.affectationCode,
-                    price: item.unit ,
+                    price: item.unit,
                 }
                 await ctx.db.insert('missingSessionRecord', record)
             }

@@ -14,3 +14,4 @@ export const selectActiveSessionWorker = (state: RootState) => state.workers.ses
 export const selectLoadedWorkers = (state: RootState) => state.workers.loadedWorkers
 
 export const selectLoadedSessionWorkers = (state: RootState) => state.workers.loadedSessionWorkers
+

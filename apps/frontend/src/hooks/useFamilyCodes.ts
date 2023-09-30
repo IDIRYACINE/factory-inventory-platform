@@ -6,7 +6,7 @@ import { loadFamilyCodes, setFamilyCodes } from "@/stores/productFamily/slice"
 import { displayMessage } from "@/stores/settings/slice"
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
-import { useMutation, usePaginatedQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import useTranslation from "next-translate/useTranslation"
 import { useEffect } from "react"
 
@@ -24,17 +24,17 @@ export const useReadFamilyCode = (args:{id?:Id<"familyCode">}) => {
 }
 
 export const useLoadFamilyCodes = () => {
-    const { results, status, loadMore } = usePaginatedQuery(api.productFamily.load, {}, { initialNumItems: 50 })
+    const results = useQuery(api.productFamily.load)
 
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (results.length > 0) {
+        if (results && results.length > 0) {
             dispatch(loadFamilyCodes(results))
         }
     }, [dispatch, results])
 
-    return { status, loadMore }
+    return results
 }
 
 type CreateFamilyCodeArgs = Omit<Doc<'familyCode'>,'_id'|'_creationTime'>
