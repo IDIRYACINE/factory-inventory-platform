@@ -25,7 +25,8 @@ export const affecatationSlice = createSlice({
     initialState,
     reducers: {
         setAffectations: (state, action: PayloadAction<AffectationState['affectations']>) => {
-            state.affectations = action.payload
+            state.affectations = action.payload,
+            state.loaded = true
         },
         loadAffectations: (state, action: PayloadAction<AffectationState['affectations']>) => {
             state.affectations = [...state.affectations, ...action.payload]

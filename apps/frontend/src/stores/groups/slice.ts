@@ -19,6 +19,8 @@ export const sessionGroupsSlice = createSlice({
     reducers: {
         setSessionGroups: (state, action: PayloadAction<GroupsState['groups']>) => {
             state.groups = action.payload
+            state.loaded = true
+
         },
         selectActiveGroup: (state, action: PayloadAction<Doc<'sessionGroups'>>) => {
             state.activeGroup = action.payload

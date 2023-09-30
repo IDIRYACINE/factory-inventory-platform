@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { displayMessage } from "@/stores/settings/slice";
-import { selectStocks, selectStock } from "@/stores/stock/selectors";
+import { selectStocksPaginated, selectStock } from "@/stores/stock/selectors";
 import { loadStocks } from "@/stores/stock/slice";
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
@@ -12,12 +12,12 @@ import { useEffect } from "react"
 
 
 export const useReadStocks = () => {
-    const codes = useAppSelector(selectStocks)
+    const codes = useAppSelector(selectStocksPaginated)
 
     return codes
 }
 
-export const useReadstock = (args:{id?:Id<"stock">}) => {
+export const useReadstock = (args: { id?: Id<"stock"> }) => {
     const stock = useAppSelector(selectStock)
 
     return stock
@@ -37,16 +37,16 @@ export const useLoadStock = () => {
     return results
 }
 
-type CreatestockArgs = Omit<Doc<"stock">,"_id" |"_creationTime">
+type CreatestockArgs = Omit<Doc<"stock">, "_id" | "_creationTime">
 
 export const useCreateStock = () => {
 
 
     const create = useMutation(api.stock.create)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
-    const handleCreate = ({ familyCode, articleName,articleCode }: CreatestockArgs) => {
-        create({ stock: { familyCode, articleName,articleCode } }).then((res) => {
+    const { t } = useTranslation('messages')
+    const handleCreate = ({ familyCode, articleName, articleCode }: CreatestockArgs) => {
+        create({ stock: { familyCode, articleName, articleCode } }).then((res) => {
             const message = res.code ? 'fail' : 'sucess'
             const type = res.code ? 'error' : 'success'
             dispatch(displayMessage({ message: t(message), type: type }))
@@ -57,16 +57,16 @@ export const useCreateStock = () => {
 
 }
 
-type UpdatestockArgs = Partial<CreatestockArgs> & {id:Id<"stock">}
+type UpdatestockArgs = Partial<CreatestockArgs> & { id: Id<"stock"> }
 export const useUpdateStock = () => {
 
 
     const update = useMutation(api.stock.update)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
-    
-    const handleUpdate = ({ id, familyCode, articleName,articleCode }:UpdatestockArgs) => {
-        update({ id, stock:{familyCode, articleName,articleCode} }).then((res) => {
+    const { t } = useTranslation('messages')
+
+    const handleUpdate = ({ id, familyCode, articleName, articleCode }: UpdatestockArgs) => {
+        update({ id, stock: { familyCode, articleName, articleCode } }).then((res) => {
             const message = res.code ? 'fail' : 'sucess'
             const type = res.code ? 'error' : 'success'
             dispatch(displayMessage({ message: t(message), type: type }))

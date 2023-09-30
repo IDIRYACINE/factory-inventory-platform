@@ -5,7 +5,7 @@ import Table from 'antd/es/table';
 import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
-import { selectStocks } from '@/stores/stock/selectors';
+import { selectStocks, selectStocksPaginated } from '@/stores/stock/selectors';
 import { useAppSelector } from '@/stores/hooks';
 
 
@@ -16,7 +16,7 @@ export default function StockTable(props: React.ComponentPropsWithoutRef<"div">)
 
   const className = clsx(props.className)
 
-  const rawColumns = ["code","name","familyCode","unit"]
+  const rawColumns = ["articleCode", "articleName", "familyCode", "unit"]
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({
     title: t(rawCol),
@@ -31,7 +31,7 @@ export default function StockTable(props: React.ComponentPropsWithoutRef<"div">)
   }))
 
   return (
-    <Table className={className} columns={columns} dataSource={data} />
+    <Table pagination={{ defaultPageSize: 8 }} className={className} columns={columns} dataSource={data} />
   )
 
 }

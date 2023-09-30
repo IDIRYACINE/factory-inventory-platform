@@ -5,7 +5,6 @@ import Button from "antd/es/button";
 import Form from "antd/es/form";
 import Input from "antd/es/input";
 import useTranslation from "next-translate/useTranslation";
-import FamilyCodeSelector from "@/components/familyCodes/FamilyCodeSelector";
 import { useCreateInventory, useUpdateInventory } from "@/hooks/useInventory";
 import { useAppSelector } from "@/stores/hooks";
 import { selectInventory } from "@/stores/inventory/selectors";

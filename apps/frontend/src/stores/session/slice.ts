@@ -33,6 +33,8 @@ export const sessionSlice = createSlice({
         ,
         setActiveSession: (state, action: PayloadAction<SessionState['activeSession']>) => {
             state.activeSession = action.payload
+            state.loadedSession = true
+
         },
         setLoadedSession: (state, action: PayloadAction<boolean>) => {
             state.loadedSession = action.payload

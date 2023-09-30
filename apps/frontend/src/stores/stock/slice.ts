@@ -25,6 +25,8 @@ export const stockSlice = createSlice({
     reducers: {
         setStock: (state, action: PayloadAction<StockState['stock']>) => {
             state.stock = action.payload
+            state.loaded = true
+
         },
 
         loadStocks: (state, action: PayloadAction<StockState['stocks']>) => {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
-import { selectFamilyCode, selectFamilyCodes } from "@/stores/productFamily/selectors"
+import { selectFamilyCode, selectFamilyCodesPaginated } from "@/stores/productFamily/selectors"
 import { loadFamilyCodes, setFamilyCodes } from "@/stores/productFamily/slice"
 import { displayMessage } from "@/stores/settings/slice"
 import { api } from "@convex/_generated/api"
@@ -12,12 +12,12 @@ import { useEffect } from "react"
 
 
 export const useReadFamilyCodes = () => {
-    const codes = useAppSelector(selectFamilyCodes)
+    const codes = useAppSelector(selectFamilyCodesPaginated)
 
     return codes
 }
 
-export const useReadFamilyCode = (args:{id?:Id<"familyCode">}) => {
+export const useReadFamilyCode = (args: { id?: Id<"familyCode"> }) => {
     const family = useAppSelector(selectFamilyCode)
 
     return family
@@ -37,22 +37,22 @@ export const useLoadFamilyCodes = () => {
     return results
 }
 
-type CreateFamilyCodeArgs = Omit<Doc<'familyCode'>,'_id'|'_creationTime'>
+type CreateFamilyCodeArgs = Omit<Doc<'familyCode'>, '_id' | '_creationTime'>
 
 export const useCreateFamilyCode = () => {
 
 
     const create = useMutation(api.productFamily.create)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
+    const { t } = useTranslation('messages')
 
     const handleCreate = ({ code, name }: CreateFamilyCodeArgs) => {
         create({ familyCode: { code, name } }).then((res) => {
-            const message = res.code? 'fail' : 'sucess'
-            const type = res.code? 'error' : 'success'
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
 
             dispatch(displayMessage({ message: t(message), type: type }))
-            
+
         })
     }
 
@@ -60,21 +60,21 @@ export const useCreateFamilyCode = () => {
 
 }
 
-type UpdateFamilyCodeArgs = Partial<CreateFamilyCodeArgs> & {id:Id<"familyCode">}
+type UpdateFamilyCodeArgs = Partial<CreateFamilyCodeArgs> & { id: Id<"familyCode"> }
 export const useUpdateFamilyCode = () => {
 
 
     const update = useMutation(api.productFamily.update)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
+    const { t } = useTranslation('messages')
 
-    const handleUpdate = ({ id, code, name }:UpdateFamilyCodeArgs) => {
+    const handleUpdate = ({ id, code, name }: UpdateFamilyCodeArgs) => {
         update({ id, code, name }).then((res) => {
-            const message = res.code? 'fail' : 'sucess'
-            const type = res.code? 'error' : 'success'
+            const message = res.code ? 'fail' : 'sucess'
+            const type = res.code ? 'error' : 'success'
 
             dispatch(displayMessage({ message: t(message), type: type }))
-            
+
         })
     }
 

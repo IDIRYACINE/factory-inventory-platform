@@ -17,7 +17,7 @@ export const load = query({
             return { code: codeNotAuthenticated}
         }
 
-        const supervisorId = (await ctx.auth.getUserIdentity())!.tokenIdentifier
+        const supervisorId = (await ctx.auth.getUserIdentity())?.tokenIdentifier
 
         
         if(supervisorId){
@@ -30,8 +30,8 @@ export const load = query({
 
 
 
-        let session =  await ctx.db.query('sessionGroups').collect()
-        return {session}
+        let group =  await ctx.db.query('sessionGroups').collect()
+        return {group}
 
     }
 })

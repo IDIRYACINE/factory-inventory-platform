@@ -26,6 +26,8 @@ export const inventorySlice = createSlice({
     reducers: {
         setInventory: (state, action: PayloadAction<InventoryState['inventories']>) => {
             state.inventories = action.payload
+            state.loaded = true
+
         },
         loadInventories: (state, action: PayloadAction<InventoryState['inventories']>) => {
             state.inventories = [...state.inventories , ...action.payload] 

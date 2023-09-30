@@ -1,3 +1,5 @@
+'use client'
+
 import { usePanelNavigation } from "@/hooks/useNavigation";
 import { SettingsState } from "@/stores/settings/slice";
 import Button from "antd/es/button";

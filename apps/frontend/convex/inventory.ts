@@ -40,9 +40,12 @@ export const load = query({
 
         const tokenIdentifier = (await ctx.auth.getUserIdentity())!.tokenIdentifier
 
-        const user = await ctx.db.query('user').withIndex('by_tokenIdentifier',q=>q.eq('tokenIdentifier',tokenIdentifier)).first()
+        console.log(tokenIdentifier)
 
-        if(user!.role === 'admin'){
+        const user = await ctx.db.query('user').withIndex('by_tokenIdentifier',q=>q.eq('tokenIdentifier',tokenIdentifier)).first()
+        console.log(user)
+
+        if(user!.role === 'admin'|| user!.role ==='superadmin'){
             const data = await ctx.db.query('inventory').collect()
             return {inventory:data}
         }

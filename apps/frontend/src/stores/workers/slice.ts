@@ -27,12 +27,14 @@ export const workersSlice = createSlice({
         },
         selectWorker: (state, action: PayloadAction<WorkersState['worker']>) => {
             state.worker = action.payload
+
         },
         unselectWorker: (state) => {
             state.worker = undefined
         },
         setSessionWorkers: (state, action: PayloadAction<WorkersState['sessionWorkers']>) => {
             state.sessionWorkers = action.payload
+            state.loadedSessionWorkers = true
         },
         selectSessionWorker: (state, action: PayloadAction<WorkersState['sessionWorker']>) => {
             state.sessionWorker = action.payload

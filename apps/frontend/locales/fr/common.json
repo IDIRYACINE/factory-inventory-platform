@@ -31,5 +31,8 @@
     "affectations" : "Affectations",
     "affectationCode" : "Affectation Code",
     "affectationName" : "Affectation Name",
-    "revoke" : "Revoke"
+    "revoke" : "Revoke",
+    "articleCode" : "Article Code",
+    "articleName" : "Article Name",
+    "workerName" : "Worker Name"
 }

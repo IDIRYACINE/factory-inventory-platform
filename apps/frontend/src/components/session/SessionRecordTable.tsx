@@ -13,7 +13,7 @@ export default function SessionRecordTable(props: React.ComponentPropsWithoutRef
 
   const className = clsx(props.className)
 
-  const rawColumns = ["code","name","worker"]
+  const rawColumns = ["articleCode","articleName","workerName"]
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({
     title: t(rawCol),
@@ -28,7 +28,7 @@ export default function SessionRecordTable(props: React.ComponentPropsWithoutRef
   }))
 
   return (
-    <Table className={className} columns={columns} dataSource={data} />
+    <Table pagination={{ defaultPageSize: 8 }} className={className} columns={columns} dataSource={data} />
   )
 
 }

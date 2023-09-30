@@ -5,19 +5,19 @@ import Table from 'antd/es/table';
 import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
-import { selectFamilyCodes } from '@/stores/productFamily/selectors';
+import { selectFamilyCodes, selectFamilyCodesPaginated } from '@/stores/productFamily/selectors';
 import { useAppSelector } from '@/stores/hooks';
 
 
 type DataType = Doc<'familyCode'> & { key: string };
 
-export default function FamilyCodeTable(props:React.ComponentPropsWithoutRef<"div">) {
+export default function FamilyCodeTable(props: React.ComponentPropsWithoutRef<"div">) {
   const { t } = useTranslation()
 
-  const className= clsx(props.className)
+  const className = clsx(props.className)
 
-  
-  const rawColumns = ["code","name"]
+
+  const rawColumns = ["code", "name"]
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({
     title: t(rawCol),
@@ -34,7 +34,7 @@ export default function FamilyCodeTable(props:React.ComponentPropsWithoutRef<"di
   }))
 
   return (
-    <Table className={className} columns={columns} dataSource={data} />
+    <Table pagination={{ defaultPageSize: 8 }} className={className} columns={columns} dataSource={data} />
   )
 
 }
