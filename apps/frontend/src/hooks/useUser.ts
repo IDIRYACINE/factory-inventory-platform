@@ -34,7 +34,7 @@ export const useLoadUsers = () => {
         }
     }, [dispatch, res])
 
-    return res
+    return res?.users
 }
 
 type CreateUserArgs = Omit<Doc<"user">,'_id' | '_creationTime'>

@@ -5,6 +5,7 @@ import { codeNotAuthenticated } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
 import { Inventory,  } from "./schema";
 import { InventoryOptional } from "./helpers/updateHelpers";
+import {  incrementInventoryCacheVersion } from "./helpers/utility";
 
 
 
@@ -78,6 +79,8 @@ export const create = mutation({
         }
 
         const data = await ctx.db.insert('inventory',args.inventory)
+        await incrementInventoryCacheVersion(ctx.db)
+
 
         return {inventoryId:data}
     }
@@ -95,7 +98,8 @@ export const update = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.patch(args.id,args.inventory)
+         await ctx.db.patch(args.id,args.inventory)
+        await incrementInventoryCacheVersion(ctx.db)
 
         return {inventoryId:args.id}
     }

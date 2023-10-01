@@ -3,14 +3,15 @@ import { action, internalQuery, mutation, query } from "./_generated/server";
 import { isAuthenticated } from "./helpers/isAuthenticated";
 import { codeNotAuthenticated } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
-import { Workers,  } from "./schema";
+import { Workers, } from "./schema";
 import { WorkersOptional } from "./helpers/updateHelpers";
+import { incrementWorkersCacheVersion } from "./helpers/utility";
 
 
 
 
 export const load = query({
-    args: {  },
+    args: {},
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -20,15 +21,15 @@ export const load = query({
         }
 
 
-       const workers=  await ctx.db.query('workers').order("desc").collect();
+        const workers = await ctx.db.query('workers').order("desc").collect();
 
-       return {workers}
+        return { workers }
     }
 })
 
 
 export const create = mutation({
-    args: {worker:v.object(Workers)},
+    args: { worker: v.object(Workers) },
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -37,16 +38,16 @@ export const create = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const workerId = await ctx.db.insert('workers',args.worker)
+        const workerId = await ctx.db.insert('workers', args.worker)
 
-        return {workerId}
+        return { workerId }
     }
 
 })
 
 
 export const update = mutation({
-    args: {id :v.id("workers") ,worker:v.object(WorkersOptional)},
+    args: { id: v.id("workers"), worker: v.object(WorkersOptional) },
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -55,9 +56,10 @@ export const update = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.patch(args.id,args.worker)
+        await ctx.db.patch(args.id, args.worker)
+        incrementWorkersCacheVersion(ctx.db)
 
-        return {workerId:args.id}
+        return { workerId: args.id }
     }
 
 })

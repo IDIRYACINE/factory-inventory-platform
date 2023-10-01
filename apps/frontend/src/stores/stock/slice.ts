@@ -23,8 +23,8 @@ export const stockSlice = createSlice({
     name: 'stocks',
     initialState,
     reducers: {
-        setStock: (state, action: PayloadAction<StockState['stock']>) => {
-            state.stock = action.payload
+        setStocks: (state, action: PayloadAction<StockState['stocks']>) => {
+            state.stocks = action.payload
             state.loaded = true
 
         },
@@ -44,6 +44,6 @@ export const stockSlice = createSlice({
     },
 })
 
-export const { setStock,selectStock,unselectStock,loadStocks,setLoadedStocks } = stockSlice.actions
+export const { setStocks,selectStock,unselectStock,loadStocks,setLoadedStocks } = stockSlice.actions
 
 export default stockSlice.reducer

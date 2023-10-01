@@ -6,6 +6,7 @@ import { paginationOptsValidator } from "convex/server";
 import { SessionGroups,  } from "./schema";
 import { SessionGroupsOptional } from "./helpers/updateHelpers";
 import { SessionGroupsCreate } from "./helpers/createHelpers";
+import { incrementSessionGroupCacheVersion } from "./helpers/utility";
 
 
 
@@ -53,6 +54,8 @@ export const create = mutation({
         }
 
         const data = await ctx.db.insert('sessionGroups',group)
+        await incrementSessionGroupCacheVersion(ctx.db)
+
 
         return {groupId:data}
     }
@@ -70,7 +73,9 @@ export const update = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.patch(args.id,args.sessionGroups)
+       await ctx.db.patch(args.id,args.sessionGroups)
+
+       await incrementSessionGroupCacheVersion(ctx.db)
 
         return {groupId:args.id}
     }

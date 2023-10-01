@@ -34,7 +34,7 @@ export const useLoadInventory = () => {
         }
     }, [dispatch, results])
 
-    return results
+    return results?.inventory
 }
 
 type CreateInventoryArgs = Omit<Doc<"inventory">, "_id" | "_creationTime">

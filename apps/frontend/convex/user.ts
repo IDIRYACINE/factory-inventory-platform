@@ -5,8 +5,9 @@ import { mutation, query } from "./_generated/server";
 import { isAuthenticated } from "./helpers/isAuthenticated";
 import { codeNotAuthenticated } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
-import { User,  } from "./schema";
+import { User, } from "./schema";
 import { UserOptional } from "./helpers/updateHelpers";
+import { incrementUsersCacheVersion } from "./helpers/utility";
 
 
 
@@ -32,22 +33,22 @@ export const get = query({
 })
 
 export const load = query({
-    args: {  },
+    args: {},
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
-        if(!authenticated) return {code:codeNotAuthenticated}
+        if (!authenticated) return { code: codeNotAuthenticated }
 
         const users = await ctx.db.query('user').collect();
 
-        return {users}
+        return { users }
 
     }
 })
 
 
 export const create = mutation({
-    args: {user:v.object(User)},
+    args: { user: v.object(User) },
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -57,16 +58,17 @@ export const create = mutation({
         }
 
 
-        const userId = await ctx.db.insert('user',args.user)
+        const userId = await ctx.db.insert('user', args.user)
+        await incrementUsersCacheVersion(ctx.db)
 
-        return {userId}
+        return { userId }
     }
 
 })
 
 
 export const update = mutation({
-    args: {id :v.id("user") ,user:v.object(UserOptional)},
+    args: { id: v.id("user"), user: v.object(UserOptional) },
     handler: async (ctx, args) => {
 
         const authenticated = await isAuthenticated(ctx.auth)
@@ -75,9 +77,10 @@ export const update = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.patch(args.id,args.user)
+        await ctx.db.patch(args.id, args.user)
+        await incrementUsersCacheVersion(ctx.db)
 
-        return {userId:args.id}
+        return { userId: args.id }
     }
 
 })

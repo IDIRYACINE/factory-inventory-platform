@@ -5,6 +5,7 @@ import { codeNotAuthenticated } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
 import { Affectations,  } from "./schema";
 import { AffectationsOptional } from "./helpers/updateHelpers";
+import { incrementAffectationsCacheVersion } from "./helpers/utility";
 
 
 
@@ -54,6 +55,8 @@ export const create = mutation({
         }
 
         const data = await ctx.db.insert('affectations',args.affectation)
+        await incrementAffectationsCacheVersion(ctx.db)
+
 
         return {affectationId:data}
     }
@@ -72,6 +75,8 @@ export const update = mutation({
         }
 
         const data = await ctx.db.patch(args.id,args.affectation)
+
+        await incrementAffectationsCacheVersion(ctx.db)
 
         return data
     }

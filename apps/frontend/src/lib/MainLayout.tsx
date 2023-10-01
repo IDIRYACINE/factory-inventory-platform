@@ -13,7 +13,7 @@ const MainLayout = ({ children }: React.PropsWithChildren) => {
             <div className="flex flex-row gap-4 h-full w-full">
                 <Sidebar />
                 <MessageDelegate/>
-                {/* <AllStateLoader/> */}
+                <AllStateLoader/>
                 {children}
             </div>
         </Provider>

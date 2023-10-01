@@ -6,6 +6,7 @@ import { SessionWorker, } from "./schema";
 import { SessionWorkerOptional } from "./helpers/updateHelpers";
 
 import { internal } from "./_generated/api";
+import { incrementSessionWorkerCacheVersion } from "./helpers/utility";
 
 
 export const load = query({
@@ -39,6 +40,8 @@ export const create = mutation({
         }
 
         const workerId = await ctx.db.insert('sessionWorkers', args.sessionWorker)
+        await incrementSessionWorkerCacheVersion(ctx.db)
+
 
         return { workerId }
     }
@@ -56,7 +59,8 @@ export const update = mutation({
             return { code: codeNotAuthenticated }
         }
 
-        const data = await ctx.db.patch(args.id, args.sessionWorker)
+        await ctx.db.patch(args.id, args.sessionWorker)
+        await incrementSessionWorkerCacheVersion(ctx.db)
 
         return {sessionWorkerId:args.id}
     }

@@ -1,5 +1,15 @@
 import './globals.css'
 
+import { Metadata } from 'next';
+
+
+
+export const metadata: Metadata = {
+  title: 'Inventory App',
+  description:
+    '',
+};
+
 
 export default function RootLayout({
   children,

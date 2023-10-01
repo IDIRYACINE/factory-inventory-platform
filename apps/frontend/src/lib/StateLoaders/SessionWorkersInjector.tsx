@@ -1,27 +1,27 @@
 "use client";
 
 import { cacheKeys } from "@/utility/caching/db";
-import { useLoadCacheStock, useCacheStock } from "@/utility/caching/useCaching";
+import { useLoadCacheSessionWorkers, useCacheSessionWorkers } from "@/utility/caching/useCaching";
 import { UpdateInjectorProps, InjectorProps } from "./types";
-import { useLoadStock } from "@/hooks/useStock";
+import { useLoadSessionWorkers } from "@/hooks/useSesionWorker";
 
 
 const ReadFromCache = () => {
 
-    useLoadCacheStock()
+    useLoadCacheSessionWorkers()
 
     return <></>
 }
 
 const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
     
-    const stock = useLoadStock()
+    const sessionWorkers = useLoadSessionWorkers()
 
-    const updateCache = useCacheStock()
+    const updateCache = useCacheSessionWorkers()
 
-    if(stock){
+    if(sessionWorkers){
         updateCache({
-            items: stock,
+            items: sessionWorkers,
             version: convexCacheState.version,
             _id : cacheKeys.sessionGroupVersion
         })
@@ -30,7 +30,7 @@ const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
     return <></>
 }
 
-export default function StockInjector({ convexCacheState, browserCacheState }: InjectorProps) {
+export default function SessionWorkersInjector({ convexCacheState, browserCacheState }: InjectorProps) {
 
 
 

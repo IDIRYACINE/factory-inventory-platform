@@ -15,10 +15,12 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as affectation from "../affectation";
+import type * as cache from "../cache";
 import type * as helpers_createHelpers from "../helpers/createHelpers";
 import type * as helpers_isAuthenticated from "../helpers/isAuthenticated";
 import type * as helpers_statusCodes from "../helpers/statusCodes";
 import type * as helpers_updateHelpers from "../helpers/updateHelpers";
+import type * as helpers_utility from "../helpers/utility";
 import type * as http from "../http";
 import type * as importData from "../importData";
 import type * as inventory from "../inventory";
@@ -41,10 +43,12 @@ import type * as workers from "../workers";
  */
 declare const fullApi: ApiFromModules<{
   affectation: typeof affectation;
+  cache: typeof cache;
   "helpers/createHelpers": typeof helpers_createHelpers;
   "helpers/isAuthenticated": typeof helpers_isAuthenticated;
   "helpers/statusCodes": typeof helpers_statusCodes;
   "helpers/updateHelpers": typeof helpers_updateHelpers;
+  "helpers/utility": typeof helpers_utility;
   http: typeof http;
   importData: typeof importData;
   inventory: typeof inventory;

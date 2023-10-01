@@ -34,7 +34,7 @@ export const useLoadAffectations = () => {
         }
     }, [dispatch, results])
 
-    return results
+    return results?.affectations
 }
 
 type CreateAffectationArgs = Omit<Doc<"affectations">, '_id' | '_creationTime'>

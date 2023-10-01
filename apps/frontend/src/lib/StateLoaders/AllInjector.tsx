@@ -1,50 +1,42 @@
 "use client";
 
-import { useReadLoadingState } from "@/hooks/useSettings";
 import AffectationInjector from "./AffectationInjector";
 import FamilyCodesInjector from "./FamilyCodesInjector";
 import InventoryInjector from "./InventoryInjector";
 import SessionInjector from "./SessionInjector";
 import StockInjector from "./StockInjectory";
 import WorkerInjector from "./WorkersInjector";
-
-type As = () => JSX.Element
-
-export default function AllStateLoader() {
-
-    const loadState = useReadLoadingState()
-
-    const injectors: As[] = []
-
-    if(!loadState.loadedAffectations){
-        injectors.push(AffectationInjector)
-    }
-
-    if(!loadState.loadedFamilies){
-        injectors.push(FamilyCodesInjector)
-    }
-
-    if(!loadState.loadedInventory){
-        injectors.push(InventoryInjector)
-    }
+import { useReadCacheMetadata } from "@/utility/caching/useCaching";
+import { useQuery } from "convex/react";
+import { api } from "@convex/_generated/api";
+import { useEffect, useState } from "react";
+import { InjectorComponent } from "./types";
 
 
-    if(!loadState.loadedSession){
-        injectors.push(SessionInjector)
-    }
 
-    if(!loadState.loadedStock){
-        injectors.push(StockInjector)
-    }
+export default function AllStateInjectors() {
 
-    if(!loadState.loadedWorkers){
-        injectors.push(WorkerInjector)
-    }
+    const readCacheState = useReadCacheMetadata()
+    const convexCacheState = useQuery(api.cache.readCache)!
+
+    const injectors: InjectorComponent[] = [AffectationInjector, FamilyCodesInjector, InventoryInjector, SessionInjector, StockInjector, WorkerInjector]
+
+    const [cacheState, setCacheState] = useState<typeof convexCacheState>()
+
+
+    useEffect(() => {
+        readCacheState().then((cache) => {
+            setCacheState(cache)
+        })
+    }, [readCacheState])
+
+
+    if (!cacheState) return <></>
 
     return (
         <>
             {injectors.map((Injector, index) => {
-                return <Injector key={index} />
+                return <Injector key={index} convexCacheState={convexCacheState} browserCacheState={cacheState} />
             })}
         </>
     )

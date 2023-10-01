@@ -100,6 +100,11 @@ export const MissingSessionRecord = {
     affectationCode : v.string(),
 }
 
+export const Cache = {
+    name : v.string(),
+    version : v.number(),
+}
+
 const workers = defineTable(Workers)
 
 const familyCode = defineTable(FamilyCode).index('by_code', ['code'])
@@ -133,6 +138,8 @@ const sessionRecord = defineTable(SessionRecord).index("by_sessionId_code",['ses
 
 const missingSessionRecord = defineTable(MissingSessionRecord)
 
+const cache = defineTable(Cache)
+
 export default defineSchema({
     workers,
     familyCode,
@@ -149,4 +156,5 @@ export default defineSchema({
     missingSessionRecord,
     inventory,
     sessionRecord,
+    cache
 });

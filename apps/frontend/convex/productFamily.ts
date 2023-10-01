@@ -4,6 +4,7 @@ import { isAuthenticated } from "./helpers/isAuthenticated";
 import { codeNotAuthenticated } from "./helpers/statusCodes";
 import { paginationOptsValidator } from "convex/server";
 import { FamilyCode } from "./schema";
+import { incrementProductFamilyCacheVersion } from "./helpers/utility";
 
 
 
@@ -53,6 +54,7 @@ export const create = mutation({
         }
 
         const data = await ctx.db.insert('familyCode',args.familyCode)
+        await incrementProductFamilyCacheVersion(ctx.db)
 
         return {familyId:data}
     }
@@ -80,7 +82,9 @@ export const update = mutation({
             patched.name = args.name
         }
 
-        const data = await ctx.db.patch(args.id,patched)
+         await ctx.db.patch(args.id,patched)
+         await incrementProductFamilyCacheVersion(ctx.db)
+
 
         return {familyId:args.id}
     }
