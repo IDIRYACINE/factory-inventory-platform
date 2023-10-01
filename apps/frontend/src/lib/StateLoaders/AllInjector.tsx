@@ -4,7 +4,7 @@ import AffectationInjector from "./AffectationInjector";
 import FamilyCodesInjector from "./FamilyCodesInjector";
 import InventoryInjector from "./InventoryInjector";
 import SessionInjector from "./SessionInjector";
-import StockInjector from "./StockInjectory";
+import StockInjector from "./StockInjector";
 import WorkerInjector from "./WorkersInjector";
 import { useReadCacheMetadata } from "@/utility/caching/useCaching";
 import { useQuery } from "convex/react";

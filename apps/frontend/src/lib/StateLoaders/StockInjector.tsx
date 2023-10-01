@@ -22,7 +22,7 @@ const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
     if(stock){
         updateCache({
             items: stock,
-            version: convexCacheState.version,
+            version: convexCacheState[cacheKeys.stockVersion],
             _id : cacheKeys.sessionGroupVersion
         })
     }
@@ -34,7 +34,7 @@ export default function StockInjector({ convexCacheState, browserCacheState }: I
 
 
 
-if(convexCacheState.version === browserCacheState.version){
+if(convexCacheState[cacheKeys.stockVersion] === browserCacheState[cacheKeys.stockVersion]){
     return <ReadFromCache/>
 }
 

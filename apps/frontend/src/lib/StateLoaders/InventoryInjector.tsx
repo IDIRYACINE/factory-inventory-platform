@@ -23,7 +23,7 @@ const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
         if(inventory){
             updateCache({
                 items: inventory,
-                version: convexCacheState.version,
+                version: convexCacheState[cacheKeys.inventoryVersion],
                 _id : cacheKeys.inventoryVersion
             })
         }
@@ -35,7 +35,7 @@ export default function InventoryInjector({ convexCacheState, browserCacheState 
 
 
 
-    if(convexCacheState.version === browserCacheState.version){
+    if(convexCacheState[cacheKeys.inventoryVersion] === browserCacheState[cacheKeys.inventoryVersion]){
         return <ReadFromCache/>
     }
 

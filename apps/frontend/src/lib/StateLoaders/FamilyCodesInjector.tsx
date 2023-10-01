@@ -23,7 +23,7 @@ const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
         if(familyCodes){
             updateCache({
                 items: familyCodes,
-                version: convexCacheState.version,
+                version: convexCacheState[cacheKeys.productFamilyVersion],
                 _id : cacheKeys.productFamilyVersion
             })
         }
@@ -35,7 +35,7 @@ export default function FamilyCodeInjector({ convexCacheState, browserCacheState
 
 
 
-    if(convexCacheState.version === browserCacheState.version){
+    if(convexCacheState[cacheKeys.productFamilyVersion] === browserCacheState[cacheKeys.productFamilyVersion]){
         return <ReadFromCache/>
     }
 

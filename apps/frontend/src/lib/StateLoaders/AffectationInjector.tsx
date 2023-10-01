@@ -35,7 +35,7 @@ export default function AffectationInjector({ convexCacheState, browserCacheStat
 
 
 
-    if(convexCacheState.version === browserCacheState.version){
+    if(convexCacheState[cacheKeys.affectationsVersion] === browserCacheState[cacheKeys.affectationsVersion]){
         return <ReadFromCache/>
     }
 

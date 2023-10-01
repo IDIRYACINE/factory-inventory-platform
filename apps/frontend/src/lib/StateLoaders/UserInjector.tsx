@@ -22,7 +22,7 @@ const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
     if(user){
         updateCache({
             items: user,
-            version: convexCacheState.version,
+            version: convexCacheState[cacheKeys.usersVersion],
             _id : cacheKeys.sessionGroupVersion
         })
     }
@@ -34,7 +34,7 @@ export default function UserInjector({ convexCacheState, browserCacheState }: In
 
 
 
-if(convexCacheState.version === browserCacheState.version){
+if(convexCacheState[cacheKeys.usersVersion] === browserCacheState[cacheKeys.usersVersion]){
     return <ReadFromCache/>
 }
 
