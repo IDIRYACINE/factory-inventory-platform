@@ -1,13 +1,12 @@
-'use client';
+
 
 import { useWorkerNavigation } from "@/hooks/useNavigation";
 import { useCreateWorker, useReadActiveWorker, useUpdateWorker } from "@/hooks/useWorkers";
 import { useAppSelector } from "@/stores/hooks";
 import { selectWorker } from "@/stores/workers/selectors";
 import { Doc } from "@convex/_generated/dataModel";
-import Button from "antd/es/button";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
+import { Button, Form, Input } from "antd";
+
 import useTranslation from "next-translate/useTranslation";
 
 
@@ -20,7 +19,7 @@ export default function WorkerForm() {
   const create = useCreateWorker()
   const update = useUpdateWorker()
 
-  const {navigateHome} = useWorkerNavigation()
+  const { navigateHome } = useWorkerNavigation()
 
   const worker = useReadActiveWorker()
 

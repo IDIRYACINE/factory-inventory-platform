@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { selectInventoriesPaginated, selectInventory } from "@/stores/inventory/selectors";

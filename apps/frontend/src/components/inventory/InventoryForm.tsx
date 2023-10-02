@@ -1,16 +1,13 @@
-'use client';
+
 
 import { Doc } from "@convex/_generated/dataModel";
-import Button from "antd/es/button";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
+import { Button, Form, Select, Input } from "antd";
+
 import useTranslation from "next-translate/useTranslation";
 import { useCreateInventory, useUpdateInventory } from "@/hooks/useInventory";
 import { useAppSelector } from "@/stores/hooks";
 import { selectInventory } from "@/stores/inventory/selectors";
 import { useReadFamilyCodes } from "@/hooks/useFamilyCodes";
-import Select from "antd/es/select";
-
 
 type FieldType = Doc<"inventory">
 
@@ -36,13 +33,13 @@ export default function InventoryForm() {
     console.log('Failed:', errorInfo);
   };
 
-     const codes = useReadFamilyCodes()
+  const codes = useReadFamilyCodes()
 
-    const options = codes.map(code => ({
-        id: code._id,
-        value: code.code.toString(),
-        label: code.name,
-    }))
+  const options = codes.map(code => ({
+    id: code._id,
+    value: code.code.toString(),
+    label: code.name,
+  }))
 
   return (
     <Form
@@ -55,7 +52,7 @@ export default function InventoryForm() {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-     
+
 
       <Form.Item<FieldType>
         label={t('name')}
@@ -85,17 +82,17 @@ export default function InventoryForm() {
         label={t('familyCode')}
         name="familyCode"
         rules={[{ required: true, message: 'ErrorMessageHere' }]}
-        >
-          <Select
-            showSearch
-            style={{ width: 200 }}
-            placeholder={t('familyCode')}
-            optionFilterProp="children"
-            filterOption={(input, option) => (option?.value ?? '').includes(input)}
-            filterSort={(optionA, optionB) =>
-                (optionA?.value ?? '').toLowerCase().localeCompare((optionB?.value ?? '').toLowerCase())
-            }
-            options={options}
+      >
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          placeholder={t('familyCode')}
+          optionFilterProp="children"
+          filterOption={(input, option) => (option?.value ?? '').includes(input)}
+          filterSort={(optionA, optionB) =>
+            (optionA?.value ?? '').toLowerCase().localeCompare((optionB?.value ?? '').toLowerCase())
+          }
+          options={options}
         />
       </Form.Item>
 

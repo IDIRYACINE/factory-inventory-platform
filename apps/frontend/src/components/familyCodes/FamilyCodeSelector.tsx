@@ -1,13 +1,12 @@
-'use client';
+
 
 import { useReadFamilyCodes } from "@/hooks/useFamilyCodes";
-import Select from "antd/es/select";
-import useTranslation from "next-translate/useTranslation";
+import {Select} from "antd";import useTranslation from "next-translate/useTranslation";
 
 
 export default function FamilyCodeSelector() {
     const codes = useReadFamilyCodes()
-    const {t} = useTranslation('common')
+    const { t } = useTranslation('common')
 
     const options = codes.map(code => ({
         id: code._id,

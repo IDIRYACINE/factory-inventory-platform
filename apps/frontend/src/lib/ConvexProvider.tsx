@@ -1,4 +1,4 @@
-'use client';
+
 
 import { ReactNode, useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";

@@ -2,7 +2,7 @@ import { useAppDispatch } from "@/stores/hooks"
 import { setImportingAffectations, setImportingFamilyCode, setImportingInventory, setImportingStock } from "@/stores/settings/slice"
 import { api } from "@convex/_generated/api"
 import { Doc } from "@convex/_generated/dataModel"
-import { RcFile } from "antd/es/upload"
+import { RcFile } from "antd/es/upload/interface"
 import { useMutation } from "convex/react"
 
 

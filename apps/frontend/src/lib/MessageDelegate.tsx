@@ -1,16 +1,15 @@
-"use client";
 
 import { useReadMessage } from "@/hooks/useSettings"
-import message from "antd/es/message";
+import { message } from "antd";
 
 
-export default function MessageDelegate(){
+export default function MessageDelegate() {
 
-    const {message:messageContent,messageType} = useReadMessage()
+    const { message: messageContent, messageType } = useReadMessage()
 
     const [messageApi, contextHolder] = message.useMessage();
 
-    if(messageContent && messageType){
+    if (messageContent && messageType) {
         messageApi[messageType](messageContent)
     }
 

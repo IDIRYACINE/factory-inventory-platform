@@ -1,6 +1,6 @@
 "use client"
 
-import { Col, Row } from "antd/es/grid";
+import { Col, Row } from "antd";
 import useTranslation from "next-translate/useTranslation";
 import OpenSessionButton from "./OpenSessionButton";
 import UsersButton from "./UsersButton";

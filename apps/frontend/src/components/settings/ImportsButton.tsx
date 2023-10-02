@@ -1,16 +1,14 @@
 import { useSettingsNavigation } from "@/hooks/useNavigation";
-import Button from "antd/es/button";
-import Card from "antd/es/card";
-import Typography from "antd/es/typography";
+import { Button, Card, Typography } from "antd";
 
 
-export default function ImportsButton({importsTitle}:{importsTitle:string}){
+export default function ImportsButton({ importsTitle }: { importsTitle: string }) {
 
-    const {navigateImports} = useSettingsNavigation()
+    const { navigateImports } = useSettingsNavigation()
 
 
     return (
-       <Card hoverable >
+        <Card hoverable >
             <Button onClick={navigateImports} className="w-full h-full">
                 <Typography.Title level={5} >{importsTitle}</Typography.Title>
             </Button>

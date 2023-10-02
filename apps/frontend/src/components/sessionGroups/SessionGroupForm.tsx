@@ -1,11 +1,10 @@
-'use client';
+
 
 import { useSessionGroupNavigation } from "@/hooks/useNavigation";
 import { useCreateSessionGroup, useReadSessionGroup, useUpdateSessionGroup } from "@/hooks/useSessionGroup";
 import { Doc } from "@convex/_generated/dataModel";
-import Button from "antd/es/button";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
+import { Button, Form, Input } from "antd";
+
 import useTranslation from "next-translate/useTranslation";
 
 
@@ -19,7 +18,7 @@ export default function SessionGroupForm() {
   const create = useCreateSessionGroup()
   const update = useUpdateSessionGroup()
 
-  const {navigateHome} = useSessionGroupNavigation()
+  const { navigateHome } = useSessionGroupNavigation()
 
   const onFinish = (values: FieldType) => {
     if (sessionGroup) {
@@ -45,7 +44,7 @@ export default function SessionGroupForm() {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-     
+
 
       <Form.Item<FieldType>
         label={t('name')}

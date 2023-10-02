@@ -1,27 +1,25 @@
 
-import Button from "antd/es/button";
-import Card from "antd/es/card";
-import Typography from "antd/es/typography";
-import Upload, { RcFile, UploadFile, UploadProps } from "antd/es/upload";
+import { Button, Card, Typography, UploadFile, Upload, UploadProps } from "antd";
+import { RcFile } from "antd/es/upload/interface";
 import { useState } from "react";
 
 
 interface ImportCardProps {
     text: string,
-    onUpload: (data:any) => void,
-    isUploadingLabel:string,
-    startUploadLabel:string,
-    uploading:boolean
+    onUpload: (data: any) => void,
+    isUploadingLabel: string,
+    startUploadLabel: string,
+    uploading: boolean
 }
-export default function ImportCard({ text,uploading, onUpload,startUploadLabel,isUploadingLabel }: ImportCardProps) {
+export default function ImportCard({ text, uploading, onUpload, startUploadLabel, isUploadingLabel }: ImportCardProps) {
 
     const [fileList, setFileList] = useState<UploadFile[]>([]);
 
     const handleUpload = () => {
-        let data:RcFile[] = []
+        let data: RcFile[] = []
 
         fileList.forEach((file) => {
-            data.push(file as  RcFile );
+            data.push(file as RcFile);
         });
 
         onUpload(data)

@@ -1,15 +1,13 @@
-'use client';
+
 
 import { useCreateSessionWorker, useReadSessionWorker, useUpdateSessionWorker } from "@/hooks/useSesionWorker";
 import { Doc } from "@convex/_generated/dataModel";
-import Button from "antd/es/button";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
+import { Button, Form, Input } from "antd";
+
 import useTranslation from "next-translate/useTranslation";
 import SessionGroupSelector from "@/components/sessionGroups/SessionGroupSelector";
 import { useLoadSessionGroups, useReadSessionGroups } from "@/hooks/useSessionGroup";
-import Select from "antd/es/select";
-import { useSessionWorkerNavigation } from "@/hooks/useNavigation";
+import { Select } from "antd"; import { useSessionWorkerNavigation } from "@/hooks/useNavigation";
 
 
 type FieldType = Doc<"sessionWorkers">
@@ -24,7 +22,7 @@ export default function SessionWorkerForm() {
 
   const groups = useLoadSessionGroups()
 
-  const {navigateHome} = useSessionWorkerNavigation()
+  const { navigateHome } = useSessionWorkerNavigation()
 
   const options = groups.map(group => ({
     id: group._id,

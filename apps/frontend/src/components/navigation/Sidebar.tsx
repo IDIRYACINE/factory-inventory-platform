@@ -1,4 +1,3 @@
-"use client";
 import { usePanelNavigation } from "@/hooks/useNavigation";
 import SidebarButton from "@/components/navigation/SidebarButton";
 

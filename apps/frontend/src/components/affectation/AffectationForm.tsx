@@ -1,11 +1,10 @@
-'use client';
+
 
 import { useCreateAffectation, useReadAffectation, useUpdateAffectation } from "@/hooks/useAffectation";
 import { useAffectationNavigation } from "@/hooks/useNavigation";
 import { Doc } from "@convex/_generated/dataModel";
-import Button from "antd/es/button";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
+import { Form, Input, Button } from "antd";
+
 import useTranslation from "next-translate/useTranslation";
 
 
@@ -28,15 +27,15 @@ export default function AffectationForm() {
     if (affectation) {
       update({
         id: affectation._id,
-        affectationName : values.affectationName!,
+        affectationName: values.affectationName!,
       })
 
       return;
     }
 
     create({
-      affectationCode:values.affectationCode!,
-      affectationName:values.affectationName!
+      affectationCode: values.affectationCode!,
+      affectationName: values.affectationName!
     })
 
   };

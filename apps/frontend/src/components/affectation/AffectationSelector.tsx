@@ -1,13 +1,13 @@
-'use client';
+
 
 import { useReadAffectations } from "@/hooks/useAffectation";
-import Select from "antd/es/select";
+import { Select } from "antd";
 import useTranslation from "next-translate/useTranslation";
 
 
 export default function AffectationSelector() {
     const codes = useReadAffectations()
-    const {t} = useTranslation('common')
+    const { t } = useTranslation('common')
 
     const options = codes.map(affectation => ({
         id: affectation._id,

@@ -1,4 +1,3 @@
-"use client";
 
 import { useLoadAffectations } from "@/hooks/useAffectation";
 import { cacheKeys } from "@/utility/caching/db";

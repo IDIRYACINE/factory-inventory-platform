@@ -1,4 +1,3 @@
-"use client";
 
 import AffectationInjector from "./AffectationInjector";
 import FamilyCodesInjector from "./FamilyCodesInjector";

@@ -1,7 +1,7 @@
-'use client';
+
 
 import { useStockNavigation } from "@/hooks/useNavigation"
-import Button from "antd/es/button"
+import { Button } from "antd"
 import clsx from "clsx"
 import useTranslation from "next-translate/useTranslation"
 

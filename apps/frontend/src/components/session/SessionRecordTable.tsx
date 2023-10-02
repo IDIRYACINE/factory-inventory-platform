@@ -1,6 +1,5 @@
-import type { ColumnsType } from 'antd/es/table';
-import Table from 'antd/es/table';
-import useTranslation from 'next-translate/useTranslation';
+import type { ColumnsType } from 'antd/es/table/interface';
+import { Table } from "antd"; import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
 import { useReadActiveSessionRecords } from '@/hooks/useSession';
@@ -13,7 +12,7 @@ export default function SessionRecordTable(props: React.ComponentPropsWithoutRef
 
   const className = clsx(props.className)
 
-  const rawColumns = ["articleCode","articleName","workerName"]
+  const rawColumns = ["articleCode", "articleName", "workerName"]
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({
     title: t(rawCol),

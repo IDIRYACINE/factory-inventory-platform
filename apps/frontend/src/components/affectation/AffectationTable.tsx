@@ -1,12 +1,11 @@
-"use client";
 
-import type { ColumnsType } from 'antd/es/table';
-import Table from 'antd/es/table';
 import useTranslation from 'next-translate/useTranslation';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
 import { useAppSelector } from '@/stores/hooks';
 import { selectAffectations, selectAffectationsPaginated } from '@/stores/affectations/selectors';
+import { Table } from 'antd';
+import { ColumnsType } from 'antd/es/table/interface';
 
 
 type DataType = Doc<'affectations'> & { key: string };

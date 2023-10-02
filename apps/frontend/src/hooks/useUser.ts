@@ -1,11 +1,11 @@
-'use client'
+
 
 import { selectActivePermission, selectActiveUser, selectUserPermissions, selectUsers } from "@/stores/users/selectors";
-import {  selectPermission, selectUser, setUserPermissions, setUsers, unselectPermission, unselectUser } from "@/stores/users/slice";
+import { selectPermission, selectUser, setUserPermissions, setUsers, unselectPermission, unselectUser } from "@/stores/users/slice";
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
-import { useMutation,  useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { useEffect } from "react"
 import { displayMessage } from "@/stores/settings/slice";
 import useTranslation from "next-translate/useTranslation";
@@ -17,7 +17,7 @@ export const useReadUsers = () => {
     return users
 }
 
-export const useReadUser = (args:{id?:Id<"user">}) => {
+export const useReadUser = (args: { id?: Id<"user"> }) => {
     const user = useAppSelector(selectActiveUser)
 
     return user
@@ -37,17 +37,17 @@ export const useLoadUsers = () => {
     return res?.users
 }
 
-type CreateUserArgs = Omit<Doc<"user">,'_id' | '_creationTime'>
+type CreateUserArgs = Omit<Doc<"user">, '_id' | '_creationTime'>
 
 export const useCreateUser = () => {
 
 
     const create = useMutation(api.user.create)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
-    
-    const handleCreate = ({ name,role,tokenIdentifier }: CreateUserArgs) => {
-        create({ user: { name,role,tokenIdentifier  } }).then((res) => {
+    const { t } = useTranslation('messages')
+
+    const handleCreate = ({ name, role, tokenIdentifier }: CreateUserArgs) => {
+        create({ user: { name, role, tokenIdentifier } }).then((res) => {
             const message = res.code ? 'fail' : 'sucess'
             const type = res.code ? 'error' : 'success'
             dispatch(displayMessage({ message: t(message), type: type }))
@@ -58,16 +58,16 @@ export const useCreateUser = () => {
 
 }
 
-type UpdateUserArgs = Partial<Omit<CreateUserArgs,"tokenIdentifer">> & {id:Id<"user">}
+type UpdateUserArgs = Partial<Omit<CreateUserArgs, "tokenIdentifer">> & { id: Id<"user"> }
 export const useUpdateUser = () => {
 
 
     const update = useMutation(api.user.update)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
-    
-    const handleUpdate = ({ id, name,role, }:UpdateUserArgs) => {
-        update({ id, user: { name,role,  }  }).then((res) => {
+    const { t } = useTranslation('messages')
+
+    const handleUpdate = ({ id, name, role, }: UpdateUserArgs) => {
+        update({ id, user: { name, role, } }).then((res) => {
             const message = res.code ? 'fail' : 'sucess'
             const type = res.code ? 'error' : 'success'
             dispatch(displayMessage({ message: t(message), type: type }))
@@ -78,12 +78,12 @@ export const useUpdateUser = () => {
 }
 
 
-type PermissionArgs = Omit<Doc<"affectationPermisions">,"_id" | "_creationTime" >
+type PermissionArgs = Omit<Doc<"affectationPermisions">, "_id" | "_creationTime">
 export const useGrantPermission = () => {
     const grant = useMutation(api.permissions.grant)
 
     const handleGrant = ({ affectationCode }: PermissionArgs) => {
-        grant({ affectationPermision:{ affectationCode} })
+        grant({ affectationPermision: { affectationCode } })
     }
 
     return handleGrant
@@ -99,7 +99,7 @@ export const useRevokePermission = () => {
     const handleRevoke = () => {
 
         const id = selectedPermission?._id
-        if(!id) return
+        if (!id) return
 
         revoke({ id })
         dispatch(unselectPermission())
@@ -115,16 +115,16 @@ export const useLoadUserPermissions = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if(res?.permissions && res.permissions.length > 0){
+        if (res?.permissions && res.permissions.length > 0) {
             dispatch(setUserPermissions(res.permissions))
         }
 
-    },[res,dispatch])
+    }, [res, dispatch])
 
     return res
 }
 
-export const useReadUserPermissions = (args?:{userId:Id<"user">}) => {
+export const useReadUserPermissions = (args?: { userId: Id<"user"> }) => {
     const permissions = useAppSelector(selectUserPermissions)
 
     return permissions
@@ -134,8 +134,8 @@ export const useSelectUser = () => {
     const dispatch = useAppDispatch()
 
     return {
-        selectUser :(user:Doc<"user">) => dispatch(selectUser(user)),
-        unSelectUser :() => dispatch(unselectUser())
+        selectUser: (user: Doc<"user">) => dispatch(selectUser(user)),
+        unSelectUser: () => dispatch(unselectUser())
     }
 }
 
@@ -143,7 +143,7 @@ export const useSelectPermission = () => {
     const dispatch = useAppDispatch()
 
     return {
-        selectPermission :(permission:Doc<"affectationPermisions">) => dispatch(selectPermission(permission)),
-        unSelectPermission :() => dispatch(unselectPermission())
+        selectPermission: (permission: Doc<"affectationPermisions">) => dispatch(selectPermission(permission)),
+        unSelectPermission: () => dispatch(unselectPermission())
     }
 }

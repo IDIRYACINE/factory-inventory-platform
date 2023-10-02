@@ -38,7 +38,7 @@ const nextConfig = {
 
     return config
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
 }
 
 module.exports = nextTranslate(nextConfig)

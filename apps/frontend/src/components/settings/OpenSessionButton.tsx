@@ -1,12 +1,9 @@
-"use client";
 
 import { useCloseSession, useOpenSession, useReadActiveSession } from "@/hooks/useSession";
-import Button from "antd/es/button";
-import Card from "antd/es/card";
-import Typography from "antd/es/typography";
+import { Button, Card, Typography } from "antd";
 
 
-export default function OpenSessionButton({ openSessionTitle,closeSessionTitle }: { closeSessionTitle:string,openSessionTitle: string }) {
+export default function OpenSessionButton({ openSessionTitle, closeSessionTitle }: { closeSessionTitle: string, openSessionTitle: string }) {
 
     const session = useReadActiveSession()
 
@@ -14,7 +11,7 @@ export default function OpenSessionButton({ openSessionTitle,closeSessionTitle }
     const closeSession = useCloseSession()
 
     const handleClick = () => {
-        if(session){
+        if (session) {
             closeSession()
             return
         }

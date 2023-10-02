@@ -1,4 +1,3 @@
-"use client";
 
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
 import { selectActiveSessionWorker, selectSessionWorkers } from "@/stores/workers/selectors"

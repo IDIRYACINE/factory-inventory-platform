@@ -1,4 +1,4 @@
-'use client'
+
 
 import { selectActiveAffectation, selectAffectationsPaginated } from "@/stores/affectations/selectors";
 import { loadAffectations, setAffectations } from "@/stores/affectations/slice";

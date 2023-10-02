@@ -1,11 +1,10 @@
-'use client';
+
 
 import { useCreateUser, useReadUser, useSelectUser, useUpdateUser } from "@/hooks/useUser";
 import { useUserNavigation } from "@/hooks/useNavigation";
 import { Doc } from "@convex/_generated/dataModel";
-import Button from "antd/es/button";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
+import { Button, Form, Input } from "antd";
+
 import useTranslation from "next-translate/useTranslation";
 import { Select } from "antd";
 

@@ -1,4 +1,3 @@
-"use client";
 
 import { cacheKeys } from "@/utility/caching/db";
 import { useLoadCacheUsers, useCacheUsers } from "@/utility/caching/useCaching";

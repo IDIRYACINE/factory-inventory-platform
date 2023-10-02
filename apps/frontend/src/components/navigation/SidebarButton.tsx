@@ -1,8 +1,7 @@
-'use client';
+
 
 import { SettingsState } from "@/stores/settings/slice";
-import Button from "antd/es/button";
-import useTranslation from 'next-translate/useTranslation'
+import { Button } from "antd"; import useTranslation from 'next-translate/useTranslation'
 
 
 interface SidebarButtonProps {

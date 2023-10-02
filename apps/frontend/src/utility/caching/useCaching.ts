@@ -1,4 +1,4 @@
-'use client';
+
 
 import { InventoryState, setInventory } from "@/stores/inventory/slice";
 import { CacheState, cacheKeys, cacheKeysArray, db } from "./db"

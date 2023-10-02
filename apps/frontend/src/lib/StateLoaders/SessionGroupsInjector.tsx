@@ -1,4 +1,3 @@
-"use client";
 
 import { useLoadSessionGroups } from "@/hooks/useSessionGroup";
 import { cacheKeys } from "@/utility/caching/db";
@@ -13,17 +12,17 @@ const ReadFromCache = () => {
     return <></>
 }
 
-const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
-    
+const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
+
     const sessionGroups = useLoadSessionGroups()
 
     const updateCache = useCacheSessionGroups()
 
-    if(sessionGroups){
+    if (sessionGroups) {
         updateCache({
             items: sessionGroups,
             version: convexCacheState[cacheKeys.sessionGroupVersion],
-            _id : cacheKeys.sessionGroupVersion
+            _id: cacheKeys.sessionGroupVersion
         })
     }
 
@@ -34,10 +33,10 @@ export default function SessionGroupsInjector({ convexCacheState, browserCacheSt
 
 
 
-if(convexCacheState[cacheKeys.sessionGroupVersion]  === browserCacheState[cacheKeys.sessionGroupVersion] ){
-    return <ReadFromCache/>
-}
+    if (convexCacheState[cacheKeys.sessionGroupVersion] === browserCacheState[cacheKeys.sessionGroupVersion]) {
+        return <ReadFromCache />
+    }
 
 
-return <FetchAndUpdateCache convexCacheState={convexCacheState}/>
+    return <FetchAndUpdateCache convexCacheState={convexCacheState} />
 }

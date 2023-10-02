@@ -51,3 +51,5 @@ pagesV2
 *.yaml
 
 .turbo
+
+/legacy

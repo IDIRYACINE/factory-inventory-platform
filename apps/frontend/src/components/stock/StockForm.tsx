@@ -1,17 +1,13 @@
-'use client';
+
 
 import { Doc } from "@convex/_generated/dataModel";
-import Button from "antd/es/button";
-import Form from "antd/es/form";
-import Input from "antd/es/input";
+import { Button, Form, Input, Select, Card } from "antd";
+
 import useTranslation from "next-translate/useTranslation";
-import FamilyCodeSelector from "@/components/familyCodes/FamilyCodeSelector";
 import { useAppSelector } from "@/stores/hooks";
 import { useCreateStock, useUpdateStock } from "@/hooks/useStock";
 import { selectStock } from "@/stores/stock/selectors";
-import Select from "antd/es/select";
 import { useReadFamilyCodes } from "@/hooks/useFamilyCodes";
-import Card from "antd/es/card";
 
 
 type FieldType = Doc<"stock">

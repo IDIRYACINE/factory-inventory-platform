@@ -1,4 +1,3 @@
-"use client";
 
 import { cacheKeys } from "@/utility/caching/db";
 import { useLoadCacheSessionWorkers, useCacheSessionWorkers } from "@/utility/caching/useCaching";
