@@ -1,7 +1,7 @@
 'use client';
 
 import { InventoryState, setInventory } from "@/stores/inventory/slice";
-import { db } from "./db"
+import { CacheState, cacheKeys, cacheKeysArray, db } from "./db"
 import { useAppDispatch } from "@/stores/hooks";
 import { StockState, setStocks } from "@/stores/stock/slice";
 import { ProductFamilyState, setFamilyCodes } from "@/stores/productFamily/slice";
@@ -9,6 +9,7 @@ import { AffectationState, setAffectations } from "@/stores/affectations/slice";
 import { GroupsState, setSessionGroups } from "@/stores/groups/slice";
 import { WorkersState, setSessionWorkers, setWorkers } from "@/stores/workers/slice";
 import { UsersState, setUsers } from "@/stores/users/slice";
+import { useEffect, useRef, useState } from "react";
 
 type GenericCacheArgs = {
     _id: string;
@@ -20,6 +21,7 @@ type InventoryCacheArgs = { items: InventoryState['inventories'] } & GenericCach
 export const useCacheInventory = () => {
 
     const handleCache = async ({ items, _id, version }: InventoryCacheArgs) => {
+        db.inventory.clear()
         db.inventory.bulkAdd(items)
         db.cacheMetadata.update(_id, { version: version })
     }
@@ -41,11 +43,15 @@ export const useLoadCacheInventory = () => {
 
 }
 
-export const useReadCacheMetadata = () => {
-    const handleCache = async () => {
-        const cachesArray = await db.cacheMetadata.toArray()
+export const useLoadCacheMetadata = () => {
 
-        const caches: {[key:string]:number} = {
+    const [cacheMetadata, setCacheMetadata] = useState<CacheState | undefined>()
+
+    if (cacheMetadata) return cacheMetadata
+
+    db.cacheMetadata.toArray().then((cachesArray) => {
+
+        const caches: { [key: string]: number } = {
 
         }
 
@@ -53,16 +59,26 @@ export const useReadCacheMetadata = () => {
             caches[cache._id] = cache.version
         })
 
-        return caches
-    }
 
-    return handleCache
+        if (caches[cacheKeys.affectationsVersion] === undefined) {
+
+            cacheKeysArray.forEach(async (cache) => {
+                caches[cache] = -1
+                await db.cacheMetadata.add({ _id: cache, version: -1 })
+            })
+        }
+
+        setCacheMetadata(caches)
+    })
+
+    return cacheMetadata
 }
 
 type StockCacheArgs = { items: StockState['stocks'] } & GenericCacheArgs;
 export const useCacheStock = () => {
 
     const handleCache = async ({ items, _id, version }: StockCacheArgs) => {
+        db.stock.clear()
         db.stock.bulkAdd(items)
         db.cacheMetadata.update(_id, { version: version })
     }
@@ -87,6 +103,7 @@ type ProductFamilyCacheArgs = { items: ProductFamilyState['familyCodes'] } & Gen
 export const useCacheProductFamily = () => {
 
     const handleCache = async ({ items, _id, version }: ProductFamilyCacheArgs) => {
+        db.productFamily.clear()
         db.productFamily.bulkAdd(items)
         db.cacheMetadata.update(_id, { version: version })
     }
@@ -110,7 +127,10 @@ export const useLoadCacheProductFamily = () => {
 type AffectationsCacheArgs = { items: AffectationState['affectations'] } & GenericCacheArgs;
 export const useCacheAffectations = () => {
 
+
     const handleCache = async ({ items, _id, version }: AffectationsCacheArgs) => {
+        db.affectations.clear()
+
         db.affectations.bulkAdd(items)
         db.cacheMetadata.update(_id, { version: version })
     }
@@ -135,6 +155,8 @@ type SessionGroupsCacheArgs = { items: GroupsState['groups'] } & GenericCacheArg
 export const useCacheSessionGroups = () => {
 
     const handleCache = async ({ items, _id, version }: SessionGroupsCacheArgs) => {
+        db.sessionGroup.clear()
+
         db.sessionGroup.bulkAdd(items)
         db.cacheMetadata.update(_id, { version: version })
     }
@@ -160,6 +182,8 @@ type SessionWorkersCacheArgs = { items: WorkersState['sessionWorkers'] } & Gener
 export const useCacheSessionWorkers = () => {
 
     const handleCache = async ({ items, _id, version }: SessionWorkersCacheArgs) => {
+        db.sessionWorker.clear()
+
         db.sessionWorker.bulkAdd(items)
         db.cacheMetadata.update(_id, { version: version })
     }
@@ -184,6 +208,8 @@ type WorkersCacheArgs = { items: WorkersState['workers'] } & GenericCacheArgs;
 export const useCacheWorkers = () => {
 
     const handleCache = async ({ items, _id, version }: WorkersCacheArgs) => {
+        db.workers.clear()
+
         db.workers.bulkAdd(items)
         db.cacheMetadata.update(_id, { version: version })
     }
@@ -208,6 +234,8 @@ type UsersCacheArgs = { items: UsersState['users'] } & GenericCacheArgs;
 export const useCacheUsers = () => {
 
     const handleCache = async ({ items, _id, version }: UsersCacheArgs) => {
+        db.users.clear()
+
         db.users.bulkAdd(items)
         db.cacheMetadata.update(_id, { version: version })
     }

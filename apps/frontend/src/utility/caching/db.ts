@@ -32,6 +32,8 @@ export const cacheKeys ={
     affectationsVersion: 'affectationsVersion',
 }
 
+export const cacheKeysArray = Object.keys(cacheKeys) as CacheKeys[]
+
 export class MySubClassedDexie extends Dexie {
     inventory!: Table<Inventory>;
     stock!: Table<Stock>;

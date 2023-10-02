@@ -1,3 +1,4 @@
+import ServerProviders from '@/lib/ServerProviders';
 import './globals.css'
 
 import { Metadata } from 'next';
@@ -17,9 +18,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html >
       <body className="h-screen" >
-        {children}
+        <ServerProviders>
+          {children}
+        </ServerProviders>
       </body>
     </html>
   )

@@ -13,17 +13,17 @@ const ReadFromCache = () => {
     return <></>
 }
 
-const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
-    
+const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
+
     const stock = useLoadStock()
 
     const updateCache = useCacheStock()
 
-    if(stock){
+    if (stock) {
         updateCache({
             items: stock,
             version: convexCacheState[cacheKeys.stockVersion],
-            _id : cacheKeys.sessionGroupVersion
+            _id: cacheKeys.stockVersion
         })
     }
 
@@ -34,10 +34,10 @@ export default function StockInjector({ convexCacheState, browserCacheState }: I
 
 
 
-if(convexCacheState[cacheKeys.stockVersion] === browserCacheState[cacheKeys.stockVersion]){
-    return <ReadFromCache/>
-}
+    if (convexCacheState[cacheKeys.stockVersion] === browserCacheState[cacheKeys.stockVersion]) {
+        return <ReadFromCache />
+    }
 
 
-return <FetchAndUpdateCache convexCacheState={convexCacheState}/>
+    return <FetchAndUpdateCache convexCacheState={convexCacheState} />
 }

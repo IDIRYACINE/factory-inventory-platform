@@ -1,31 +1,6 @@
-'use client'
-
+"use client";
 import { usePanelNavigation } from "@/hooks/useNavigation";
-import { SettingsState } from "@/stores/settings/slice";
-import Button from "antd/es/button";
-import useTranslation from 'next-translate/useTranslation'
-
-
-interface SidebarButtonProps {
-    textKey: SettingsState['activePanel'];
-    onClick: (panel: SettingsState['activePanel']) => void;
-    selected: boolean;
-
-}
-const SidebarButton = ({ textKey, onClick, selected }: SidebarButtonProps) => {
-    const { t } = useTranslation('common')
-
-    const text = t(textKey)
-
-    const buttonType = selected ? 'default' : 'primary'
-
-    return (
-        <Button type={buttonType} onClick={() => onClick(textKey)} className="w-full">
-            {text}
-        </Button>
-    )
-
-}
+import SidebarButton from "@/components/navigation/SidebarButton";
 
 const Sidebar = () => {
     const { panels, navigateToPanel, activePanel } = usePanelNavigation()

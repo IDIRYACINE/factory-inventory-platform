@@ -14,31 +14,30 @@ const ReadFromCache = () => {
     return <></>
 }
 
-const FetchAndUpdateCache = ({convexCacheState}:UpdateInjectorProps) => {
-    
-        const affectations = useLoadAffectations()
+const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
 
-        const updateCache = useCacheAffectations()
+    const affectations = useLoadAffectations()
 
-        if(affectations){
-            updateCache({
-                items: affectations,
-                version: convexCacheState.version,
-                _id : cacheKeys.affectationsVersion
-            })
-        }
-    
-        return <></>
+    const updateCache = useCacheAffectations()
+
+    if (affectations !== undefined) {
+        updateCache({
+            items: affectations,
+            version: convexCacheState.affectationsVersion,
+            _id: cacheKeys.affectationsVersion
+        })
+    }
+
+    return <></>
 }
 
 export default function AffectationInjector({ convexCacheState, browserCacheState }: InjectorProps) {
 
 
-
-    if(convexCacheState[cacheKeys.affectationsVersion] === browserCacheState[cacheKeys.affectationsVersion]){
-        return <ReadFromCache/>
+    if (convexCacheState[cacheKeys.affectationsVersion] === browserCacheState[cacheKeys.affectationsVersion]) {
+        return <ReadFromCache />
     }
 
 
-    return <FetchAndUpdateCache convexCacheState={convexCacheState}/>
+    return <FetchAndUpdateCache convexCacheState={convexCacheState} />
 }

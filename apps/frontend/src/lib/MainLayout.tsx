@@ -1,22 +1,20 @@
 'use client'
 
 import Sidebar from "@/components/navigation/Sidebar"
-import { store } from "@/stores/store"
-import { Provider } from "react-redux"
 import MessageDelegate from "./MessageDelegate"
 import AllStateLoader from "./StateLoaders/AllInjector"
+import ReduxProvider from "./ReduxProvider"
 
 const MainLayout = ({ children }: React.PropsWithChildren) => {
-
     return (
-        <Provider store={store}>
+        <ReduxProvider>
             <div className="flex flex-row gap-4 h-full w-full">
                 <Sidebar />
-                <MessageDelegate/>
-                <AllStateLoader/>
+                <MessageDelegate />
+                <AllStateLoader />
                 {children}
             </div>
-        </Provider>
+        </ReduxProvider>
     )
 }
 

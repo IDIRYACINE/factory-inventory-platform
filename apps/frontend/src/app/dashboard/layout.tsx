@@ -1,7 +1,6 @@
-import ServerProviders from '@/lib/ServerProviders';
+"use client";
 
 import MainLayout from '@/lib/MainLayout';
-import ReduxProvider from '@/lib/ReduxProvider';
 
 
 
@@ -12,13 +11,9 @@ export default function DashbaordLayout({
 }) {
   return (
 
-    <ServerProviders>
       <MainLayout>
-        <ReduxProvider>
           {children}
-        </ReduxProvider>
       </MainLayout>
-    </ServerProviders>
 
   )
 }
