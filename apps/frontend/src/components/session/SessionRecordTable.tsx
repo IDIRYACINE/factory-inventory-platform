@@ -8,7 +8,7 @@ import { useReadActiveSessionRecords } from '@/hooks/useSession';
 type DataType = Doc<'sessionRecord'> & { key: string };
 
 export default function SessionRecordTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
 
@@ -27,7 +27,7 @@ export default function SessionRecordTable(props: React.ComponentPropsWithoutRef
   }))
 
   return (
-    <Table pagination={{ defaultPageSize: 8 }} className={className} columns={columns} dataSource={data} />
+    <Table pagination={{ defaultPageSize: 7 }} className={className} columns={columns} dataSource={data} />
   )
 
 }

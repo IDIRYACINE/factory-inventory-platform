@@ -11,7 +11,7 @@ import { ColumnsType } from 'antd/es/table/interface';
 type DataType = Doc<'affectations'> & { key: string };
 
 export default function AffectationTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
 
@@ -33,7 +33,7 @@ export default function AffectationTable(props: React.ComponentPropsWithoutRef<"
   }))
 
   return (
-    <Table pagination={{ defaultPageSize: 8 }} className={className} columns={columns} dataSource={data} />
+    <Table pagination={{ defaultPageSize: 7 }} className={className} columns={columns} dataSource={data} />
   )
 
 }

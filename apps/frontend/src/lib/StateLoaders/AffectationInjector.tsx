@@ -2,7 +2,7 @@
 import { useLoadAffectations } from "@/hooks/useAffectation";
 import { cacheKeys } from "@/utility/caching/db";
 import { InjectorProps, UpdateInjectorProps } from "./types";
-import { useCacheAffectations, useLoadCacheAffectations } from "@/utility/caching/useCaching";
+import { useCacheAffectations, useLoadCacheAffectations, useReadCacheMetadata, useReadConvexCache } from "@/utility/caching/useCaching";
 
 
 
@@ -30,10 +30,13 @@ const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
     return <></>
 }
 
-export default function AffectationInjector({ convexCacheState, browserCacheState }: InjectorProps) {
+export default function AffectationInjector() {
+    const browserCache = useReadCacheMetadata()
+    const convexCacheState = useReadConvexCache()
 
+    if (browserCache === undefined || convexCacheState === undefined) return <></>
 
-    if (convexCacheState[cacheKeys.affectationsVersion] === browserCacheState[cacheKeys.affectationsVersion]) {
+    if (convexCacheState[cacheKeys.affectationsVersion] === browserCache[cacheKeys.affectationsVersion]) {
         return <ReadFromCache />
     }
 

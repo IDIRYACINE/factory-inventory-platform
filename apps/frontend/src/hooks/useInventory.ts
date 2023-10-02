@@ -44,7 +44,7 @@ export const useCreateInventory = () => {
 
     const create = useMutation(api.inventory.create)
     const dispatch = useAppDispatch()
-    const { t } = useTranslation()
+    const { t } = useTranslation("common")
 
     const handleCreate = ({ familyCode, articleName, articleCode, unit, stockCode, affectationCode }: CreateInventoryArgs) => {
         create({ inventory: { familyCode, articleName, articleCode, unit, stockCode, affectationCode } }).then((res) => {
@@ -66,7 +66,7 @@ export const useUpdateInventory = () => {
 
     const update = useMutation(api.inventory.update)
     const dispatch = useAppDispatch()
-    const { t } = useTranslation()
+    const { t } = useTranslation("common")
 
     const handleUpdate = ({ id, familyCode, articleName, articleCode, unit, affectationCode }: UpdateInventoryArgs) => {
         update({ id, inventory: { familyCode, articleName, articleCode, unit, affectationCode } }).then((res) => {

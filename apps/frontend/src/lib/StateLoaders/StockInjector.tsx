@@ -1,6 +1,6 @@
 
 import { cacheKeys } from "@/utility/caching/db";
-import { useLoadCacheStock, useCacheStock } from "@/utility/caching/useCaching";
+import { useLoadCacheStock, useCacheStock, useReadCacheMetadata, useReadConvexCache } from "@/utility/caching/useCaching";
 import { UpdateInjectorProps, InjectorProps } from "./types";
 import { useLoadStock } from "@/hooks/useStock";
 
@@ -29,11 +29,14 @@ const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
     return <></>
 }
 
-export default function StockInjector({ convexCacheState, browserCacheState }: InjectorProps) {
+export default function StockInjector() {
+    const browserCache = useReadCacheMetadata()
+    const convexCacheState = useReadConvexCache()
+
+    if (browserCache === undefined || convexCacheState === undefined) return <></>
 
 
-
-    if (convexCacheState[cacheKeys.stockVersion] === browserCacheState[cacheKeys.stockVersion]) {
+    if (convexCacheState[cacheKeys.stockVersion] === browserCache[cacheKeys.stockVersion]) {
         return <ReadFromCache />
     }
 

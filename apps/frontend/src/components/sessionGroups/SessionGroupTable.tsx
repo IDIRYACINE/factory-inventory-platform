@@ -8,7 +8,7 @@ import { useReadSessionGroups } from '@/hooks/useSessionGroup';
 type DataType = Doc<'sessionGroups'> & { key: string };
 
 export default function SessionGroupTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
   const rawColumns = ["groupName"]

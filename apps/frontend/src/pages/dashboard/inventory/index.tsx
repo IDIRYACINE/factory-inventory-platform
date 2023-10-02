@@ -1,4 +1,5 @@
 import { InventoryPanel } from "@/components/inventory/InventoryPanel";
+import { GetServerSideProps } from "next/types";
 
 export default function InventoryPage() {
     return (
@@ -6,4 +7,10 @@ export default function InventoryPage() {
             <InventoryPanel />
         </>
     )
+}
+
+
+export const getServerSideProps: GetServerSideProps = async () => {
+
+    return { props: {} }
 }

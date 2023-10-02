@@ -1,6 +1,5 @@
 
 
-import { useLoadSessionWorkers } from "@/hooks/useSesionWorker";
 import { useLoadActiveSession } from "@/hooks/useSession"
 
 

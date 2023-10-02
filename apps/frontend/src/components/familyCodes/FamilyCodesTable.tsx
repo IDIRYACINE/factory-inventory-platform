@@ -11,7 +11,7 @@ import { useAppSelector } from '@/stores/hooks';
 type DataType = Doc<'familyCode'> & { key: string };
 
 export default function FamilyCodeTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
 
@@ -33,7 +33,7 @@ export default function FamilyCodeTable(props: React.ComponentPropsWithoutRef<"d
   }))
 
   return (
-    <Table pagination={{ defaultPageSize: 8 }} className={className} columns={columns} dataSource={data} />
+    <Table pagination={{ defaultPageSize: 7 }} className={className} columns={columns} dataSource={data} />
   )
 
 }

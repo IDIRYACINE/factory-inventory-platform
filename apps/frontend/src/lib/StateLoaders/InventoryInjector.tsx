@@ -1,7 +1,7 @@
 
 import { cacheKeys } from "@/utility/caching/db";
 import { InjectorProps, UpdateInjectorProps } from "./types";
-import { useCacheInventory, useLoadCacheInventory } from "@/utility/caching/useCaching";
+import { useCacheInventory, useLoadCacheInventory, useReadCacheMetadata, useReadConvexCache } from "@/utility/caching/useCaching";
 import { useLoadInventory } from "@/hooks/useInventory";
 
 
@@ -30,11 +30,13 @@ const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
     return <></>
 }
 
-export default function InventoryInjector({ convexCacheState, browserCacheState }: InjectorProps) {
+export default function InventoryInjector() {
+    const browserCache = useReadCacheMetadata()
+    const convexCacheState = useReadConvexCache()
 
+    if (browserCache === undefined || convexCacheState === undefined) return <></>
 
-
-    if (convexCacheState[cacheKeys.inventoryVersion] === browserCacheState[cacheKeys.inventoryVersion]) {
+    if (convexCacheState[cacheKeys.inventoryVersion] === browserCache[cacheKeys.inventoryVersion]) {
         return <ReadFromCache />
     }
 

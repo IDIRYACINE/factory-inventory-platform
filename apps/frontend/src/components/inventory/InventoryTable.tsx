@@ -10,7 +10,7 @@ import { useAppSelector } from '@/stores/hooks';
 type DataType = Doc<'inventory'> & { key: string };
 
 export default function InventoryTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
 
@@ -30,7 +30,7 @@ export default function InventoryTable(props: React.ComponentPropsWithoutRef<"di
   }))
 
   return (
-    <Table pagination={{ defaultPageSize: 8 }} className={className} columns={columns} dataSource={data} />
+    <Table pagination={{ defaultPageSize: 7 }} className={className} columns={columns} dataSource={data} />
   )
 
 }

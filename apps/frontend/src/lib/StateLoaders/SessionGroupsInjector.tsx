@@ -1,7 +1,7 @@
 
 import { useLoadSessionGroups } from "@/hooks/useSessionGroup";
 import { cacheKeys } from "@/utility/caching/db";
-import { useLoadCacheSessionGroups, useCacheSessionGroups } from "@/utility/caching/useCaching";
+import { useLoadCacheSessionGroups, useCacheSessionGroups, useReadCacheMetadata, useReadConvexCache } from "@/utility/caching/useCaching";
 import { UpdateInjectorProps, InjectorProps } from "./types";
 
 
@@ -29,11 +29,13 @@ const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
     return <></>
 }
 
-export default function SessionGroupsInjector({ convexCacheState, browserCacheState }: InjectorProps) {
+export default function SessionGroupsInjector() {
+    const browserCache = useReadCacheMetadata()
+    const convexCacheState = useReadConvexCache()
 
+    if (browserCache === undefined || convexCacheState === undefined) return <></>
 
-
-    if (convexCacheState[cacheKeys.sessionGroupVersion] === browserCacheState[cacheKeys.sessionGroupVersion]) {
+    if (convexCacheState[cacheKeys.sessionGroupVersion] === browserCache[cacheKeys.sessionGroupVersion]) {
         return <ReadFromCache />
     }
 

@@ -5,46 +5,42 @@ import InventoryInjector from "./InventoryInjector";
 import SessionInjector from "./SessionInjector";
 import StockInjector from "./StockInjector";
 import WorkerInjector from "./WorkersInjector";
-import { useLoadCacheMetadata } from "@/utility/caching/useCaching";
-import { useQuery } from "convex/react";
-import { api } from "@convex/_generated/api";
-import { useEffect, useState } from "react";
+import { useLoadCacheMetadata, useLoadConvexCache, useReadCacheMetadata, useReadConvexCache } from "@/utility/caching/useCaching";
 import { InjectorComponent } from "./types";
-import { CacheState, cacheKeys } from "@/utility/caching/db";
+import { cacheKeys } from "@/utility/caching/db";
 
 
-const InjectorDelegate = ({ convexCacheState }: { convexCacheState: CacheState }) => {
+function InjectorsLoader() {
     const cacheMetadata = useLoadCacheMetadata()
-
-    const injectors: InjectorComponent[] = [AffectationInjector, FamilyCodesInjector, InventoryInjector, SessionInjector, StockInjector, WorkerInjector]
-
-    if (cacheMetadata === undefined || cacheMetadata[cacheKeys.affectationsVersion] === undefined) return <></>
+    const convexCacheState = useLoadConvexCache()
 
     return (
         <>
-            {injectors.map((Injector, index) => {
-                return <Injector key={index} convexCacheState={convexCacheState} browserCacheState={cacheMetadata} />
-            })}
+
         </>
     )
 }
 
 
-export default function AllStateInjectors() {
+export default function Injectors() {
+    const cacheMetadata = useReadCacheMetadata()
+    const convexCacheState = useReadConvexCache()
 
-    const convexCacheState = useQuery(api.cache.readCache)
-
-
-
-
-    if (!convexCacheState) return <></>
-
-    console.log("convex", convexCacheState)
+    if (!cacheMetadata || !convexCacheState) return <InjectorsLoader />
 
     return (
-        <InjectorDelegate convexCacheState={convexCacheState} />
+        <>
+            <AffectationInjector />
+            <FamilyCodesInjector />
+            < InventoryInjector />
+            < SessionInjector />
+            < StockInjector />
+            < WorkerInjector />
+        </>
     )
 
+
 }
+
 
 

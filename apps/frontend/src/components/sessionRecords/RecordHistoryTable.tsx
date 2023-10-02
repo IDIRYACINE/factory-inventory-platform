@@ -7,7 +7,7 @@ import { Doc } from '@convex/_generated/dataModel';
 type DataType = Doc<'sessionRecord'> & { key: string };
 
 export default function HistoryTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
 

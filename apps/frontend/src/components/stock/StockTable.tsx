@@ -10,11 +10,11 @@ import { useAppSelector } from '@/stores/hooks';
 type DataType = Doc<'stock'> & { key: string };
 
 export default function StockTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
 
-  const rawColumns = ["articleCode", "articleName", "familyCode", "unit"]
+  const rawColumns = ["articleCode", "articleName", "familyCode"]
 
   const columns: ColumnsType<DataType> = rawColumns.map((rawCol) => ({
     title: t(rawCol),
@@ -29,7 +29,7 @@ export default function StockTable(props: React.ComponentPropsWithoutRef<"div">)
   }))
 
   return (
-    <Table pagination={{ defaultPageSize: 8 }} className={className} columns={columns} dataSource={data} />
+    <Table pagination={{ defaultPageSize: 7 }} className={className} columns={columns} dataSource={data} />
   )
 
 }

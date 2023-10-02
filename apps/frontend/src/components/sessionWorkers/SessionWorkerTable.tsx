@@ -10,7 +10,7 @@ import { useReadSessionWorkers } from '@/hooks/useSesionWorker';
 type DataType = Doc<'sessionWorkers'> & { key: string };
 
 export default function SessionGroupTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
   const rawColumns = ["username", "password"]

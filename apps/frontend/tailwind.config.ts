@@ -1,6 +1,10 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  important: '#app',
+  corePlugins: {
+    preflight: true,
+  },
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,8 +12,8 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors:{
-        'primary' : '#52c41a'
+      colors: {
+        'primary': '#52c41a'
       }
     },
   },

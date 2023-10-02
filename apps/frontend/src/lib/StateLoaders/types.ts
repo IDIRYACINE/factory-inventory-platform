@@ -2,10 +2,10 @@ import { CacheState } from "@/utility/caching/db"
 
 
 export type InjectorProps = {
-        convexCacheState: CacheState,
-        browserCacheState: CacheState
-    }
+    convexCacheState: CacheState,
+    browserCache: CacheState
+}
 
-export type UpdateInjectorProps = Omit<InjectorProps,'browserCacheState'>
+export type UpdateInjectorProps = Omit<InjectorProps, 'browserCache'>
 
-export type InjectorComponent = ({ convexCacheState, browserCacheState }: InjectorProps) => JSX.Element
+export type InjectorComponent = () => JSX.Element

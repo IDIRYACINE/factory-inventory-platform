@@ -1,7 +1,7 @@
 
 import { cacheKeys } from "@/utility/caching/db";
 import { InjectorProps, UpdateInjectorProps } from "./types";
-import { useCacheProductFamily, useLoadCacheProductFamily } from "@/utility/caching/useCaching";
+import { useCacheProductFamily, useLoadCacheProductFamily, useReadCacheMetadata, useReadConvexCache } from "@/utility/caching/useCaching";
 import { useLoadFamilyCodes } from "@/hooks/useFamilyCodes";
 
 
@@ -30,11 +30,14 @@ const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
     return <></>
 }
 
-export default function FamilyCodeInjector({ convexCacheState, browserCacheState }: InjectorProps) {
+export default function FamilyCodeInjector() {
+    const browserCache = useReadCacheMetadata()
+    const convexCacheState = useReadConvexCache()
+
+    if (browserCache === undefined || convexCacheState === undefined) return <></>
 
 
-
-    if (convexCacheState[cacheKeys.productFamilyVersion] === browserCacheState[cacheKeys.productFamilyVersion]) {
+    if (convexCacheState[cacheKeys.productFamilyVersion] === browserCache[cacheKeys.productFamilyVersion]) {
         return <ReadFromCache />
     }
 

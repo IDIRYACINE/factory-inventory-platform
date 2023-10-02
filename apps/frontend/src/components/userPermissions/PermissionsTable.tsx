@@ -9,7 +9,7 @@ import { useReadUserPermissions, useSelectPermission } from '@/hooks/useUser';
 type DataType = Doc<'affectationPermisions'> & { key: string };
 
 export default function PermissionTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
 

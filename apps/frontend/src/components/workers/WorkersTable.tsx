@@ -10,7 +10,7 @@ import { selectWorker } from '@/stores/workers/slice';
 type DataType = Doc<"workers"> & { key: string; }
 
 export default function WorkersTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
 

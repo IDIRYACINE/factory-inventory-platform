@@ -2,7 +2,7 @@
 
 import { InventoryState, setInventory } from "@/stores/inventory/slice";
 import { CacheState, cacheKeys, cacheKeysArray, db } from "./db"
-import { useAppDispatch } from "@/stores/hooks";
+import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { StockState, setStocks } from "@/stores/stock/slice";
 import { ProductFamilyState, setFamilyCodes } from "@/stores/productFamily/slice";
 import { AffectationState, setAffectations } from "@/stores/affectations/slice";
@@ -10,6 +10,9 @@ import { GroupsState, setSessionGroups } from "@/stores/groups/slice";
 import { WorkersState, setSessionWorkers, setWorkers } from "@/stores/workers/slice";
 import { UsersState, setUsers } from "@/stores/users/slice";
 import { useEffect, useRef, useState } from "react";
+import { useQuery } from "convex/react";
+import { api } from "@convex/_generated/api";
+import { setBrowserCache, setConvexCache } from "@/stores/settings/slice";
 
 type GenericCacheArgs = {
     _id: string;
@@ -34,42 +37,58 @@ export const useLoadCacheInventory = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLoadCache = async () => {
-        const cache = await db.inventory.toArray()
-        dispatch(setInventory(cache))
-    }
+    useEffect(() => {
+        db.inventory.toArray().then((cache) => {
+            dispatch(setInventory(cache))
+        })
+    }, [dispatch])
 
-    return handleLoadCache
+}
 
+export const useReadCacheMetadata = () => {
+    const cacheMetadata = useAppSelector(state => state.settings.browserCache)
+
+    return cacheMetadata
+}
+
+export const useReadConvexCache = () => {
+    const cacheMetadata = useAppSelector(state => state.settings.convexCache)
+
+    return cacheMetadata
 }
 
 export const useLoadCacheMetadata = () => {
 
-    const [cacheMetadata, setCacheMetadata] = useState<CacheState | undefined>()
+    const cacheMetadata = useReadCacheMetadata()
+    const dispatch = useAppDispatch()
 
-    if (cacheMetadata) return cacheMetadata
+    useEffect(() => {
+        if (cacheMetadata) return
 
-    db.cacheMetadata.toArray().then((cachesArray) => {
+        db.cacheMetadata.toArray().then((cachesArray) => {
 
-        const caches: { [key: string]: number } = {
+            const caches: { [key: string]: number } = {
 
-        }
+            }
 
-        cachesArray.forEach(cache => {
-            caches[cache._id] = cache.version
+            cachesArray.forEach(cache => {
+                caches[cache._id] = cache.version
+            })
+
+
+            if (caches[cacheKeys.affectationsVersion] === undefined) {
+
+                cacheKeysArray.forEach(async (cache) => {
+                    caches[cache] = -1
+                    await db.cacheMetadata.add({ _id: cache, version: -1 })
+                })
+            }
+
+            dispatch(setBrowserCache(caches))
         })
 
+    }, [dispatch, cacheMetadata])
 
-        if (caches[cacheKeys.affectationsVersion] === undefined) {
-
-            cacheKeysArray.forEach(async (cache) => {
-                caches[cache] = -1
-                await db.cacheMetadata.add({ _id: cache, version: -1 })
-            })
-        }
-
-        setCacheMetadata(caches)
-    })
 
     return cacheMetadata
 }
@@ -90,12 +109,14 @@ export const useLoadCacheStock = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLoadCache = async () => {
-        const cache = await db.stock.toArray()
-        dispatch(setStocks(cache))
-    }
+    useEffect(() => {
+        db.stock.toArray().then((cache) => {
+            dispatch(setStocks(cache))
 
-    return handleLoadCache
+        })
+    }, [dispatch])
+
+
 
 }
 
@@ -115,12 +136,11 @@ export const useLoadCacheProductFamily = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLoadCache = async () => {
-        const cache = await db.productFamily.toArray()
-        dispatch(setFamilyCodes(cache))
-    }
-
-    return handleLoadCache
+    useEffect(() => {
+        db.productFamily.toArray().then((cache) => {
+            dispatch(setFamilyCodes(cache))
+        })
+    }, [dispatch])
 
 }
 
@@ -142,12 +162,11 @@ export const useLoadCacheAffectations = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLoadCache = async () => {
-        const cache = await db.affectations.toArray()
-        dispatch(setAffectations(cache))
-    }
-
-    return handleLoadCache
+    useEffect(() => {
+        db.affectations.toArray().then((cache) => {
+            dispatch(setAffectations(cache))
+        })
+    }, [dispatch])
 
 }
 
@@ -168,12 +187,11 @@ export const useLoadCacheSessionGroups = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLoadCache = async () => {
-        const cache = await db.sessionGroup.toArray()
-        dispatch(setSessionGroups(cache))
-    }
-
-    return handleLoadCache
+    useEffect(() => {
+        db.sessionGroup.toArray().then((cache) => {
+            dispatch(setSessionGroups(cache))
+        })
+    }, [dispatch])
 
 }
 
@@ -195,12 +213,11 @@ export const useLoadCacheSessionWorkers = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLoadCache = async () => {
-        const cache = await db.sessionWorker.toArray()
-        dispatch(setSessionWorkers(cache))
-    }
-
-    return handleLoadCache
+    useEffect(() => {
+        db.sessionWorker.toArray().then((cache) => {
+            dispatch(setSessionWorkers(cache))
+        })
+    }, [dispatch])
 
 }
 
@@ -221,12 +238,11 @@ export const useLoadCacheWorkers = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLoadCache = async () => {
-        const cache = await db.workers.toArray()
-        dispatch(setWorkers(cache))
-    }
-
-    return handleLoadCache
+    useEffect(() => {
+        db.workers.toArray().then((cache) => {
+            dispatch(setWorkers(cache))
+        })
+    }, [dispatch])
 
 }
 
@@ -247,12 +263,26 @@ export const useLoadCacheUsers = () => {
 
     const dispatch = useAppDispatch()
 
-    const handleLoadCache = async () => {
-        const cache = await db.users.toArray()
-        dispatch(setUsers(cache))
-    }
-
-    return handleLoadCache
+    useEffect(() => {
+        db.users.toArray().then((cache) => {
+            dispatch(setUsers(cache))
+        })
+    }, [dispatch])
 
 }
 
+
+
+export const useLoadConvexCache = () => {
+    const convexCacheState = useQuery(api.cache.readCache)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (convexCacheState) {
+            dispatch(setConvexCache(convexCacheState))
+        }
+    }, [dispatch, convexCacheState])
+
+    return convexCacheState
+}

@@ -1,6 +1,6 @@
 
 import { cacheKeys } from "@/utility/caching/db";
-import { useLoadCacheSessionWorkers, useCacheSessionWorkers } from "@/utility/caching/useCaching";
+import { useLoadCacheSessionWorkers, useCacheSessionWorkers, useReadCacheMetadata, useReadConvexCache } from "@/utility/caching/useCaching";
 import { UpdateInjectorProps, InjectorProps } from "./types";
 import { useLoadSessionWorkers } from "@/hooks/useSesionWorker";
 
@@ -29,11 +29,15 @@ const FetchAndUpdateCache = ({ convexCacheState }: UpdateInjectorProps) => {
     return <></>
 }
 
-export default function SessionWorkersInjector({ convexCacheState, browserCacheState }: InjectorProps) {
+export default function SessionWorkersInjector() {
+    const browserCache = useReadCacheMetadata()
+    const convexCacheState = useReadConvexCache()
+
+    if (browserCache === undefined || convexCacheState === undefined) return <></>
 
 
 
-    if (convexCacheState[cacheKeys.sessionWorkerVersion] === browserCacheState[cacheKeys.sessionWorkerVersion]) {
+    if (convexCacheState[cacheKeys.sessionWorkerVersion] === browserCache[cacheKeys.sessionWorkerVersion]) {
         return <ReadFromCache />
     }
 

@@ -9,7 +9,7 @@ import { useReadUsers, useSelectUser } from '@/hooks/useUser';
 type DataType = Doc<'user'> & { key: string };
 
 export default function UserTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation()
+  const { t } = useTranslation("common")
 
   const className = clsx(props.className)
   const { selectUser, unSelectUser } = useSelectUser()

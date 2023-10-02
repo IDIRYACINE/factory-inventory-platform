@@ -48,7 +48,7 @@ export const useCreateSessionWorker = () => {
 
     const dispatch = useAppDispatch()
 
-    const { t } = useTranslation()
+    const { t } = useTranslation("common")
 
     const handleCreate = ({ groupId, username, password }: CreateSessionWorkerArgs) => {
         if (!worker) return
@@ -69,7 +69,7 @@ export const useUpdateSessionWorker = () => {
 
     const update = useMutation(api.sessionWorker.update)
     const dispatch = useAppDispatch()
-    const { t } = useTranslation()
+    const { t } = useTranslation("common")
 
     const handleUpdate = ({ id, groupId, username, password }: UpdateSessionWorkerArgs) => {
         update({ id, sessionWorker: { groupId, username, password } }).then((res) => {
