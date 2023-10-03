@@ -6,3 +6,6 @@ export default function SettingsPage() {
         <SettingsPanel />
     )
 }
+
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

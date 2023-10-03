@@ -1,5 +1,5 @@
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
 import { useAppSelector } from '@/stores/hooks';
@@ -11,7 +11,7 @@ import { ColumnsType } from 'antd/es/table/interface';
 type DataType = Doc<'affectations'> & { key: string };
 
 export default function AffectationTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation("common")
+  const t = useTranslations()
 
   const className = clsx(props.className)
 

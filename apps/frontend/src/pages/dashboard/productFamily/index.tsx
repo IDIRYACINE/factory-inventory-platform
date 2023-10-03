@@ -8,3 +8,7 @@ export default function ProductFamilyPage() {
         </>
     )
 }
+
+
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

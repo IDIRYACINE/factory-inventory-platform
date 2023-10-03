@@ -1,10 +1,12 @@
 import PermissionNewPanel from "@/components/userPermissions/PermissionsNewPanel";
 
 
-export default function GrantUserPermissions(){
+export default function GrantUserPermissions() {
 
 
     return (
-        <PermissionNewPanel/>
+        <PermissionNewPanel />
     )
-} 
+}
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

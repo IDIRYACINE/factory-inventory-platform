@@ -286,3 +286,14 @@ export const useLoadConvexCache = () => {
 
     return convexCacheState
 }
+
+
+export const useClearAllCache = () => {
+
+
+    const clearCache = async () => {
+        await db.delete()
+    }
+
+    return clearCache
+}

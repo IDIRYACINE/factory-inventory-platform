@@ -7,3 +7,6 @@ export default function AffectationsPage() {
         </>
     )
 }
+
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

@@ -7,3 +7,6 @@ export default function WorkersPage() {
         </>
     )
 }
+
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

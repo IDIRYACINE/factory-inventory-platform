@@ -5,7 +5,7 @@ import { createCache, StyleProvider } from '@ant-design/cssinjs/lib/StyleContext
 import { extractStyle } from '@ant-design/cssinjs/lib/hooks/useStyleRegister';
 
 const MyDocument = () => (
-  <Html lang="en">
+  <Html >
     <Head />
     <body id="app" className="w-screen h-screen">
       <Main />

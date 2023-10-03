@@ -2,7 +2,6 @@ const path = require('path')
 const { StatsWriterPlugin } = require("webpack-stats-plugin");
 const Visualizer = require('webpack-visualizer-plugin2');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const nextTranslate = require('next-translate-plugin')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -40,7 +39,11 @@ const nextConfig = {
 
     return config
   },
+  i18n: {
+    locales: ['en', 'fr'],
+    defaultLocale: 'fr'
+  },
   reactStrictMode: false,
 }
 
-module.exports = nextTranslate(nextConfig)
+module.exports = nextConfig

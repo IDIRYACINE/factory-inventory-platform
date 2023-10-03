@@ -7,7 +7,7 @@ import { displayMessage } from "@/stores/settings/slice";
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
-import useTranslation from "next-translate/useTranslation";
+import { useTranslations } from 'next-intl';
 import { useEffect } from "react"
 
 
@@ -44,7 +44,7 @@ export const useCreateAffectation = () => {
 
     const create = useMutation(api.affectation.create)
     const dispatch = useAppDispatch()
-    const { t } = useTranslation('messages')
+    const t = useTranslations()
 
     const handleCreate = ({ affectationCode, affectationName }: CreateAffectationArgs) => {
         create({ affectation: { affectationCode, affectationName } }).then((res) => {
@@ -67,7 +67,7 @@ export const useUpdateAffectation = () => {
     const dispatch = useAppDispatch()
     const update = useMutation(api.affectation.update)
 
-    const { t } = useTranslation('messages')
+    const t = useTranslations()
 
     const handleUpdate = ({ id, affectationName }: UpdateAffectationArgs) => {
         update({ id, affectation: { affectationName } }).then((res) => {

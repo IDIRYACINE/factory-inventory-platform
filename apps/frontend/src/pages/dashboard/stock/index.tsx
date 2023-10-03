@@ -9,8 +9,5 @@ export default function StockPage() {
     )
 }
 
-
-export const getServerSideProps: GetServerSideProps = async () => {
-
-    return { props: {} }
-}
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

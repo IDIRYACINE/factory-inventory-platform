@@ -5,14 +5,14 @@ import { useAffectationNavigation } from "@/hooks/useNavigation";
 import { Doc } from "@convex/_generated/dataModel";
 import { Form, Input, Button } from "antd";
 
-import useTranslation from "next-translate/useTranslation";
+import { useTranslations } from 'next-intl';
 
 
 type FieldType = Partial<Doc<"affectations">>
 
 export default function AffectationForm() {
 
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   const { navigateHome } = useAffectationNavigation()
 

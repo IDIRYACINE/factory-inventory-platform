@@ -5,14 +5,14 @@ import { usePermissionsNavigation } from "@/hooks/useNavigation";
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Input } from "antd";
 
-import useTranslation from "next-translate/useTranslation";
+import { useTranslations } from 'next-intl';
 
 
 type FieldType = Doc<"affectationPermisions">
 
 export default function PermissionsForm() {
 
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   const { navigateHome } = usePermissionsNavigation()
 

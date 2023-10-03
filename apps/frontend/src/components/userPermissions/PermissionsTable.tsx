@@ -1,6 +1,6 @@
 
 import type { ColumnsType } from 'antd/es/table/interface';
-import { Table } from "antd"; import useTranslation from 'next-translate/useTranslation';
+import { Table } from "antd"; import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
 import { useReadUserPermissions, useSelectPermission } from '@/hooks/useUser';
@@ -9,7 +9,7 @@ import { useReadUserPermissions, useSelectPermission } from '@/hooks/useUser';
 type DataType = Doc<'affectationPermisions'> & { key: string };
 
 export default function PermissionTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation("common")
+  const t = useTranslations()
 
   const className = clsx(props.className)
 

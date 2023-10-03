@@ -1,5 +1,5 @@
 import type { ColumnsType } from 'antd/es/table/interface';
-import { Table } from "antd"; import useTranslation from 'next-translate/useTranslation';
+import { Table } from "antd"; import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
 import { useReadSessionGroups } from '@/hooks/useSessionGroup';
@@ -8,7 +8,7 @@ import { useReadSessionGroups } from '@/hooks/useSessionGroup';
 type DataType = Doc<'sessionGroups'> & { key: string };
 
 export default function SessionGroupTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation("common")
+  const t = useTranslations()
 
   const className = clsx(props.className)
   const rawColumns = ["groupName"]

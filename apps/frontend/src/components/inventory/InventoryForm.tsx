@@ -3,7 +3,7 @@
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Select, Input } from "antd";
 
-import useTranslation from "next-translate/useTranslation";
+import { useTranslations } from 'next-intl';
 import { useCreateInventory, useUpdateInventory } from "@/hooks/useInventory";
 import { useAppSelector } from "@/stores/hooks";
 import { selectInventory } from "@/stores/inventory/selectors";
@@ -13,7 +13,7 @@ type FieldType = Doc<"inventory">
 
 export default function InventoryForm() {
 
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   const create = useCreateInventory()
   const update = useUpdateInventory()

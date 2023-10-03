@@ -1,6 +1,6 @@
 
 import { useCloseSession, useOpenSession, useReadActiveSession } from "@/hooks/useSession";
-import { Button, Card, Typography } from "antd";
+import { Card, Typography } from "antd";
 
 
 export default function OpenSessionButton({ openSessionTitle, closeSessionTitle }: { closeSessionTitle: string, openSessionTitle: string }) {
@@ -23,10 +23,8 @@ export default function OpenSessionButton({ openSessionTitle, closeSessionTitle 
     const title = session ? closeSessionTitle : openSessionTitle
 
     return (
-        <Card hoverable >
-            <Button onClick={handleClick} className="w-full h-full">
-                <Typography.Title level={5} >{title}</Typography.Title>
-            </Button>
+        <Card className="flex flex-row justify-center items-center" onClick={handleClick} hoverable >
+            <Typography.Title level={5} >{title}</Typography.Title>
         </Card>
     )
 

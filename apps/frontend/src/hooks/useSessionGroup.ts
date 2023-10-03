@@ -6,12 +6,12 @@ import { Doc, Id } from "@convex/_generated/dataModel"
 import { useMutation, useQuery } from "convex/react"
 import { useEffect } from "react"
 import { useReadActiveSession } from "./useSession"
-import useTranslation from "next-translate/useTranslation"
+import { useTranslations } from 'next-intl';
 import { displayMessage } from "@/stores/settings/slice"
 
 
 export const useReadSessionGroups = () => {
-    const  groups = useAppSelector(selectGroups)
+    const groups = useAppSelector(selectGroups)
 
     return groups
 }
@@ -32,12 +32,12 @@ export const useLoadSessionGroups = () => {
         if (res?.group && res.group.length > 0) {
             dispatch(setSessionGroups(res.group))
         }
-    }, [dispatch,res])
+    }, [dispatch, res])
 
     return res?.group ?? []
 }
 
-type CreateSessionGroupsArgs = Omit<Doc<"sessionGroups">,"_id" |"_creationTime"|"supervisorTokenIdentifier"|"supervisorId">
+type CreateSessionGroupsArgs = Omit<Doc<"sessionGroups">, "_id" | "_creationTime" | "supervisorTokenIdentifier" | "supervisorId">
 
 export const useCreateSessionGroup = () => {
 
@@ -45,10 +45,10 @@ export const useCreateSessionGroup = () => {
     const create = useMutation(api.sessionGroup.create)
     const session = useReadActiveSession()
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
+    const t = useTranslations()
 
     const handleCreate = ({ groupName }: CreateSessionGroupsArgs) => {
-        create({ sessionGroups: { sessionId:session!._id,groupName } }).then((res) => {
+        create({ sessionGroups: { sessionId: session!._id, groupName } }).then((res) => {
             const message = res.code ? 'fail' : 'sucess'
             const type = res.code ? 'error' : 'success'
             dispatch(displayMessage({ message: t(message), type: type }))
@@ -59,16 +59,16 @@ export const useCreateSessionGroup = () => {
 
 }
 
-type UpdateSessionGroupsArgs = Partial<Omit<CreateSessionGroupsArgs,'supervisorId'>> & {id:Id<"sessionGroups">}
+type UpdateSessionGroupsArgs = Partial<Omit<CreateSessionGroupsArgs, 'supervisorId'>> & { id: Id<"sessionGroups"> }
 export const useUpdateSessionGroup = () => {
 
 
     const update = useMutation(api.sessionGroup.update)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
+    const t = useTranslations()
 
-    const handleUpdate = ({ id, sessionId,groupName }:UpdateSessionGroupsArgs) => {
-        update({ id, sessionGroups:{sessionId,groupName} }).then((res) => {
+    const handleUpdate = ({ id, sessionId, groupName }: UpdateSessionGroupsArgs) => {
+        update({ id, sessionGroups: { sessionId, groupName } }).then((res) => {
             const message = res.code ? 'fail' : 'sucess'
             const type = res.code ? 'error' : 'success'
             dispatch(displayMessage({ message: t(message), type: type }))

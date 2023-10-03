@@ -1,7 +1,6 @@
 
 import { useUserNavigation } from "@/hooks/useNavigation";
-import { useCloseSession, useOpenSession, useReadActiveSession } from "@/hooks/useSession";
-import { Button, Card, Typography } from "antd";
+import { Card, Typography } from "antd";
 
 
 export default function UsersButton({ usersTitle }: { usersTitle: string }) {
@@ -13,10 +12,8 @@ export default function UsersButton({ usersTitle }: { usersTitle: string }) {
     }
 
     return (
-        <Card hoverable >
-            <Button onClick={handleClick} className="w-full h-full">
-                <Typography.Title level={5} >{usersTitle}</Typography.Title>
-            </Button>
+        <Card className="flex flex-row justify-center items-center" onClick={handleClick} hoverable >
+            <Typography.Title level={5} >{usersTitle}</Typography.Title>
         </Card>
     )
 

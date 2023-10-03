@@ -1,10 +1,10 @@
 import { useAppDispatch, useAppSelector } from "@/stores/hooks"
-import { selectActiveSession, selectActiveSessionRecords } from "@/stores/session/selectors";
-import { loadRecords, setActiveSession } from "@/stores/session/slice";
+import { selectActiveSession, selectActiveSessionRecords, selectActiveSessionRecordsPaginated } from "@/stores/session/selectors";
+import { loadRecords, setActiveSession, setRecords } from "@/stores/session/slice";
 import { displayMessage } from "@/stores/settings/slice";
 import { api } from "@convex/_generated/api";
 import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
-import useTranslation from "next-translate/useTranslation";
+import { useTranslations } from 'next-intl';
 import { useEffect } from "react";
 
 
@@ -24,7 +24,7 @@ export const useReadActiveSessionRecords = () => {
 }
 
 export const useLoadActiveSessionRecords = () => {
-    const { results, status, loadMore } = usePaginatedQuery(api.session.loadRecords, {active:true}, { initialNumItems: 50 })
+    const { results, status, loadMore } = usePaginatedQuery(api.session.loadRecords, { active: true }, { initialNumItems: 50 })
 
     const dispatch = useAppDispatch()
 
@@ -53,9 +53,9 @@ export const useLoadActiveSession = () => {
 export const useCloseSession = () => {
     const closeSesion = useMutation(api.session.closeSession)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
-    
-    const handleCloseSession =  () => {
+    const t = useTranslations()
+
+    const handleCloseSession = () => {
         closeSesion().then((res) => {
             const message = res.code ? 'fail' : 'sucess'
             const type = res.code ? 'error' : 'success'
@@ -69,9 +69,9 @@ export const useCloseSession = () => {
 export const useOpenSession = () => {
     const openSession = useMutation(api.session.openSession)
     const dispatch = useAppDispatch()
-    const {t} = useTranslation('messages')
+    const t = useTranslations()
 
-    const handleOpenSession =  () => {
+    const handleOpenSession = () => {
         openSession().then((res) => {
             const message = res.code ? 'fail' : 'sucess'
             const type = res.code ? 'error' : 'success'
@@ -80,4 +80,22 @@ export const useOpenSession = () => {
     }
 
     return handleOpenSession
+}
+
+
+export const useLoadScannedRecordsPaginated = () => {
+
+    const { results, status, loadMore } = usePaginatedQuery(api.session.loadRecords, { active: true }, { initialNumItems: 50 })
+
+
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        if (results.length > 0) {
+            dispatch(setRecords(results))
+        }
+    }, [dispatch, results])
+
+    return { status, loadMore, results }
+
 }

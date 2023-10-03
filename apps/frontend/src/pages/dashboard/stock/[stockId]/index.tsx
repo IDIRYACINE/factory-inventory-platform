@@ -1,8 +1,11 @@
 import StockNewPanel from "@/components/stock/StockNewPanel";
 
 
-export default function StockEditPage(){
+export default function StockEditPage() {
     return (
-        <StockNewPanel/>
+        <StockNewPanel />
     )
 }
+
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

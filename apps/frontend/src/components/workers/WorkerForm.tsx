@@ -7,14 +7,14 @@ import { selectWorker } from "@/stores/workers/selectors";
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Input } from "antd";
 
-import useTranslation from "next-translate/useTranslation";
+import { useTranslations } from 'next-intl';
 
 
 type FieldType = Doc<"workers">
 
 export default function WorkerForm() {
 
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   const create = useCreateWorker()
   const update = useUpdateWorker()

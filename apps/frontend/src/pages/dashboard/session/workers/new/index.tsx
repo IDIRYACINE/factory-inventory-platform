@@ -9,3 +9,7 @@ export default function SessionWorkerNewPage() {
         <SessionWorkerPanelNew />
     )
 }
+
+
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

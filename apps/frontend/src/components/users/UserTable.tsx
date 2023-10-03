@@ -1,6 +1,6 @@
 
 import type { ColumnsType } from 'antd/es/table/interface';
-import { Table } from "antd"; import useTranslation from 'next-translate/useTranslation';
+import { Table } from "antd"; import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
 import { useReadUsers, useSelectUser } from '@/hooks/useUser';
@@ -9,7 +9,7 @@ import { useReadUsers, useSelectUser } from '@/hooks/useUser';
 type DataType = Doc<'user'> & { key: string };
 
 export default function UserTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const { t } = useTranslation("common")
+  const t = useTranslations()
 
   const className = clsx(props.className)
   const { selectUser, unSelectUser } = useSelectUser()

@@ -9,3 +9,6 @@ export default function SessionGroupsPage() {
         <SessionGroupNewPanel />
     )
 }
+
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale

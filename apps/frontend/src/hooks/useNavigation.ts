@@ -12,7 +12,7 @@ import { unselectStock } from "@/stores/stock/slice"
 import { unselectUser } from "@/stores/users/slice"
 import { unselectWorker } from "@/stores/workers/slice"
 import { Id } from "@convex/_generated/dataModel"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/router"
 
 
 

@@ -1,16 +1,17 @@
 "use client"
 
 import { Col, Row } from "antd";
-import useTranslation from "next-translate/useTranslation";
+import { useTranslations } from 'next-intl';
 import OpenSessionButton from "./OpenSessionButton";
 import UsersButton from "./UsersButton";
 import ImportsButton from "./ImportsButton";
+import LogoutButton from "./LogoutButton";
 
 
 
 export default function SettingsPanel() {
 
-    const { t } = useTranslation('common')
+    const t = useTranslations()
 
 
     return (
@@ -24,6 +25,9 @@ export default function SettingsPanel() {
                 </Col>
                 <Col span={8}>
                     <ImportsButton importsTitle={t('imports')} />
+                </Col>
+                <Col span={8}>
+                    <LogoutButton logoutTitle={t('logout')} />
                 </Col>
             </Row>
         </div>

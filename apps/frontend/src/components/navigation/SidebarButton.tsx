@@ -1,7 +1,7 @@
 
 
 import { SettingsState } from "@/stores/settings/slice";
-import { Button } from "antd"; import useTranslation from 'next-translate/useTranslation'
+import { Button } from "antd"; import { useTranslations } from 'next-intl'
 
 
 interface SidebarButtonProps {
@@ -11,7 +11,7 @@ interface SidebarButtonProps {
 
 }
 const SidebarButton = ({ textKey, onClick, selected }: SidebarButtonProps) => {
-    const { t } = useTranslation('common')
+    const t = useTranslations()
 
 
     const buttonType = selected ? 'default' : 'primary'

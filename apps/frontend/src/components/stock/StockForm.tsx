@@ -3,7 +3,7 @@
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Input, Select, Card } from "antd";
 
-import useTranslation from "next-translate/useTranslation";
+import { useTranslations } from 'next-intl';
 import { useAppSelector } from "@/stores/hooks";
 import { useCreateStock, useUpdateStock } from "@/hooks/useStock";
 import { selectStock } from "@/stores/stock/selectors";
@@ -14,7 +14,7 @@ type FieldType = Doc<"stock">
 
 export default function StockForm() {
 
-  const { t } = useTranslation('common');
+  const t = useTranslations();
 
   const create = useCreateStock()
   const update = useUpdateStock()

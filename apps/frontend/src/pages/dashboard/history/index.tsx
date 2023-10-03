@@ -5,3 +5,6 @@ export default function HistoryPage() {
         <HistoryPanel />
     )
 }
+
+import { getAppLocale } from "@/utility/locale/useLoadLocale";
+export const getStaticProps = getAppLocale
