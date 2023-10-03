@@ -4,7 +4,8 @@ import { loadRecords, setActiveSession, setRecords } from "@/stores/session/slic
 import { displayMessage } from "@/stores/settings/slice";
 import { api } from "@convex/_generated/api";
 import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 import { useEffect } from "react";
 
 
@@ -53,7 +54,7 @@ export const useLoadActiveSession = () => {
 export const useCloseSession = () => {
     const closeSesion = useMutation(api.session.closeSession)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleCloseSession = () => {
         closeSesion().then((res) => {
@@ -69,7 +70,7 @@ export const useCloseSession = () => {
 export const useOpenSession = () => {
     const openSession = useMutation(api.session.openSession)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleOpenSession = () => {
         openSession().then((res) => {

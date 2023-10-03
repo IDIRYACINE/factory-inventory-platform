@@ -1,6 +1,7 @@
 
 import type { ColumnsType } from 'antd/es/table/interface';
-import { Table } from "antd"; import { useTranslations } from 'next-intl';
+import { Table } from "antd"; import { useTranslation } from 'next-i18next'
+  ;
 import clsx from 'clsx';
 import { selectWorkers } from '@/stores/workers/selectors';
 import { useAppDispatch, useAppSelector } from '@/stores/hooks';
@@ -10,7 +11,7 @@ import { selectWorker } from '@/stores/workers/slice';
 type DataType = Doc<"workers"> & { key: string; }
 
 export default function WorkersTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const t = useTranslations()
+  const { t } = useTranslation('common')
 
   const className = clsx(props.className)
 

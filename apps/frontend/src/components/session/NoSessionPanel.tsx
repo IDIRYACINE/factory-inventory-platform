@@ -1,10 +1,11 @@
 import { Typography } from "antd"
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 
 
 export default function SessionGuard() {
 
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     return (
         <div className="p-4 flex flex-col justify-center items-center w-full h-full">

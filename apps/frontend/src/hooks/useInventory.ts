@@ -7,7 +7,8 @@ import { displayMessage } from "@/stores/settings/slice";
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 import { useEffect } from "react"
 
 
@@ -44,7 +45,7 @@ export const useCreateInventory = () => {
 
     const create = useMutation(api.inventory.create)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleCreate = ({ familyCode, articleName, articleCode, unit, stockCode, affectationCode }: CreateInventoryArgs) => {
         create({ inventory: { familyCode, articleName, articleCode, unit, stockCode, affectationCode } }).then((res) => {
@@ -66,7 +67,7 @@ export const useUpdateInventory = () => {
 
     const update = useMutation(api.inventory.update)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleUpdate = ({ id, familyCode, articleName, articleCode, unit, affectationCode }: UpdateInventoryArgs) => {
         update({ id, inventory: { familyCode, articleName, articleCode, unit, affectationCode } }).then((res) => {

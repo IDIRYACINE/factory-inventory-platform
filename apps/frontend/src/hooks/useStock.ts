@@ -7,7 +7,8 @@ import { loadStocks } from "@/stores/stock/slice";
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation, usePaginatedQuery, useQuery } from "convex/react";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 import { useEffect } from "react"
 
 
@@ -44,7 +45,7 @@ export const useCreateStock = () => {
 
     const create = useMutation(api.stock.create)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
     const handleCreate = ({ familyCode, articleName, articleCode }: CreatestockArgs) => {
         create({ stock: { familyCode, articleName, articleCode } }).then((res) => {
             const message = res.code ? 'fail' : 'sucess'
@@ -63,7 +64,7 @@ export const useUpdateStock = () => {
 
     const update = useMutation(api.stock.update)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleUpdate = ({ id, familyCode, articleName, articleCode }: UpdatestockArgs) => {
         update({ id, stock: { familyCode, articleName, articleCode } }).then((res) => {

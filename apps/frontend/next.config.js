@@ -2,6 +2,7 @@ const path = require('path')
 const { StatsWriterPlugin } = require("webpack-stats-plugin");
 const Visualizer = require('webpack-visualizer-plugin2');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { i18n } = require('./next-i18next.config')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -39,10 +40,7 @@ const nextConfig = {
 
     return config
   },
-  i18n: {
-    locales: ['en', 'fr'],
-    defaultLocale: 'fr'
-  },
+  i18n,
   reactStrictMode: false,
 }
 

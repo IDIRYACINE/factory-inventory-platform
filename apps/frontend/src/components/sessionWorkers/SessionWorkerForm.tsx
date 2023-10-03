@@ -4,7 +4,8 @@ import { useCreateSessionWorker, useReadSessionWorker, useUpdateSessionWorker } 
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Input } from "antd";
 
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+  ;
 import SessionGroupSelector from "@/components/sessionGroups/SessionGroupSelector";
 import { useLoadSessionGroups, useReadSessionGroups } from "@/hooks/useSessionGroup";
 import { Select } from "antd"; import { useSessionWorkerNavigation } from "@/hooks/useNavigation";
@@ -14,7 +15,7 @@ type FieldType = Doc<"sessionWorkers">
 
 export default function SessionWorkerForm() {
 
-  const t = useTranslations();
+  const { t } = useTranslation('common')
 
   const sessionWorker = useReadSessionWorker()
   const create = useCreateSessionWorker()

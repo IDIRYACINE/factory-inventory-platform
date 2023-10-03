@@ -8,7 +8,8 @@ import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { useEffect } from "react"
 import { displayMessage } from "@/stores/settings/slice";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 
 
 export const useReadUsers = () => {
@@ -44,7 +45,7 @@ export const useCreateUser = () => {
 
     const create = useMutation(api.user.create)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleCreate = ({ name, role, tokenIdentifier }: CreateUserArgs) => {
         create({ user: { name, role, tokenIdentifier } }).then((res) => {
@@ -64,7 +65,7 @@ export const useUpdateUser = () => {
 
     const update = useMutation(api.user.update)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleUpdate = ({ id, name, role, }: UpdateUserArgs) => {
         update({ id, user: { name, role, } }).then((res) => {

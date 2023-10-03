@@ -5,7 +5,8 @@ import { setWorkers } from "@/stores/workers/slice";
 import { api } from "@convex/_generated/api";
 import { Doc, Id } from "@convex/_generated/dataModel";
 import { useAction, useMutation, useQuery } from "convex/react";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 import { useEffect } from "react";
 
 
@@ -38,7 +39,7 @@ export const useCreateWorker = () => {
 
     const create = useMutation(api.workers.create)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleCreate = ({ name, phone }: CreateWorkerArgs) => {
         create({ worker: { name, phone } }).then((res) => {
@@ -58,7 +59,7 @@ export const useUpdateWorker = () => {
 
     const update = useMutation(api.workers.update)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleUpdate = ({ id, name, phone }: UpdateWorkerArgs) => {
         update({ id, worker: { name, phone } }).then((res) => {

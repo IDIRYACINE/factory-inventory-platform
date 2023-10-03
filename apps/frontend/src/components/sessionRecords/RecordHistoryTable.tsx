@@ -1,5 +1,6 @@
 import type { ColumnsType } from 'antd/es/table/interface';
-import { Table } from "antd"; import { useTranslations } from 'next-intl';
+import { Table } from "antd"; import { useTranslation } from 'next-i18next'
+  ;
 import clsx from 'clsx';
 import { Doc } from '@convex/_generated/dataModel';
 
@@ -7,7 +8,7 @@ import { Doc } from '@convex/_generated/dataModel';
 type DataType = Doc<'sessionRecord'> & { key: string };
 
 export default function HistoryTable(props: React.ComponentPropsWithoutRef<"div">) {
-  const t = useTranslations()
+  const { t } = useTranslation('common')
 
   const className = clsx(props.className)
 

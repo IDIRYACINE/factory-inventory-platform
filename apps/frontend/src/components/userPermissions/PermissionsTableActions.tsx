@@ -4,11 +4,12 @@ import { usePermissionsNavigation } from "@/hooks/useNavigation"
 import { useLoadUserPermissions, useRevokePermission } from "@/hooks/useUser";
 import { Button } from "antd"
 import clsx from "clsx"
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+  ;
 
 
 const PermissionsTableActions = (props: React.ComponentPropsWithoutRef<"div">) => {
-  const t = useTranslations()
+  const { t } = useTranslation('common')
   const className = clsx(props.className, "flex flex-row justify-end items-center")
   const { navigateUsers, navigateGrantPermission } = usePermissionsNavigation()
 

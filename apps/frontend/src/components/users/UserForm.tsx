@@ -5,7 +5,8 @@ import { useUserNavigation } from "@/hooks/useNavigation";
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Input } from "antd";
 
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+  ;
 import { Select } from "antd";
 
 
@@ -13,7 +14,7 @@ type FieldType = Doc<"user">
 
 export default function UserForm() {
 
-  const t = useTranslations();
+  const { t } = useTranslation('common')
 
   const { navigateHome } = useUserNavigation()
 

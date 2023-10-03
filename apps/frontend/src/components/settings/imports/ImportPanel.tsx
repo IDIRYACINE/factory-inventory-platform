@@ -1,6 +1,7 @@
 import { Col, Row } from "antd";
 import ImportCard from "./ImportCard";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 import { useDataImports } from "@/hooks/useImport";
 import { useReadImportingStatus } from "@/hooks/useSettings";
 import { useAppDispatch } from "@/stores/hooks";
@@ -8,7 +9,7 @@ import { useAppDispatch } from "@/stores/hooks";
 
 
 export default function ImportPanel() {
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const isUploadingLabel = t("uploading")
     const startUploadLabel = t("startUpload")

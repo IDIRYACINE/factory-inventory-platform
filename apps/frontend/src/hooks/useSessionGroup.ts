@@ -6,7 +6,8 @@ import { Doc, Id } from "@convex/_generated/dataModel"
 import { useMutation, useQuery } from "convex/react"
 import { useEffect } from "react"
 import { useReadActiveSession } from "./useSession"
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 import { displayMessage } from "@/stores/settings/slice"
 
 
@@ -45,7 +46,7 @@ export const useCreateSessionGroup = () => {
     const create = useMutation(api.sessionGroup.create)
     const session = useReadActiveSession()
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleCreate = ({ groupName }: CreateSessionGroupsArgs) => {
         create({ sessionGroups: { sessionId: session!._id, groupName } }).then((res) => {
@@ -65,7 +66,7 @@ export const useUpdateSessionGroup = () => {
 
     const update = useMutation(api.sessionGroup.update)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleUpdate = ({ id, sessionId, groupName }: UpdateSessionGroupsArgs) => {
         update({ id, sessionGroups: { sessionId, groupName } }).then((res) => {

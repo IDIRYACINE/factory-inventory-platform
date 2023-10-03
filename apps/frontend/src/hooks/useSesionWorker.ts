@@ -8,7 +8,8 @@ import { useMutation, useQuery } from "convex/react"
 import { useEffect } from "react"
 import { useReadActiveWorker } from "./useWorkers";
 import { displayMessage } from "@/stores/settings/slice";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 
 
 export const useReadSessionWorkers = () => {
@@ -48,7 +49,7 @@ export const useCreateSessionWorker = () => {
 
     const dispatch = useAppDispatch()
 
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleCreate = ({ groupId, username, password }: CreateSessionWorkerArgs) => {
         if (!worker) return
@@ -69,7 +70,7 @@ export const useUpdateSessionWorker = () => {
 
     const update = useMutation(api.sessionWorker.update)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleUpdate = ({ id, groupId, username, password }: UpdateSessionWorkerArgs) => {
         update({ id, sessionWorker: { groupId, username, password } }).then((res) => {

@@ -7,7 +7,8 @@ import { displayMessage } from "@/stores/settings/slice"
 import { api } from "@convex/_generated/api"
 import { Doc, Id } from "@convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 import { useEffect } from "react"
 
 
@@ -44,7 +45,7 @@ export const useCreateFamilyCode = () => {
 
     const create = useMutation(api.productFamily.create)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleCreate = ({ code, name }: CreateFamilyCodeArgs) => {
         create({ familyCode: { code, name } }).then((res) => {
@@ -66,7 +67,7 @@ export const useUpdateFamilyCode = () => {
 
     const update = useMutation(api.productFamily.update)
     const dispatch = useAppDispatch()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const handleUpdate = ({ id, code, name }: UpdateFamilyCodeArgs) => {
         update({ id, code, name }).then((res) => {

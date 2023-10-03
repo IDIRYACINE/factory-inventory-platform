@@ -1,12 +1,13 @@
 
 
 import { useReadSessionGroups } from "@/hooks/useSessionGroup";
-import { Select } from "antd"; import { useTranslations } from 'next-intl';
+import { Select } from "antd"; import { useTranslation } from 'next-i18next'
+    ;
 
 
 export default function SessionGroupSelector() {
     const groups = useReadSessionGroups()
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
     const options = groups.map(group => ({
         id: group._id,

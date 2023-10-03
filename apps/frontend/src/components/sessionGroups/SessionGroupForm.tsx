@@ -5,14 +5,15 @@ import { useCreateSessionGroup, useReadSessionGroup, useUpdateSessionGroup } fro
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Input } from "antd";
 
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+  ;
 
 
 type FieldType = Doc<"sessionGroups">
 
 export default function SessionGroupForm() {
 
-  const t = useTranslations();
+  const { t } = useTranslation('common')
 
   const sessionGroup = useReadSessionGroup()
   const create = useCreateSessionGroup()

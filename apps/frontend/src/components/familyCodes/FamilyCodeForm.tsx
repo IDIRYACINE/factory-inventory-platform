@@ -4,14 +4,15 @@ import { useCreateFamilyCode, useReadFamilyCode, useUpdateFamilyCode } from "@/h
 import { useProductFamilyNavigation } from "@/hooks/useNavigation";
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Input } from "antd";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+  ;
 
 
 type FieldType = Partial<Doc<"familyCode">>
 
 export default function FamilyCodeForm() {
 
-  const t = useTranslations();
+  const { t } = useTranslation('common')
 
   const { navigateHome } = useProductFamilyNavigation()
 

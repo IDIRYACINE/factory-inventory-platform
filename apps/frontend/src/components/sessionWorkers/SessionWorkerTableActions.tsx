@@ -4,11 +4,12 @@ import { useSessionWorkerNavigation } from "@/hooks/useNavigation"
 import { useReadActiveSessionWorker } from "@/hooks/useSesionWorker";
 import { Button } from "antd"
 import clsx from "clsx"
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+  ;
 
 
 const SessionGroupTableActions = (props: React.ComponentPropsWithoutRef<"div">) => {
-  const t = useTranslations()
+  const { t } = useTranslation('common')
   const className = clsx(props.className, "flex flex-row justify-end items-center")
   const { navigateToEditSessionWorker, navigateSession } = useSessionWorkerNavigation()
 

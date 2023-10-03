@@ -1,7 +1,8 @@
 "use client"
 
 import { Col, Row } from "antd";
-import { useTranslations } from 'next-intl';
+import { useTranslation } from 'next-i18next'
+    ;
 import OpenSessionButton from "./OpenSessionButton";
 import UsersButton from "./UsersButton";
 import ImportsButton from "./ImportsButton";
@@ -11,7 +12,7 @@ import LogoutButton from "./LogoutButton";
 
 export default function SettingsPanel() {
 
-    const t = useTranslations()
+    const { t } = useTranslation('common')
 
 
     return (
