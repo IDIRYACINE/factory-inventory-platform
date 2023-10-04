@@ -11,7 +11,7 @@ import { useTranslation } from 'next-i18next'
 const WorkersTableActions = (props: React.ComponentPropsWithoutRef<"div">) => {
   const { t } = useTranslation('common')
   const className = clsx(props.className, "flex flex-row justify-end items-center")
-  const { navigateToNewWorker, navigateToEditWorker } = useWorkerNavigation()
+  const { navigateToNewWorker } = useWorkerNavigation()
 
   const { navigateToNewSessionWorker } = useSessionWorkerNavigation()
 
@@ -20,7 +20,7 @@ const WorkersTableActions = (props: React.ComponentPropsWithoutRef<"div">) => {
   const handleEdit = () => {
     if (!worker) return
 
-    navigateToEditWorker(worker!._id)
+    navigateToNewWorker()
   }
 
 

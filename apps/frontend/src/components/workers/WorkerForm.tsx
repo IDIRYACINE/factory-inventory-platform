@@ -2,8 +2,6 @@
 
 import { useWorkerNavigation } from "@/hooks/useNavigation";
 import { useCreateWorker, useReadActiveWorker, useUpdateWorker } from "@/hooks/useWorkers";
-import { useAppSelector } from "@/stores/hooks";
-import { selectWorker } from "@/stores/workers/selectors";
 import { Doc } from "@convex/_generated/dataModel";
 import { Button, Form, Input } from "antd";
 

@@ -58,9 +58,6 @@ export const useWorkerNavigation = () => {
         router.push(createWorkersPath)
     }
 
-    const navigateToEditWorker = (id: Id<"workers">) => {
-        router.push(editWorkersPath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         dispatch(unselectWorker())
@@ -68,11 +65,8 @@ export const useWorkerNavigation = () => {
     }
 
     return {
-        navigateToNewWorker,
-        navigateToEditWorker,
-        navigateHome
+        navigateToNewWorker, navigateHome
     }
-
 }
 
 export const useProductFamilyNavigation = () => {
@@ -83,9 +77,6 @@ export const useProductFamilyNavigation = () => {
         router.push(createFamilyCodePath)
     }
 
-    const navigateToEditProductFamily = (id: Id<"familyCode">) => {
-        router.push(editFamilyCodePath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         dispatch(unselectFamilyCode())
@@ -93,11 +84,8 @@ export const useProductFamilyNavigation = () => {
     }
 
     return {
-        navigateToNewProductFamily,
-        navigateToEditProductFamily,
-        navigateHome
+        navigateToNewProductFamily, navigateHome
     }
-
 }
 
 export const useInventoryNavigation = () => {
@@ -108,9 +96,6 @@ export const useInventoryNavigation = () => {
         router.push(createInventoryPath)
     }
 
-    const navigateToEditInventory = (id: Id<"inventory">) => {
-        router.push(editInventoryPath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         dispatch(unselectInventor())
@@ -119,8 +104,6 @@ export const useInventoryNavigation = () => {
 
     return {
         navigateToNewInventory,
-        navigateToEditInventory,
-        navigateHome
     }
 }
 
@@ -133,9 +116,6 @@ export const useStockNavigation = () => {
         router.push(createStockPath)
     }
 
-    const navigateToEditStock = (id: Id<"stock">) => {
-        router.push(editStockPath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         dispatch(unselectStock())
@@ -144,8 +124,6 @@ export const useStockNavigation = () => {
 
     return {
         navigateToNewStock,
-        navigateToEditStock,
-        navigateHome
     }
 }
 
@@ -156,9 +134,6 @@ export const useHistoryNavigation = () => {
         router.push(createFamilyCodePath)
     }
 
-    const navigateToEditHistory = (id: Id<"sessionRecord">) => {
-        router.push(editWorkersPath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         router.push('/')
@@ -166,8 +141,6 @@ export const useHistoryNavigation = () => {
 
     return {
         navigateToNewHistory,
-        navigateToEditHistory,
-        navigateHome
     }
 }
 
@@ -179,9 +152,6 @@ export const useSessionGroupNavigation = () => {
         router.push(createSessionGroupsPath)
     }
 
-    const navigateToEditSessionGroup = (id: Id<"sessionGroups">) => {
-        router.push(editSessionGroupsPath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         dispatch(resetActiveGroup())
@@ -191,7 +161,6 @@ export const useSessionGroupNavigation = () => {
 
     return {
         navigateToNewSessionGroup,
-        navigateToEditSessionGroup,
         navigateHome
     }
 }
@@ -206,9 +175,6 @@ export const useAffectationNavigation = () => {
         router.push(createAffectationsPath)
     }
 
-    const navigateToEditAffectation = (id: Id<"affectations">) => {
-        router.push(editAffectationsPath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         dispatch(unselectAffecation)
@@ -217,11 +183,9 @@ export const useAffectationNavigation = () => {
 
     return {
         navigateToNewAffectation,
-        navigateToEditAffectation,
         navigateHome
+
     }
-
-
 }
 
 export const useSessionWorkerNavigation = () => {
@@ -231,9 +195,6 @@ export const useSessionWorkerNavigation = () => {
         router.push(createSessionWorkersPath)
     }
 
-    const navigateToEditSessionWorker = (id: Id<"sessionWorkers">) => {
-        router.push(editSessionWorkersPath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         router.push(sessionWorkersPath)
@@ -245,9 +206,8 @@ export const useSessionWorkerNavigation = () => {
 
     return {
         navigateToNewSessionWorker,
-        navigateToEditSessionWorker,
-        navigateHome,
-        navigateSession
+        navigateSession,
+        navigateHome
     }
 }
 
@@ -260,9 +220,6 @@ export const useUserNavigation = () => {
         router.push(createUserPath)
     }
 
-    const navigateToEditUser = (id: Id<"user">) => {
-        router.push(editUserPath.replace(':id', id))
-    }
 
     const navigateHome = () => {
         dispatch(unselectUser())
@@ -276,7 +233,6 @@ export const useUserNavigation = () => {
 
     return {
         navigateToNewUser,
-        navigateToEditUser,
         navigateHome,
         navigatePermissions
     }

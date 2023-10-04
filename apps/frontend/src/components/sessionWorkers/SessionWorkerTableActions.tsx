@@ -11,14 +11,14 @@ import { useTranslation } from 'next-i18next'
 const SessionGroupTableActions = (props: React.ComponentPropsWithoutRef<"div">) => {
   const { t } = useTranslation('common')
   const className = clsx(props.className, "flex flex-row justify-end items-center")
-  const { navigateToEditSessionWorker, navigateSession } = useSessionWorkerNavigation()
+  const { navigateSession, navigateToNewSessionWorker } = useSessionWorkerNavigation()
 
   const worker = useReadActiveSessionWorker()
 
   const handleEdit = () => {
     if (!worker) return
 
-    navigateToEditSessionWorker(worker!._id)
+    navigateToNewSessionWorker()
   }
 
   return (
